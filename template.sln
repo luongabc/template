@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAMS", "..\..\..\OneDrive\Máy tính\New folder\ThucTap\ThucTap\TAMS\TAMS.csproj", "{C0761C24-DAFA-469A-A2F7-19ACF59E2B92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAMS.Entity", "..\..\..\OneDrive\Máy tính\New folder\ThucTap\ThucTap\TAMS.Entity\TAMS.Entity.csproj", "{6D794080-45CA-4062-8697-40D3E3693656}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAMS.Libs", "..\..\..\OneDrive\Máy tính\New folder\ThucTap\ThucTap\TAMS.Libs\TAMS.Libs.csproj", "{5F52CD07-2554-44CD-8C9E-0BD6B8A0EA21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TAMS.DAL", "..\..\..\OneDrive\Máy tính\New folder\ThucTap\ThucTap\TAMS.DAL\TAMS.DAL.csproj", "{FD9B1159-7BD5-4588-851F-011D02361756}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C0761C24-DAFA-469A-A2F7-19ACF59E2B92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0761C24-DAFA-469A-A2F7-19ACF59E2B92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0761C24-DAFA-469A-A2F7-19ACF59E2B92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0761C24-DAFA-469A-A2F7-19ACF59E2B92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D794080-45CA-4062-8697-40D3E3693656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D794080-45CA-4062-8697-40D3E3693656}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D794080-45CA-4062-8697-40D3E3693656}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D794080-45CA-4062-8697-40D3E3693656}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F52CD07-2554-44CD-8C9E-0BD6B8A0EA21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F52CD07-2554-44CD-8C9E-0BD6B8A0EA21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F52CD07-2554-44CD-8C9E-0BD6B8A0EA21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F52CD07-2554-44CD-8C9E-0BD6B8A0EA21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD9B1159-7BD5-4588-851F-011D02361756}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD9B1159-7BD5-4588-851F-011D02361756}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD9B1159-7BD5-4588-851F-011D02361756}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD9B1159-7BD5-4588-851F-011D02361756}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3247601E-08DB-452D-B87C-D16720AF5776}
+	EndGlobalSection
+EndGlobal
