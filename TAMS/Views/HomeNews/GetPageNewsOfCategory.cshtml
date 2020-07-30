@@ -1,0 +1,173 @@
+﻿
+@{
+    ViewBag.Title = "HomeNews";
+    Layout = null;
+    var ListCategories = ViewData["ListCategory"] as List<Entity.Category>;
+    var ListNews = ViewData["ListNews"] as Tuple<List<Entity.News>, int,int>;
+    var sixeListCate = ListCategories.Count;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../../Content/bootstrap-4.0.0-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../Content/style.css" />
+</head>
+<body>
+    <div class="container center-item " style="margin-top:20px;">
+        <div class="d-flex justify-content-between">
+            <img class="" src="../../Content/imgs/logo.png" />
+            <img class="" src="../../Content/imgs/Layer 463.png" />
+        </div>
+        <div class="bg-green menu nav text-center text-white m-b-20" id="menu">
+            @foreach(var category in ViewData["ListCategory"] as List<Entity.Category>)
+            {
+                if (0== @category.ParentId) {
+                    <a href="?CategoryId=@category.Id" class="CategoryIdNow">@category.Name</a>
+                }
+            }
+        </div>
+        <div class="container row m-b-20 reset-margin reset-padding">
+            <div class="col-md-9 padding-reset">
+                <div class="row bg-f6f6f6 breackcome">
+                    <a>Trang chu</a>
+                    <div class="m-2">
+                        <img src="../../Content/imgs/Layer 59.png" width="8" height="11" class="d-block rounded" />
+                    </div>
+                    <label>
+                        @foreach (var category in ViewData["ListCategory"] as List<Entity.Category>)
+                        {
+                            if (@ListNews.Item3 == category.Id)
+                            {
+                                <a href="?CategoryId=@category.Id" class="CategoryIdNow" >@category.Name</a>
+                                <a  class=" d-none" id="CategoryIdNow">@category.Id</a>
+                            }
+                        }
+                    </label>
+                </div>
+                <div class="content-news">
+                    @if (ListNews.Item1.Count > 0) { 
+                    <div class="row" id="news-impotant">
+                        <img class="col-md-5 reset-padding rounded" src="../../Content/imgs/@ListNews.Item1[0].Avatar" width="330" height="250" />
+                        <div class="right text-content col-md-7">
+                            <div>@ListNews.Item1[0].ModifyDate</div>
+                            <h4>@ListNews.Item1[0].Name</h4>
+                            <p class="text-14px">@ListNews.Item1[0].Sapo</p>
+                        </div>
+                    </div>
+                    }
+                    <div class="row d-flex justify-content-between p-t-20" id="3-news">
+                        @for (var i = 1; i < 4; i++)
+                        {
+                            if (i < ListNews.Item1.Count) { 
+                            <div class="card-new">
+                                <img class="img-auto-width rounded" src="../../Content/imgs/@ListNews.Item1[@i].Avatar " width="220" style="width:100%;height:150px;" />
+                                <h6>@ListNews.Item1[@i].Name</h6>
+                                <div class="text-right text-secondary text-14px">@ListNews.Item1[@i].ModifyDate</div>
+                                <p class="" style="font-size: 12px;">@ListNews.Item1[@i].Sapo</p>
+                            </div>
+                            }
+                        }
+                    </div>
+                </div>
+
+
+                <div class="more-news" id="more-news">
+                    @foreach (var news in ListNews.Item1)
+                    {
+                        <div class="row m-b-20">
+                            <div class="w-100">
+                                <img style="float: left;margin-right: 20px;width:35%; height:150px;" src="../../Content/imgs/@news.Avatar" width="220" />
+                                <div class="text-secondary text-14px">@news.ModifyDate</div>
+                                <h6>@news.Name</h6>
+                                <p class="text-14px ">@news.Sapo</p>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                <div class="d-flex flex-row-reverse">
+                    <ul class="pagination pagination-sm right " id="paginations">
+                        @for (var i = 1; i <= ListNews.Item2; i++) {
+                            if (i == 1) {
+                                    <li class="page-item"><a class="page-link bg-primary text-white" id="@i" value="@i">@i</a></li>
+                            }
+                            else { 
+                                <li class="page-item"><a class="page-link" id="@i" value="@i">@i</a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="col-md-3 " style="padding-right:0px;">
+                <div class=" bg-f6f6f6 border-top-lg m-b-20">
+
+                    <h4 class="text-center" style="width: 100%">Xem nhieu nhat</h4>
+                    <div class="row reset-margin d-flex justify-content-around" id="more-view">
+                        @for (var i = 0; i < 2; i++)
+                        {
+                            if (i < ListNews.Item1.Count)
+                            {
+                            <div class="" style="width: 40%;height: auto;">
+                                <img class="img-auto-width" src="../../Content/imgs/@ListNews.Item1[@i].Avatar" />
+                                <h6 class="text-14px">@ListNews.Item1[@i].Name</h6>
+                            </div>
+                            }
+                        }
+                    </div>
+
+                    <div class="top-4-view" id="top-4-view">
+                        @for (var i = 1; i <= 4; i++)
+                        {
+                            if (@i < @ListNews.Item1.Count)
+                            {<div class="row p-3">
+                                <h2 class="p-2 color-green">@i</h2>
+                                <div class="p-2" style="width: 85%"><h6>@ListNews.Item1[@i].Name</h6></div>
+                            </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class=" bg-f6f6f6 border-top-lg m-b-20 p-b-20">
+                    <h4 class="text-center" style="width: 100%">Tin anh</h4>
+                    <img class="img-auto-width" src="../../Content/imgs/2.png" />
+                    <h6 class="text-14px text-center">Kẻ gây thảm án ở Nghệ An xin tha tội chết</h6>
+                </div>
+
+                <img class="img-auto-width" src="../../Content/imgs/Layer 40.png" />
+            </div>
+        </div>
+
+        <div class=" row " style="background-color:#f6f6f6" id="Bottom-menu">
+            @foreach (var category in ListCategories)
+            {
+                if (@category.ParentId == 0)
+                {
+                    <div class="p-3 box" id="@category.Id" style="width:270px;">
+                        <a href="?CategoryId=@category.Id" class="box-link h6">@category.Name</a><br>
+                        @foreach (var categoryChil in ListCategories)
+                        {
+                            if (categoryChil.ParentId == category.Id)
+                            {
+                                <a href="?CategoryId=@categoryChil.Id">@categoryChil.Name</a><br>
+                            }
+                        }
+                    </div>
+                }
+            }
+        </div>
+        <div class=" d-flex justify-content-between p-3">
+            <img src="../../Content/imgs/logo.png" width="175" height="65" />
+            <div class="" style="margin-left:20px;"><p>Tất cả những thông tin tòa soạn ở khu vực này tất cả những thông tin tòa soạn ở khu vực này tất cả những thông tin tòa soạn ở khu vực này tất cả những thông tin tòa soạn ở khu vực này tất cả những thông tin tòa soạn ở khu vực này tất cả những thông tin tòa soạn ở khu vực này tất cả những thông tin tòa soạn ở khu vực này tất cả những thông tin tòa soạn ở khu vực này tất cả những thông tin tòa soạn ở khu vực này tất cả những thông tin tòa soạn ở khu vực này tất cả những thông tin tòa soạn ở khu vực này</p></div>
+        </div>
+    </div>
+    <script type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="~/Content/CategoryNews.js"></script>
+</body>
+</html>
+@{ 
+    ViewData.Clear();
+}
+

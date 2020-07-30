@@ -1,0 +1,96 @@
+﻿@model Entity.News
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View</title>
+    <link rel="stylesheet" type="text/css" href="../../Content/bootstrap-4.0.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../Content/style.css">
+</head>
+<body>
+    <div>
+        
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="dl-horizontal col-6">
+                <h4>News</h4>
+                <hr />
+                <dl class="row">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+
+                    <dd class="m-l-20">
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+                </dl>
+                    <div>
+                        @Html.DisplayNameFor(model => model.Avatar)
+                    </div>
+                    <div>
+                        <img src="~/Content/imgs/@Model.Avatar" height="200" class="m-auto" />
+                    </div>
+                    <div>
+                        @Html.DisplayFor(model => model.Avatar, new { @class = "text-center" })
+                    </div>
+                <dl class="row">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Sapo)
+                    </dt>
+
+                    <dd class="m-l-20">
+                        @Html.DisplayFor(model => model.Sapo)
+                    </dd>
+                </dl>
+                <dl class="row">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+
+                    <dd class="m-l-20">
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+                </dl>
+                <dl class="row">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Active)
+                    </dt>
+
+                    <dd class="m-l-20">
+                        @Html.DisplayFor(model => model.Active)
+                    </dd>
+                </dl>
+                <dl class="row">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CategoryId)
+                    </dt>
+
+                    <dd class="m-l-20">
+                        @Html.DisplayFor(model => model.CategoryId)
+                    </dd>
+                </dl>
+                <dl class="row">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ModifyDate)
+                    </dt>
+
+                    <dd class="m-l-20">
+                        @Html.DisplayFor(model => model.ModifyDate)
+                    </dd>
+                </dl>
+                <p>
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+            </div>
+            </div>
+    </div>
+    
+</body>
+</html>

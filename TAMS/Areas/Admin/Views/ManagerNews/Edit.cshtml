@@ -1,0 +1,84 @@
+﻿@{ 
+    var news = ViewData["news"] as Entity.News;
+    var ListCategories = ViewData["ListCategories"] as List<Entity.Category>;
+}
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap-4.0.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css">
+</head>
+<body>
+    <div  class=" container" >
+        <form action="Edit" method="post" id="news-form" enctype="multipart/form-data" class="form-horizontal  p-2">
+            <h4>News</h4>
+            <hr />
+            <input type="text" name="Id" id="Id" class="form-control d-none" value="@news.Id" />
+            <div class=" m-b-20 ">
+                <label class="control-label  font-weight-bold">Name :</label>
+                <input type="text" name="Name" id="Name" class="form-control " value="@news.Name" />
+            </div>
+            <div class=" m-b-20 m-l-20 row">
+                <div class="w-50">
+                    <label class="control-label font-weight-bold ">File avatar :</label><br />
+                    <input type="file" name="fileAvatar" id="fileAvatar" />
+                </div>
+                <div class="w-25">
+                    <img src="~/Content/imgs/@news.Avatar" class="img-auto-width" />
+                </div>
+            </div>
+            <div class=" form-group m-b-20 ">
+                <label class="control-label font-weight-bold">Sapo :</label>
+                <input type="text" name="Sapo" id="Sapo" class="form-control" value="@news.Sapo" />
+            </div>
+            <div class=" form-group m-b-20 ">
+                <label class="control-label font-weight-bold">Description :</label>
+                <input type="text" name="Description" id="Description" class="form-control" value="@news.Description" />
+            </div>
+            <div class="row">
+                <div class=" form-group m-b-20 col-3 ">
+                    <label class="control-label  font-weight-bold p-1">Active : </label>
+                    @if (news.Active)
+                    {
+                        <input type="checkbox" name="Active" id="Active" value="true" checked="checked" />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="Active" id="Active" value="true" />
+                    }
+                </div>
+                <div class=" form-group m-b-20 col-8 row">
+                    <label class="control-label  font-weight-bold p-1">Category :</label>
+                    <select class="form-control w-75" form="news-form" id="CategoryId" name="CategoryId">
+                        @foreach (var Category in ListCategories)
+                        {
+                            if (Category.Id == news.CategoryId)
+                            {
+                                <option value="@Category.Id" class="bg-primary" style="color:#fff;">@Category.Name</option>
+                                break;
+                            }
+                        }
+                        @foreach (var Category in ListCategories)
+                        {
+                            <option value="@Category.Id">@Category.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class=" col-10 m-b-20 flex-row">
+                <input type="submit" value="Edit" id="btn-save" class="btn btn-default" />
+            </div>
+        </form>
+        @Html.ActionLink("Back to List", "Index")
+        </div>
+        <script type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>
+</body>
+</html>

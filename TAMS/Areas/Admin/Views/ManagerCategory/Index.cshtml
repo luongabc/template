@@ -1,0 +1,83 @@
+﻿@{
+    var data = ViewData["Data"] as Tuple<List<Entity.Category>, int>;
+}
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+    <link rel="stylesheet" type="text/css" href="../../../Content/bootstrap-4.0.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../Content/style.css">
+</head>
+<body>
+    <div class="container">
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table table-bordered">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>ParentId</th>
+                <th>Active</th>
+                <th>CreateDate</th>
+                <th></th>
+            </tr>
+            <tbody id="tb-data">
+                @foreach (var item in data.Item1)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Slug)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ParentId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Active)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreateDate)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="w-100 ">
+            <ul class="center-block pagination row ">
+                @for (int i = 1; i <= data.Item2; i++)
+                {
+                    if (i == 1)
+                    {
+                        <li class="page-item"><a class="page-link bg-primary text-white" id="@i" value="@i">@i</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item"><a class="page-link " id="@i" value="@i">@i</a></li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Admin/JavaScripts/IndexCategory.js"></script>
+</body>
+</html>

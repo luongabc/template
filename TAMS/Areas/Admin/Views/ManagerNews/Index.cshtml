@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "HomeNews";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manager News</title>
+    <link rel="stylesheet" type="text/css" href="../../../Content/bootstrap-4.0.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../Content/style.css">
+</head>
+<body>
+    <div class="container">
+        <button class="button btn-primary h5 m-3" id="btn-create-new"> Create New</button>
+        <table class=" table  table-bordered ">
+            <thead>
+                <tr>
+                    <th class="text-center ">Id</th>
+                    <th class="text-center">Name</th>
+                    <th class="text-center"><a href="/Admin/ManagerCategory" class="">Category</a></th>
+                    <th class="text-center" style="width:160px;">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewData["ListNews"] as List<Entity.News>)
+                {
+                    <tr class="data" id="@item.Id" value="@item.Id">
+                        <td class="text-center">@item.Id</td>
+                        <td class="text-center">@item.Name</td>
+                            @foreach(var category in ViewData["ListCategories"] as List<Entity.Category>)
+                            {
+                                if (item.CategoryId == category.Id)
+                                {
+                                    <td class="text-center">@category.Name</td>
+                                }
+                            }
+                        <td class="center-block">
+                            <a class="btn-edit" href="/Admin/ManagerNews/Edit?id=@item.Id" value="@item.Id">Edit |</a>
+                            <a class="btn-delete" href="/Admin/ManagerNews/Delete?id=@item.Id" value="@item.Id">Delete |</a>
+                            <a class="btn-view" href="/Admin/ManagerNews/View?id=@item.Id" value="@item.Id">View</a>
+                        </td>
+                    </tr>
+                 }
+            </tbody>
+        </table>
+        <div id="background" class="position-absolute bg-dark" style="width:100%;height:100%;top:0px;left:0px;opacity:0.5">
+        </div>
+        <div id="form-create" class="position-absolute border" style="width:600px;height:600px;top:calc(50vh - 300px);left:calc(50vw - 300px);background-color:white;">
+            
+            <form action="ManagerNews/Create" method="post" id="news-form" enctype="multipart/form-data" class="form-horizontal  p-2">
+                <h4>News</h4>
+                <hr />
+                <div class=" m-b-20 ">
+                    <label class="control-label  font-weight-bold">Name :</label>
+                    
+                    <input type="text" name="Name" id="Name" class="form-control " />
+                </div>
+                <div class=" m-b-20 " >
+                    <label class="control-label font-weight-bold ">File avatar :</label><br />
+                    <input type="file" name="fileAvatar" id="fileAvatar" />
+                </div>
+                <div class=" form-group m-b-20 ">
+                    <label class="control-label font-weight-bold">Sapo :</label>
+                    <input type="text" name="Sapo" id="Sapo" class="form-control" />
+                </div>
+                <div class=" form-group m-b-20 ">
+                    <label class="control-label font-weight-bold">Description :</label>
+                    <input type="text" name="Description" id="Description" class="form-control" />
+                </div>
+                <div class="row">
+                    <div class=" form-group m-b-20 w-50 col-3">
+                        <label class="control-label  font-weight-bold p-1">Active : </label>
+                        <input type="checkbox" name="Active" id="Active" value="true" />
+                    </div>
+                    <div class=" m-b-20 w-50  col-8 row">
+                        <label class="control-label  font-weight-bold p-1">Category :</label>
+                        <select class="form-control w-75" form="news-form" id="CategoryId" name="CategoryId">
+                            @foreach (var Category in ViewData["ListCategories"] as List<Entity.Category>)
+                            {
+                                <option value="@Category.Id">@Category.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class=" col-10 m-b-20 flex-row">
+                    <input type="submit" value="Create" id="btn-save" class="btn btn-default" />
+                    <input type="button" value="Close" id="btn-close-form" class="btn btn-danger position-absolute " style="right:0px;" />
+                </div>
+            </form>
+        </div>
+        </div>
+        <script type="text/javascript" src="../../../Scripts/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="~/Areas/Admin/JavaScripts/news.js"></script>
+</body>
+</html>

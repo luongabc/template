@@ -1,0 +1,78 @@
+﻿
+.bg-green {
+    background-color: #048b3c;
+}
+.color-green {
+    color: #048b3c;
+}
+.bg-f6f6f6 {
+    background-color: #f6f6f6;
+}
+
+.menu {
+    height: 35px;
+    background-image: url('../../Content/imgs/home-24.png');
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    padding-left: 50px;
+}
+.menu a{
+    border-right:1px solid #fff;
+    height:100%;
+    line-height:35px;
+    padding-left:20px;
+    padding-right:20px;
+    color:#fff;
+}
+.box .box-link {
+    font-size: 20px;
+    color: #048b3c;
+}
+.breackcome{
+    padding-left: 20px;
+}
+.content-news{
+}
+.text-content{
+    width: 100%;
+}
+.text-16px{
+    font-size: 16px;
+}
+.text-14px{
+    font-size: 14px;
+}
+.reset-padding{
+    padding:0px;
+}
+.reset-margin{
+    margin:0px;
+}
+.p-t-20{
+    padding-top: 20px;
+}
+.p-b-20{
+    padding-bottom: 20px;
+}
+.m-b-20{
+    margin-bottom: 20px;
+}
+.m-l-20{
+    margin-left:20px;
+}
+.card-new{
+    width:250px;
+}
+.img-auto-width {
+  width: 100%;
+  height: auto;
+}
+.border-top-lg{
+    border-top: 4px solid #048b3c;
+}
+h1,h2,h3,h4,h5,h6,p,a,dt{
+    word-wrap: break-word
+}
+img{
+    padding-bottom:5px;
+}
