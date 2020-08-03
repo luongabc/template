@@ -132,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\JavaScripts\IndexCategory.js" />
+    <Content Include="Areas\Admin\JavaScripts\ManagerNews-Edit.js" />
     <Content Include="Areas\Admin\JavaScripts\news.js" />
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />

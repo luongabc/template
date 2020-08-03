@@ -8,6 +8,11 @@
 .bg-f6f6f6 {
     background-color: #f6f6f6;
 }
+.border-red{
+    border:2px solid #ff0000;
+    border-radius:5px;
+}
+
 
 .menu {
     height: 35px;

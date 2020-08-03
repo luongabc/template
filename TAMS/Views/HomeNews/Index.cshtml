@@ -3,14 +3,14 @@
     ViewBag.Title = "HomeNews";
     Layout = null;
     var ListCategories = ViewData["ListCategory"] as List<Entity.Category>;
-    var ListNews = ViewData["ListNews"] as List<Entity.News>;
+    var ListNews = ViewData["ListNews"] as Tuple<List<Entity.News>,int>;
 }
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../../Content/bootstrap-4.0.0-dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../../Content/style.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap-4.0.0-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/style.css" />
 </head>
 <body>
     <div class="container center-item " style="margin-top:20px;">
@@ -22,76 +22,86 @@
             @foreach (var category in ListCategories)
             {
                 if (@category.ParentId == 0) { 
-                    <a href="HomeNews/GetPageNewsOfCategory?Id=@category.Id">@category.Name</a>
+                    <a href="/HomeNews/GetPageNewsOfCategory?Id=@category.Id">@category.Name</a>
                 }
             }
         </div>
         <div class="container row m-b-20 reset-margin reset-padding">
-            <div class="col-md-9 padding-reset">
+            <div class="col-md-8 padding-reset">
                 <div class="row bg-f6f6f6 breackcome">
-                    <a>Trang chu</a>
+                    <a href="/HomeNews">Trang chu</a>
                     <div class="m-2">
                         <img src="../../Content/imgs/Layer 59.png" width="8" height="11" class="d-block rounded" />
                     </div>
-                    <label>Xem-an-choi</label>
                 </div>
                 <div class="content-news">
                     <div class="row" id="news-impotant">
-                            <img class="col-md-5 reset-padding rounded" src="../../Content/imgs/@ListNews[0].Avatar" width="330" height="250" />
-                            <div class="right text-content col-md-7">
-                                <div>@ListNews[0].ModifyDate</div>
-                                <h4>@ListNews[0].Name</h4>
-                                <p class="text-14px">@ListNews[0].Sapo</p>
+                        @if (ListNews.Item1.Count > 0) { 
+                            <img class="col-6 reset-padding rounded" src="../../Content/imgs/@ListNews.Item1[0].Avatar" width="330" height="250" />
+                            <div class="right text-content col-6">
+                                <div>@ListNews.Item1[0].ModifyDate.ToString("d")</div>
+                                <h4>@ListNews.Item1[0].Name</h4>
+                                <p class="text-14px">@ListNews.Item1[0].Sapo</p>
                             </div>
+                        }
                     </div>
                     <div class="row d-flex justify-content-between p-t-20" id="3-news">
-                        @for(var i=1;i<4;i++)
+                        @for (var i=1;i<4;i++)
                         {
-                            <div class="card-new">
-                                <img class="img-auto-width rounded" src="../../Content/imgs/@ListNews[@i].Avatar " width="220" style="width:100%;height:150px;"/>
-                                <h6>@ListNews[@i].Name</h6>
-                                <div class="text-right text-secondary text-14px">@ListNews[@i].ModifyDate</div>
-                                <p class="" style="font-size: 12px;">@ListNews[@i].Sapo</p>
+                            <div class="card-new " style="width:30%">
+                                <img class="img-auto-width rounded" src="../../Content/imgs/@ListNews.Item1[@i].Avatar " width="200" style="width:100%;height:150px;"/>
+                                <h6>@ListNews.Item1[@i].Name</h6>
+                                <div class="text-right text-secondary text-14px">@ListNews.Item1[@i].ModifyDate.ToString("d")</div>
+                                <p class="" style="font-size: 12px;">@ListNews.Item1[@i].Sapo</p>
                             </div>
                         }
                     </div>
                 </div>
                 <div class="more-news" id="more-news">
-                    @foreach (var news in ListNews)
+                    @foreach (var news in ListNews.Item1)
                     {
                         <div class="row m-b-20">
                             <div class="w-100">
                                 <img  style="float: left;margin-right: 20px;width:35%; height:150px;" src="../../Content/imgs/@news.Avatar" width="220" />
-                                <div class="text-secondary text-14px">@news.ModifyDate</div>
+                                <div class="text-secondary text-14px">@news.ModifyDate.ToString("d")</div>
                                 <h6>@news.Name</h6>
                                 <p class="text-14px ">@news.Sapo</p>
                             </div>
                         </div>
                     }
-
                 </div>
                 <div class="d-flex flex-row-reverse">
                     <ul class="pagination pagination-sm right " id="paginations">
+                        @for(var i = 1; i <= ListNews.Item2;i++)
+                        {
+                            if(i==1){
+                                <li><a class="page-link bg-primary text-white" id="@i">@i</a></li>
+                            }
+                            else {
+                                <li><a class="page-link" id="@i">@i</a></li>
+                            }
+                        }
                     </ul>
                 </div>
             </div>
-            <div class="col-md-3 " style="padding-right:0px;">
+            <div class="col-md-4 " style="padding-right:0px;">
                 <div class=" bg-f6f6f6 border-top-lg m-b-20">
                     <h4 class="text-center" style="width: 100%">Xem nhieu nhat</h4>
                     <div class="row reset-margin d-flex justify-content-around" id="more-view">
                         @for (var i = 0; i < 2; i++) {
-                        <div class="" style="width: 40%;height: auto;">
-                            <img class="img-auto-width" src="../../Content/imgs/@ListNews[@i].Avatar" />
-                            <h6 class="text-14px">@ListNews[@i].Name</h6>
+                        <div class="" style="width: 45%;height: auto;">
+                            <img class="img-auto-width" src="../../Content/imgs/@ListNews.Item1[@i].Avatar" />
+                            <h6 class="h6 small">@ListNews.Item1[@i].Name</h6>
                         </div>
                         }
                     </div>
                     <div class="top-4-view" id="top-4-view">
                         @for (var i = 1; i <= 4; i++) {
-                        <div class="row p-3">
-                            <h2 class="p-2 color-green">@i</h2>
-                            <div class="p-2" style="width: 85%"><h6>@ListNews[@i].Name</h6></div>
-                        </div>
+                            if (i < ListNews.Item1.Count) { 
+                                <div class="row p-3">
+                                    <h2 class="p-2 color-green">@i</h2>
+                                   <div class="p-2" style="width: 85%"><h6>@ListNews.Item1[@i].Name</h6></div>
+                                </div>}
                         }
                     </div>
                 </div>
@@ -106,22 +116,22 @@
         </div>
 
         <div class=" row " style="background-color:#f6f6f6" id="Bottom-menu">
-            @foreach (var category in ListCategories)
+           @foreach (var category in ListCategories)
             {
                 if (@category.ParentId == 0)
                 {
-            <div class="p-3 box" id="@category.Id" style="width:270px;">
-                <a href="?@category.Name" class="box-link h6">@category.Name</a><br>
-                @foreach (var categoryChil in ListCategories)
-                {
-                    if (categoryChil.ParentId == category.Id)
-                    {
-                        <a href="#">@categoryChil.Name</a><br>
+                    <div class="p-3 box" id="@category.Id" style="width:270px;">
+                        <a href="?@category.Name" class="box-link h6">@category.Name</a><br>
+                        @foreach (var categoryChil in ListCategories)
+                        {
+                            if (categoryChil.ParentId == category.Id)
+                        {
+                            <a href="#">@categoryChil.Name</a><br>
+                        }
                     }
+                    </div>
                 }
-            </div>
-                 }
-             }
+            }
         </div>
         <div class=" d-flex justify-content-between p-3">
             <img src="../../Content/imgs/logo.png" width="175" height="65" />

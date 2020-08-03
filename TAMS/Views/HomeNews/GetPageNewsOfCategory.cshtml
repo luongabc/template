@@ -16,7 +16,7 @@
 <body>
     <div class="container center-item " style="margin-top:20px;">
         <div class="d-flex justify-content-between">
-            <img class="" src="../../Content/imgs/logo.png" />
+            <img  class="" src="../../Content/imgs/logo.png" />
             <img class="" src="../../Content/imgs/Layer 463.png" />
         </div>
         <div class="bg-green menu nav text-center text-white m-b-20" id="menu">
@@ -30,7 +30,7 @@
         <div class="container row m-b-20 reset-margin reset-padding">
             <div class="col-md-9 padding-reset">
                 <div class="row bg-f6f6f6 breackcome">
-                    <a>Trang chu</a>
+                    <a href="/HomeNews">Trang chu</a>
                     <div class="m-2">
                         <img src="../../Content/imgs/Layer 59.png" width="8" height="11" class="d-block rounded" />
                     </div>
@@ -50,7 +50,7 @@
                     <div class="row" id="news-impotant">
                         <img class="col-md-5 reset-padding rounded" src="../../Content/imgs/@ListNews.Item1[0].Avatar" width="330" height="250" />
                         <div class="right text-content col-md-7">
-                            <div>@ListNews.Item1[0].ModifyDate</div>
+                            <div>@ListNews.Item1[0].ModifyDate.ToString("d")</div>
                             <h4>@ListNews.Item1[0].Name</h4>
                             <p class="text-14px">@ListNews.Item1[0].Sapo</p>
                         </div>
@@ -63,7 +63,7 @@
                             <div class="card-new">
                                 <img class="img-auto-width rounded" src="../../Content/imgs/@ListNews.Item1[@i].Avatar " width="220" style="width:100%;height:150px;" />
                                 <h6>@ListNews.Item1[@i].Name</h6>
-                                <div class="text-right text-secondary text-14px">@ListNews.Item1[@i].ModifyDate</div>
+                                <div class="text-right text-secondary text-14px">@ListNews.Item1[@i].ModifyDate.ToString("d")</div>
                                 <p class="" style="font-size: 12px;">@ListNews.Item1[@i].Sapo</p>
                             </div>
                             }
@@ -78,7 +78,7 @@
                         <div class="row m-b-20">
                             <div class="w-100">
                                 <img style="float: left;margin-right: 20px;width:35%; height:150px;" src="../../Content/imgs/@news.Avatar" width="220" />
-                                <div class="text-secondary text-14px">@news.ModifyDate</div>
+                                <div class="text-secondary text-14px">@news.ModifyDate.ToString("d")</div>
                                 <h6>@news.Name</h6>
                                 <p class="text-14px ">@news.Sapo</p>
                             </div>

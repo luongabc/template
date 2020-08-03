@@ -15,6 +15,8 @@ namespace project_14_7_2020.Areas.Admin.Controllers
 {
     public class ManagerNewsController : Controller
     {
+        private int pageSize = 7;
+
         [HttpGet]
         public ActionResult Edit(int Id)
         {
@@ -35,12 +37,13 @@ namespace project_14_7_2020.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(News news, HttpPostedFileBase fileAvatar)
         {
-            String name = fileAvatar.FileName.ToString();
-            news.Avatar = name;
+            if (fileAvatar == null) news.Avatar = null;
+            else news.Avatar = fileAvatar.FileName.ToString();
             NewsContext newsBL = new NewsContext();
             if (newsBL.Update(news) >= 0)
             {
-                string SaveLocation = Server.MapPath("~/Content/imgs") + "\\" + name;
+                string SaveLocation = Server.MapPath("~/Content/imgs") + "\\" + news.Avatar;
+                if (fileAvatar != null) { 
                 try
                 {
                     fileAvatar.SaveAs(SaveLocation);
@@ -48,6 +51,7 @@ namespace project_14_7_2020.Areas.Admin.Controllers
                 catch (Exception ex)
                 {
                     Response.Write("Error: " + ex.Message);
+                }
                 }
                 return RedirectToAction("Index");
             }
@@ -67,9 +71,31 @@ namespace project_14_7_2020.Areas.Admin.Controllers
         {
             NewsContext newsBL = new NewsContext();
             CategoryContext categoryBL = new CategoryContext();
-            ViewData["ListNews"] = newsBL.GetAllNews();
+            Tuple<List<News>, int> getDatas = newsBL.GetNewsOfPage(-1, 1, this.pageSize);
+            int NumPage = getDatas.Item2 / this.pageSize;
+            int div = getDatas.Item2 % this.pageSize;
+            if (div > 0) NumPage++;
+            ViewData["ListNews"] = Tuple.Create(getDatas.Item1, NumPage);
             ViewData["ListCategories"] = categoryBL.GetAllCategories();
             return View();
+        }
+        public ActionResult index(int page)
+        {
+            NewsContext newsBL = new NewsContext();
+            CategoryContext categoryBL = new CategoryContext();
+            Tuple<List<News>, int> getDatas = newsBL.GetNewsOfPage(-1, page, this.pageSize);
+            int NumPage = getDatas.Item2 / this.pageSize;
+            int div = getDatas.Item2 % this.pageSize;
+            if (div > 0) NumPage++;
+            ViewData["ListNews"] = Tuple.Create(getDatas.Item1, NumPage);
+            ViewData["ListCategories"] = categoryBL.GetAllCategories();
+            return View();
+        }
+        [HttpGet]
+        public IEnumerable GetNewByPage(int page)
+        {
+            NewsContext newsBL = new NewsContext();
+            return JsonConvert.SerializeObject(newsBL.GetNewsOfPage(-1,page,this.pageSize));
         }
         [HttpGet]
         public ActionResult Create()
@@ -80,6 +106,7 @@ namespace project_14_7_2020.Areas.Admin.Controllers
         public ActionResult Create(News news, HttpPostedFileBase fileAvatar)
         {
             NewsContext newsBL = new NewsContext();
+            if(fileAvatar==null) return RedirectToAction("Index");
             String nameFile= System.IO.Path.GetFileName(fileAvatar.FileName);
             news.Avatar = nameFile;
             if (newsBL.Create(news) > 0)

@@ -10,15 +10,22 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>View</title>
-    <link rel="stylesheet" type="text/css" href="../../Content/bootstrap-4.0.0-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../../Content/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap-4.0.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css">
 </head>
 <body>
     <div>
         
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="dl-horizontal col-6">
+        <div class="container">
+            <div class="d-flex justify-content-between">
+                <img class="" src="~/Content/imgs/logo.png" />
+                <img class="" src="~/Content/imgs/Layer 463.png" />
+            </div>
+            <div class="bg-green menu nav text-center text-white m-b-20" id="menu">
+                <a href="/Admin/ManagerNews">News</a>
+                <a href="/Admin/ManagerCategory">Category</a>
+            </div>
+            <div class="dl-horizontal ">
                 <h4>News</h4>
                 <hr />
                 <dl class="row">
@@ -30,15 +37,15 @@
                         @Html.DisplayFor(model => model.Name)
                     </dd>
                 </dl>
-                    <div>
+                <dl class="row">
+                    <dt class="w-25">
                         @Html.DisplayNameFor(model => model.Avatar)
-                    </div>
-                    <div>
+                    </dt>
+                    <dt>
                         <img src="~/Content/imgs/@Model.Avatar" height="200" class="m-auto" />
-                    </div>
-                    <div>
                         @Html.DisplayFor(model => model.Avatar, new { @class = "text-center" })
-                    </div>
+                    </dt>
+                </dl>
                 <dl class="row">
                     <dt>
                         @Html.DisplayNameFor(model => model.Sapo)
@@ -57,39 +64,39 @@
                         @Html.DisplayFor(model => model.Description)
                     </dd>
                 </dl>
-                <dl class="row">
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Active)
-                    </dt>
+                <div class="row justify-content-between reset-margin">
+                    <dl class="row">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Active)
+                        </dt>
+                        <dt class="m-l-20">
+                            @Html.DisplayFor(model => model.Active)
+                        </dt>
+                    </dl>
+                    <dl class="row">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CategoryId)
+                        </dt>
 
-                    <dd class="m-l-20">
-                        @Html.DisplayFor(model => model.Active)
-                    </dd>
-                </dl>
-                <dl class="row">
-                    <dt>
-                        @Html.DisplayNameFor(model => model.CategoryId)
-                    </dt>
-
-                    <dd class="m-l-20">
-                        @Html.DisplayFor(model => model.CategoryId)
-                    </dd>
-                </dl>
-                <dl class="row">
-                    <dt>
-                        @Html.DisplayNameFor(model => model.ModifyDate)
-                    </dt>
-
-                    <dd class="m-l-20">
-                        @Html.DisplayFor(model => model.ModifyDate)
-                    </dd>
-                </dl>
+                        <dt class="m-l-20">
+                            @Html.DisplayFor(model => model.CategoryId)
+                        </dt>
+                    </dl>
+                    <dl class="row">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ModifyDate)
+                        </dt>
+                        <dd class="m-l-20">
+                            @Html.DisplayFor(model => model.ModifyDate)
+                        </dd>
+                    </dl>
+                </div>
                 <p>
                     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
                     @Html.ActionLink("Back to List", "Index")
                 </p>
             </div>
-            </div>
+        </div>
     </div>
     
 </body>

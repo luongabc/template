@@ -38,11 +38,8 @@ namespace project_14_7_2020.Areas.Admin.Controllers
         public ActionResult Create(Category category)
         {
             CategoryContext categoryContext = new CategoryContext();
-            if (categoryContext.Create(category) > 0)
-            {
-                return RedirectToAction("Index");
-            }
-            return View();
+            categoryContext.Create(category);
+            return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int Id)
@@ -54,9 +51,9 @@ namespace project_14_7_2020.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(Category category)
         {
+            if (category.Id < 0) return View();
             CategoryContext categoryContext = new CategoryContext();
-            if (categoryContext.Update(category) > -1) return RedirectToAction("Index");
-            return View();
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

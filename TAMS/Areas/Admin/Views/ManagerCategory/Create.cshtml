@@ -16,16 +16,24 @@
 </head>
 <body>
     <div class="container">
+        <div class="d-flex justify-content-between">
+            <img class="" src="../../Content/imgs/logo.png" />
+            <img class="" src="../../Content/imgs/Layer 463.png" />
+        </div>
+        <div class="bg-green menu nav text-center text-white m-b-20" id="menu">
+            <a href="/Admin/ManagerNews">News</a>
+            <a href="/Admin/ManagerCategory">Category</a>
+        </div>
         <h4>Category</h4>
         <hr />
-        <form action="/ManagerCategory/Create" method="POST" id="form-create" class="form-horizontal">
+        <form action="~/Admin/ManagerCategory/Create" method="POST" id="form-create" class="form-horizontal">
             <div class="form-group">
                 <label class="h6">Name:</label>
-                <input class="form-control" type="text" id="Name" name="Name" autocomplete="off"/>
+                <input class="form-control" type="text" id="Name" name="Name" autocomplete="off" />
             </div>
             <div class="form-group">
                 <label class="h6">Slug:</label>
-                <input class="form-control" type="text" id="Slug" name="Slug" autocomplete="off"/>
+                <input class="form-control" type="text" id="Slug" name="Slug" autocomplete="off" />
             </div>
             <div class="form-group">
                 <label class="h6">Parent Category:</label>
@@ -38,7 +46,7 @@
             </div>
             <div class="form-group">
                 <label class="h6">Active:</label>
-                <input type="checkbox" form="form-create" id="Active" name="Active" value="true"/>
+                <input type="checkbox" form="form-create" id="Active" name="Active" value="true" />
             </div>
             <button type="submit" class="btn btn-default"> Create</button>
         </form>

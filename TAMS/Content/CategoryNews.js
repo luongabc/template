@@ -6,7 +6,6 @@ class NewsPage {
     constructor() {
     }
     init() {
-
         $(".page-link").on("click", this.clickPage);
     }
     clickPage() {
@@ -22,7 +21,7 @@ class NewsPage {
                 $("#more-news").append(`<div class="row m-b-20">
                             <div class="w-100">
                                 <img style="float: left;margin-right: 20px" src="../../Content/imgs/`+ news.Avatar + `" width="220" />
-                                <div class="text-secondary text-14px">`+ news.ModifyDate + `</div>
+                                <div class="text-secondary text-14px">`+ news.ModifyDate.slice(0,10) + `</div>
                                 <h6>`+ news.Name + `</h6>
                                 <p class="text-14px ">`+ news.Sapo + `</p>
                             </div>

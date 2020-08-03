@@ -26,7 +26,7 @@ class managerCategory {
                         <td>`+ item.CreateDate +`</td>
                         <td>
                            <a href="/Admin/ManagerCategory/Edit?Id=`+ item.Id+`" >Edit  </a>|
-                           <a href="/Admin/ManagerCategory/Delete?Id=`+ item.Id +`" >Datele</a>
+                           <a href="/Admin/ManagerCategory/Delete?Id=`+ item.Id +`" >Detele</a>
                         </td>
                     </tr>`)
             })

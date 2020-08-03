@@ -17,7 +17,15 @@
     <link rel="stylesheet" type="text/css" href="~/Content/style.css">
 </head>
 <body>
-    <div  class=" container" >
+    <div class=" container">
+        <div class="d-flex justify-content-between">
+            <img class="" src="~/Content/imgs/logo.png" />
+            <img class="" src="~/Content/imgs/Layer 463.png" />
+        </div>
+        <div class="bg-green menu nav text-center text-white m-b-20" id="menu">
+            <a href="/Admin/ManagerNews">News</a>
+            <a href="/Admin/ManagerCategory">Category</a>
+        </div>
         <form action="Edit" method="post" id="news-form" enctype="multipart/form-data" class="form-horizontal  p-2">
             <h4>News</h4>
             <hr />
@@ -31,8 +39,8 @@
                     <label class="control-label font-weight-bold ">File avatar :</label><br />
                     <input type="file" name="fileAvatar" id="fileAvatar" />
                 </div>
-                <div class="w-25">
-                    <img src="~/Content/imgs/@news.Avatar" class="img-auto-width" />
+                <div class="w-25" >
+                    <img src="~/Content/imgs/@news.Avatar" class="img-auto-width" id="img-select"/>
                 </div>
             </div>
             <div class=" form-group m-b-20 ">
@@ -78,7 +86,8 @@
             </div>
         </form>
         @Html.ActionLink("Back to List", "Index")
-        </div>
+    </div>
         <script type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>
+        <script type="text/javascript" src="~/Areas/Admin/JavaScripts/ManagerNews-Edit.js"></script>
 </body>
 </html>

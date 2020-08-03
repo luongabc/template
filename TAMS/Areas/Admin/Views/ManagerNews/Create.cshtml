@@ -10,15 +10,22 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
-    <link rel="stylesheet" type="text/css" href="../../../Content/bootstrap-4.0.0-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../../../Content/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap-4.0.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css">
 </head>
 <body class="container">
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
 
-
-    @using (Html.BeginForm("Create","ManagerNews",FormMethod.Post))
+    <div class="d-flex justify-content-between">
+        <img class="" src="../../Content/imgs/logo.png" />
+        <img class="" src="../../Content/imgs/Layer 463.png" />
+    </div>
+    <div class="bg-green menu nav text-center text-white m-b-20" id="menu">
+        <a href="/Admin/ManagerNews">News</a>
+        <a href="/Admin/ManagerCategory">Category</a>
+    </div>
+    @using (Html.BeginForm("Create", "ManagerNews", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
 
