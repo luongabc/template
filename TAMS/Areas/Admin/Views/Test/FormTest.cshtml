@@ -1,0 +1,111 @@
+﻿@{
+    Layout = "~/Areas/Admin//Views/Shared/Layout1.cshtml";
+    var listTests = ViewData["listTest"] as List<TAMS.Entity.Test>;
+    var formTest= ViewData["FormTest"]  as TAMS.Entity.Test;
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Manager Test</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Test</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<div>
+
+</div>
+<section class="content">
+    <div class="container-fluid row justify-content-around">
+        <div class="card col-7">
+            <div class="card-header">
+                <h3 class="card-title">DataTable Test</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover >
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name User</th>
+                            <th>Score</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in listTests)
+                        {
+                            <tr id="Test_@item.Id">
+                                <td><input type="checkbox" class="w-100 checkbox-test" /></td>  
+                                <th>@item.UserName</th>
+                                <th>
+                                    @if (item.Score == null &&
+                                        item.Status != (int)(TAMS.Entity.baseEmun.StaticTest.NotStart))
+                                    {
+                                        <a href="/Admin/Test/ViewTest?IdTest=@item.Id">Chấm</a>
+                                    }
+                                    else if (item.Status == (int)(TAMS.Entity.baseEmun.StaticTest.Finish))
+                                    {
+                                        <a href="#">@item.Score</a>
+                                    }
+                                </th>
+                                <th>
+                                    <a href="/Admin/Test/Detail?IdTest=@item.Id">Detail |</a>
+                                    <a href="/Admin/Test/Delete?IdTest=@item.Id">Delete</a>
+                                </th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+            <!-- /.row -->
+
+        </div>
+        <div class="card card-widget widget-user-2 col-4">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-info">
+                <!-- /.widget-user-image -->
+                <h3 class="text-center">@formTest.Name</h3>
+                <h5 class="text-center">@formTest.CategoryTestName</h5>
+            </div>
+            <div class="card-footer p-0">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            Time <p class="float-right ">@formTest.Time</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            Questions <p class="float-right  ">@formTest.NumQuestion</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            Create Date <p class="float-right ">@formTest.CreateDate</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    <!--/. container-fluid -->
+    </div>
+</section>
+<!-- /.content -->
+
+
+
+
+

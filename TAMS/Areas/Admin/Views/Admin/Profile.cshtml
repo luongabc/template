@@ -1,0 +1,72 @@
+﻿@model TAMS.Entity.LoginAdmin
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (Session["UserName"] == null)
+    {
+        Response.Redirect("~/Admin/Login");
+    }
+}
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<div id="UserName" style="display:none;">@ViewData["user"]</div>
+<div class="container">
+    <div class="div-box">
+        <div class="User-img">
+
+        </div>
+        <h3 class="User-name">Pardeep Singh</h3>
+        <h4 class="designation">Web Designer</h4>
+        <div class="contact-btn">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Update</button><br /><br />
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">ChangePassword</button><br /><br />
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+
+            </div>
+            <div class="modal-body">
+                <form>
+                    @Html.LabelFor(model => model.Avatar)
+                    @Html.TextBoxFor(model => model.Avatar, new { @class = "form-control", @placeholder = "file", type = "file" })
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary" id="btnUpdate" onclick="UpdateProfile();">Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+
+            </div>
+            <div class="modal-body">
+                <form>
+                    @Html.LabelFor(model => model.Password)
+                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @placeholder = "Password" })
+
+                    @Html.LabelFor(model => model.PasswordNew)
+                    @Html.TextBoxFor(model => model.PasswordNew, new { @class = "form-control", @placeholder = "Password New" })
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary" id="btnUpdate" onclick="ChangePassword();">Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/Profile.js"></script>

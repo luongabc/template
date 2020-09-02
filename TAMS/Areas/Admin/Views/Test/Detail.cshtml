@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/Layout1.cshtml";
+    var user = ViewData["user"] as TAMS.Entity.User;
+    var test = ViewData["Test"] as TAMS.Entity.Test;
+    var listData = ViewData["ContentTest"] as Tuple<List<TAMS.Entity.Question>, List<TAMS.Entity.UserResult>>;
+}
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Categories Test</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6 ">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Categories Test</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="p-3 h5 bg-white border-secondary  col-md-8" style="border-radius: 5px;border:1px solid #000">
+                @if (listData != null)
+                {
+                    for (var i = 1; i <= listData.Item1.Count; i++)
+                    {
+                        if (listData.Item1[i - 1].IdCategory == (int)TAMS.Entity.baseEmun.CategoryQuestion.CheckBox)
+                        {
+                            <div>
+                                <label class="text-primary">Câu @i: @listData.Item1[i - 1].Text</label><br />
+                                @foreach (var answer in listData.Item2)
+                                {
+                                    if (answer.IdQuestion == listData.Item1[i - 1].Id)
+                                    {
+                                        if (answer.result == true)
+                                        {
+                                            <input class="answerCheck m-2" type="checkbox" name="Q_@listData.Item1[i-1].Id" id="@answer.IdAnswer" disabled checked="checked" value="@answer.TextAnswer" />
+                                            <label>@answer.TextAnswer</label><br />
+                                        }
+                                        else
+                                        {
+                                            <input class="answerCheck m-2" type="checkbox" name="Q_@listData.Item1[i-1].Id" id="@answer.IdAnswer" disabled value="@answer.TextAnswer" />
+                                            <label>@answer.TextAnswer</label><br />
+                                        }
+                                    }
+                                }
+                            </div>
+                        }
+                        else if (listData.Item1[i - 1].IdCategory == (int)TAMS.Entity.baseEmun.CategoryQuestion.Text)
+                        {
+                            <div>
+                                <label class="  text-primary">Câu @i: @listData.Item1[i - 1].Text</label><br />
+                                @foreach (var answer in listData.Item2)
+                                {
+                                    if (answer.IdQuestion == listData.Item1[i - 1].Id)
+                                    {
+                                        <input type="text" class="answerText w-100 p-1 m-2" disabled name="Q_@listData.Item1[i-1].Id" value="@answer.TextAnswer" />
+                                        break;
+                                    }
+                                }
+                            </div>
+                        }
+                    }
+                }
+            </div>
+                <div class=" p-3  col-md-4 ">
+                    <div class="row justify-content-center">
+                        <div class="p-2">
+                            <label class="h3 text-bold text-primary">@user.UserName</label><br />
+                            <div>
+                                <label>Born date: </label>
+                                <label class="h6 ">@user.BornDate</label>
+                            </div>
+                            <div>
+                                <label>Sex: </label>
+                                @if (user.sex == true)
+                                {
+                                    <label class="h6">Male</label>
+                                }
+                                else
+                                {
+                                    <label class="h6">Female</label>
+                                }
+
+                            </div>
+                            <div>
+                                <label>Email: </label>
+                                <label class="h6">@user.Email</label>
+                            </div>
+                        </div>
+                        <div class="p-2">
+                            <label class="h3 text-bold text-primary">@test.Name</label><br />
+                            <div>
+                                <label>Name test: </label>
+                                <label class="h6 ">@test.CategoryTestName</label>
+                            </div>
+                            <div>
+                                <label>Count question: </label>
+                                <label class="h6">@test.NumQuestion</label>
+                            </div>
+                            <div>
+                                <label>Time start: </label>
+                                <label class="h6">@test.TimeStart</label>
+                            </div>
+                            <div>
+                                <label>Time : </label>
+                                <label class="h6">@test.Time</label>
+                            </div>
+                            <div>
+                                <label>Status: </label>
+
+                                @{
+                                    var status = (TAMS.Entity.baseEmun.StaticTest)(test.Status);
+                                    <label class="h6">@status.ToString()</label>
+                                }
+                            </div>
+                            <div>
+                                <label>Score: </label>
+                                <label class="h6">@test.Score</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+
+    </div>
+</section>

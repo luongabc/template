@@ -1,0 +1,85 @@
+﻿
+@{
+    var user= ViewData["user"] as TAMS.Entity.User;
+    var test=ViewData["Test"] as TAMS.Entity.Test;
+    var listData =ViewData["ListData"] as Tuple<List<TAMS.Entity.Question>,List<TAMS.Entity.UserResult>>;
+    Layout = null;
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HƯỚNG DẪN THI TUYỂN ONLINE</title>
+    <link rel="stylesheet" href="~/Style/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Style/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Style/Css/Home.css" />
+</head>
+<body class="position-relative unSelect"  >
+    @{var hours = test.Time.Hours;
+        var Mn = test.Time.Minutes;
+        <div id="h" class="d-none">@hours</div>
+        <div id="Mn" class="d-none">@Mn</div>
+        <div id="idTest" class="d-none">@test.Id</div>
+    }
+    <div>
+        <div class="fixed-top" style="background-image:url(https://tuyendung.vnpt.vn/Styles/ver2/images/bg-home22.png)">
+            <div class="row justify-content-between w-100 p-2">
+                <div class="col-sm-3 col-md-3">
+                    <img class="center-block p-2" src="https://tuyendung.vnpt.vn/Styles/ver2/images/logo.png" />
+                </div>
+                <div class="row" style="line-height:60px;">
+                    <a class="a-lienHe h5" style="color:#fff;background:none;padding:10px">Liên hệ</a>
+                    <a class="a-lienHe h5" style="color:#fff;background:none;padding:10px">Liên hệ</a>
+                    <a class="a-lienHe h5" style="color:#fff;background:none;padding:10px">Liên hệ</a>
+                    <a class="a-lienHe h5" style="color:#fff;background:none;padding:10px">Liên hệ</a>
+                </div>
+                <div></div>
+                <div class="" style="">
+                    <button class="btn btn-primary border-white text-white" style="width:100px;" title="Đăng nhập" id="btn-Logout">Đăng xuất</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mb-4" style="margin-top:100px;">
+        <div class="row">
+            <div class="p-3 h5 bg-white border rounded border-secondary col-md-9"  id="testContent">
+               
+            </div>
+            <div class="   col-md-3 position-fixed  "  style="right:20px">
+                <div class="row text-center m-4 justify-content-center " id="count-down">
+                    <div>
+                        <label class="bg-primary text-white h3 " id="hours2" style="width:30px; border-radius:4px;margin:2px">0 </label>
+                        <label class="bg-primary text-white h3 " id="hours1" style="width: 30px; border-radius: 4px; margin: 2px">0 </label>
+                        <label class="h3">:</label>
+                    </div>
+                    <div>
+                        <label class="bg-primary text-white h3" id="minute2" style="width: 30px; border-radius: 4px; margin: 2px">0 </label>
+                        <label class="bg-primary text-white h3" id="minute1" style="width: 30px; border-radius: 4px; margin: 2px">0 </label>
+                        <label class="h3 ">:</label>
+                    </div>
+                    <div>
+                        <label class="bg-primary text-white h3" id="secon2" style="width: 30px; border-radius: 4px; margin: 2px">0 </label>
+                        <label class="bg-primary text-white h3" id="secon1" style="width: 30px; border-radius: 4px; margin: 2px">0 </label>
+                    </div>
+
+                </div>
+                <div class="row   m-4 body-content justify-content-center">
+                        <button class=" btn btn-primary text-bold" id="btn-sendResult">Lưu bài</button>
+                </div>
+                
+                    <div class="row " id="list-Question"  >
+
+                    </div>
+                
+                <div class="row justify-content-center">
+                    <button class=" m-auto btn btn-danger m-3" id="btn-finishTest">Kết thúc</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Style/Js/Test.js"></script>
+</body>
+</html>

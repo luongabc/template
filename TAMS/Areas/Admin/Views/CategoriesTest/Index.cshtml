@@ -1,0 +1,120 @@
+﻿@{ 
+    Layout = "~/Areas/Admin//Views/Shared/Layout1.cshtml";
+    var listCategoriesTest = ViewData["listCategoriesTest"] as List<TAMS.Entity.CategoryTest>;
+    var totalPage = (int)ViewData["totalPage"];
+    var page = (int)ViewData["Page"];
+}
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Categories Test</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Categories Test</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div>
+
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            
+            <!-- Main row -->
+            <div class="row justify-content-around">
+                <div class="card col-md-8 col-sm-12">
+                    <div class="card-header">
+                        <h3 class="card-title">Data Table Categories Test</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>CreateDate</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in listCategoriesTest)
+                                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.CreateDate</td>
+                        <td>
+                            <a href="/Admin/CategoriesTest/AddQuestion?IdCategory=@item.Id">Question |</a>
+                            <a href="/Admin/CategoriesTest/Delete?IdCategory=@item.Id">Delete</a>
+                        </td>
+                    </tr>}
+                            </tbody>
+                        </table>
+                        <div class="row justify-content-end p-2">
+                            <div class="">
+                                <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                                    <ul class="pagination">
+                                        @{ var Previous = page - 1;
+                                           var Next = page + 1;
+                                           if (Previous > 0)
+                                           {
+                                               <li class="paginate_button page-item previous " id="example2_previous"><a href="/Admin/CategoriesTest/Page?page=@Previous" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                                           } 
+                                           }
+
+                                        @for (int i = 1; i <= totalPage; i++)
+                                        {
+                                            if (i == page)
+                                            {
+                                    <li class="paginate_button page-item active"><a href="/Admin/CategoriesTest/Page?page=@i" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">@i</a></li> }
+                                                    else
+                                                    {
+                                    <li class="paginate_button page-item"><a href="/Admin/CategoriesTest/Page?page=@i" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">@i</a></li>}
+                                                }
+                                        @if (Next <= totalPage)
+                                        {
+                                            <li class="paginate_button page-item next " id="example2_next"><a href="/Admin/CategoriesTest/Page?page=@Next" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">Next</a></li>
+                                        }
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- /.row -->
+                </div><!--/. container-fluid -->
+                <div class="col-md-3">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Create new category test</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form role="form" action="/Admin/CategoriesTest/Create">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Name</label>
+                                    <input type="text" class="form-control" id="Name" name="Name" autocomplete="off" placeholder="Enter name">
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+    </section>
+    <!-- /.content -->
+

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿
 using System.Web.Mvc;
+using TAMS;
+using TAMS.DAL.ModelEntity;
 
-namespace project_14_7_2020.Controllers
+namespace TAMS.Controllers
 {
     public class HomeController : Controller
     {
@@ -12,18 +11,23 @@ namespace project_14_7_2020.Controllers
         {
             return View();
         }
-
-        public ActionResult About()
+        public ActionResult Info()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
-
-        public ActionResult Contact()
+        public ActionResult Test()
         {
-            ViewBag.Message = "Your contact page.";
-
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(string name,string password)
+        {
+            var userSession = UserContext.Search(name, password);
+            if (userSession !=null)
+            {
+                Session.Add(Common.USER_SESSION, userSession);
+                return RedirectToAction("Info");
+            }
             return View();
         }
     }

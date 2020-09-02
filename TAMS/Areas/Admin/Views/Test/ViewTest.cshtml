@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "ViewTest";
+    Layout = "~/Areas/Admin/Views/Shared/Layout1.cshtml";
+    var listData = ViewData["ContentTest"] as Tuple<List<TAMS.Entity.Question>, List<TAMS.Entity.UserResult>>;
+}
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Categories Test</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Categories Test</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+        <!-- Main content -->
+        <div>
+
+        </div>
+        <section class="content">
+            <div class="container-fluid row">
+                <div class="p-3 h5 bg-white border-secondary  col-md-10" style="border-radius: 5px;border:1px solid #000">
+                   @if (listData != null)
+                    {
+                        for (var i = 1; i <= listData.Item1.Count; i++)
+                        {
+                    <div class="row">
+                        <div class="m-4" style="width:30px">
+                            <input type="checkbox" class="form-check form-control">
+                        </div>
+                        <div class="" style="">
+                            <label class="  text-primary">Câu @i: @listData.Item1[i - 1].Text</label><br />
+                            @foreach (var answer in listData.Item2)
+                            {
+                                if (answer.IdQuestion == listData.Item1[i - 1].Id)
+                                {
+                                    <div class="">
+                                        Trả lời :  @answer.TextAnswer
+                                    </div>
+                                    break;
+                                }
+                            }
+                        </div>
+                    </div>
+                        }
+                    }
+                </div>
+                <div class="col-md-2 row justify-content-center">
+                    <div>
+                        <button class="btn btn-primary ">Done</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    

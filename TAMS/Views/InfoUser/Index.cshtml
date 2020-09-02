@@ -1,0 +1,124 @@
+﻿@{
+    var user = ViewData["user"] as TAMS.Entity.User;
+    var listTest = ViewData["ListTest"] as List<TAMS.Entity.Test>;
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HƯỚNG DẪN THI TUYỂN ONLINE</title>
+    <link rel="stylesheet" href="~/Style/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Style/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Style/Css/Home.css" />
+</head>
+<body>
+    <div>
+        <div class="header sticky-top" style="height:120px">
+            <div class="   row justify-content-between w-100">
+                <div class="col-sm-3 col-md-3">
+                    <img class="center-block p-2" src="https://tuyendung.vnpt.vn/Styles/ver2/images/logo.png" />
+                </div>
+                <div class="row" style="line-height:60px;">
+                        <a class="a-lienHe h5" style="color:#fff;background:none;padding:10px">Liên hệ</a>
+                        <a class="a-lienHe h5" style="color:#fff;background:none;padding:10px">Liên hệ</a>
+                        <a class="a-lienHe h5" style="color:#fff;background:none;padding:10px">Liên hệ</a>
+                        <a class="a-lienHe h5" style="color:#fff;background:none;padding:10px">Liên hệ</a>
+                </div>
+                <div></div>
+                <div>
+                    <a class=" col-md-5  btn-signIn text-white" href="/LoginAndRegister" title="Đăng xuất" id="btn-Logout">Đăng xuất</a>
+                </div>
+            </div>
+            <label class="w-100 text-center text-white h2" >THÔNG TIN THI TUYỂN</label>
+        </div>
+        <div class=" w-100" style="top:-70px;z-index:100">
+            <div class="container">
+                <div class="row p-3 bg-white border-secondary m-3" style="border-radius: 5px;border:1px solid #000">
+                    <div class="p-2"><img class="img-circle" src="~/Style/Img/Screenshot_1.png" width="150" height="150" /></div>
+                    <div class="p-2">
+                        <label class="h3 text-bold" >@user.UserName</label><br />
+                        <div id="BornDate">
+                            <img class="icon" src="~/Style/open-iconic-master/png/calendar-2x.png" />
+                            <label class="h6 " >@user.BornDate</label>
+                        </div>
+                        <div id="Sex">
+                            <img class="icon" src="~/Style/open-iconic-master/png/badge-2x.png" />
+                            <label class="h6" >@user.sex</label>
+                        </div>
+                        <div id="Email">
+                            <img class="icon" src="~/Style/open-iconic-master/png/envelope-closed-2x.png" />
+                            <label class="h6" >@user.Email</label>
+                        </div>
+                        <div id="Date">
+                            <img class="icon" src="~/Style/open-iconic-master/png/flag-2x.png" />
+                            <label class="h6" >@user.CreateDate</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-3 bg-white border-secondary m-2" style="border-radius: 5px;border:1px solid #000">
+                    <label class="h3 w-100">Danh sách bài thi</label>
+                    <hr />
+                    <div class="row">
+                       @foreach (var item in listTest)
+                        {
+                        <div class="row p-2 bg-white border-secondary m-2 pl-4" style="border-radius: 5px;border:1px solid #000">
+                            <div>
+                                <label class="h5 text-primary" id="place">@item.Name</label>
+                                <div id="">
+                                    <img class="icon" src="~/Style/open-iconic-master/png/aperture-2x.png" />
+                                    <label class="h6 ">Cấu trúc : </label><label class="h6 text-body" id="">  @item.CategoryTestName</label>
+                                </div>
+                                <div id="">
+                                    <img class="icon" src="~/Style/open-iconic-master/png/list-2x.png" />
+                                    <label class="h6">Số câu hỏi : </label><label class="h6 text-body" id="">  @item.NumQuestion</label>
+                                </div>
+                                <div id="">
+                                    <img class="icon" src="~/Style/open-iconic-master/png/clock-2x.png" />
+                                    <label class="h6">Thời lượng : </label><label class="h6 text-body" id="">  @string.Format("{0:hh\\:mm\\:ss}", item.Time)</label>
+                                </div>
+                                <div id="">
+                                    <img class="icon" src="~/Style/open-iconic-master/png/flag-2x.png" />
+                                    <label class="h6">Trạng thái : </label>
+                                    @if ((int)TAMS.Entity.baseEmun.StaticTest.NotStart == item.Status)
+                                    {
+                                <label class="h6 font-weight text-primary" id="">Chưa bắt đầu</label>
+                                    }
+                                    else if ((int)TAMS.Entity.baseEmun.StaticTest.Doing == item.Status)
+                                    {
+                                <label class="h6 font-weight text-yellow" id="">Đang làm dở</label>
+                                    }
+                                    else if ((int)TAMS.Entity.baseEmun.StaticTest.Finish == item.Status)
+                                    {
+                                <label class="h6 font-weight text-danger " id="">Đã làm xong</label>
+                                    }
+                                </div>
+                            </div>
+                            <div>
+                                @if (item.Status == (int)TAMS.Entity.baseEmun.StaticTest.NotStart)
+                                {
+                                    <a href="/InfoUser/Test?IdUser=@user.Id&&IdTest=@item.Id" class="m-4 btn btn-primary" style="width:150px;">Tham gia</a>
+                                }
+                                else if (item.Status == (int)TAMS.Entity.baseEmun.StaticTest.Doing)
+                                {
+                                    <a href="/InfoUser/Test?IdUser=@user.Id&&IdTest=@item.Id" class="m-4 btn btn-primary" style="width:150px;">Tiếp tục</a>
+                                }
+                                else {<a class="m-4 btn btn-info text-white" style="width:150px;">Số câu đúng: @item.Score</a>}
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-0 m-0">
+            @Html.Partial("../Shared/Footer")
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

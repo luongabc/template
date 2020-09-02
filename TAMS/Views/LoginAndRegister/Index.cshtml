@@ -1,0 +1,25 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Style/Css/Home.css" />
+</head>
+<body>
+    <div>
+        <div id="form-login" class="login" style="position:fixed;width:80%; top:50px;left:10%;background-color:white;z-index:4">
+            @Html.Partial("../Home/_Login");
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"> </script>
+</body>
+</html>

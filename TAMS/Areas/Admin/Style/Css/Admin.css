@@ -1,0 +1,42 @@
+﻿.div-box {
+    border-radius: 20px;
+    margin: 20px 0px;
+    background-color: #ffffff;
+    padding-top: 20px;
+    box-shadow: 8px 8px 0px 0px #adadad;
+}
+
+.User-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    margin: 0 auto;
+}
+
+    .User-img img {
+        width: 100%;
+    }
+
+.User-name {
+    text-align: center;
+    font-size: 22px;
+    margin: 15px 0px 10px;
+}
+
+.designation {
+    text-align: center;
+    font-size: 16px;
+}
+
+.contact-btn {
+    margin: 0 auto;
+    display: table;
+}
+
+    .contact-btn .btn {
+        width: 95px;
+        margin: 15px 5px;
+    }
+

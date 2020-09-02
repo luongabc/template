@@ -1,0 +1,102 @@
+﻿@model TAMS.Entity.User
+@{
+    Layout = "~/Areas/Admin/Views/Shared/Layout1.cshtml";
+    var data = ViewData["user"] as TAMS.Entity.User;
+
+}
+    <div class="wrapper">
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="m-3 w-100">
+                        <!-- general form elements -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Sửa thông tin người dùng</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            @using (Html.BeginForm("Edit", "UsersManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" });
+
+                <div class="card-body">
+                    <div class="row justify-content-between">
+                        <div class="">
+                            @Html.HiddenFor(model => model.Id)
+                        </div>
+                        <div class="form-group col-4 pl-3 pr-3">
+                            <label for="exampleInputEmail1">Email address</label>
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "v@gmail.com", @type = "email", @Value = data.Email })
+                        </div>
+                        <div class="form-group col-4 pl-3 pr-3">
+                            <label for="exampleInputPassword1">Password</label>
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Password", @type = "password", @Value = data.Password })
+
+                        </div>
+                        <div class="form-group col-4 pl-3 pr-3">
+                            <label for="exampleInputPassword1">UserName</label>
+                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Joker99", @Value = data.UserName })
+
+                        </div>
+                    </div>
+                            
+                    <div class="row justify-content-between">
+                    <div class="form-group col-4 pl-3 pr-3" >
+                        <label for="exampleInputPassword1">Name</label>
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @autofocus = "autofocus", @placeholder = "Ngô Văn ...", @Value = data.Name })
+                    </div>
+                    <div class="form-group col-4 pl-3 pr-3">
+                        <label for="exampleInputFile"></label>
+                        @Html.LabelFor(model => model.Avatar, htmlAttributes: new { @class = "control-label", @Value = data.Avatar })
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" name="AvatarUpload" id="file" class="btn btn-info" />
+                                @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger", @Value = data.Avatar })
+                                @*@Html.TextBoxFor(model => model.Avatar, new { @class = "form-control", @autofocus = "autofocus", @type = "file" })*@
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-4 pl-3 pr-3">
+                        <label for="exampleInputPassword1">Birthday</label>
+                        @Html.TextBoxFor(model => model.Birthday, new { @class = "form-control", @autofocus = "autofocus", @type = "Date", @Value = data.Birthday })
+                    </div>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                </div> <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Sửa</button>
+                                </div>}
+                            <div>
+                                @Html.ActionLink("Back to List", "Index", "UsersManager")
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                        <!-- Form Element sizes -->
+                        <!-- Control Sidebar -->
+                        <aside class="control-sidebar control-sidebar-dark">
+                            <!-- Control sidebar content goes here -->
+                        </aside>
+                        <!-- /.control-sidebar -->
+                    </div>
+                    @section scripts {
+                        <script src="/Assets/Admin/dist/js/demo.js"></script>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                bsCustomFileInput.init();
+                            });
+                        </script>
+                        }
+                    </div>
+            </div>
+        </section>
+    </div>
+
+

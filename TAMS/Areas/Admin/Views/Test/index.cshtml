@@ -1,0 +1,108 @@
+﻿
+@{
+    Layout = "~/Areas/Admin//Views/Shared/Layout1.cshtml";
+    var listTests = ViewData["listTest"] as List<TAMS.Entity.Test>;
+    var page = (int)ViewData["page"];
+    var totalPage = (int)ViewData["totalPage"];
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Manager Test</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Test</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<div>
+
+</div>
+<section class="content">
+    <div class="container-fluid">
+
+        <!-- /.row -->
+        <!-- Main row -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">DataTable Test</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="row">
+                    <a class="btn btn-primary m-2" href="/Admin/Test/Create">Create</a>
+                    <a class="btn btn-danger m-2" href="/Admin/Test/Delete">Delete</a>
+                </div>
+                <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>NumQuestion</th>
+                            <th>Category</th>
+                            <th>Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in listTests)
+                        {
+                            <tr id="Test_@item.Id">
+                                <td>@item.Name</td>
+                                <td>@item.NumQuestion</td>
+                                <th>@item.CategoryTestName</th>
+                                <th>@item.Time</th>
+                                <th>
+                                    <a href="/Admin/Test/FormTest?IdForm=@item.Id">Detail |</a>
+                                    <a href="/Admin/Test/Delete?IdTest=@item.Id">Delete</a>
+                                </th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="row justify-content-end p-2">
+                            <div class="">
+                                <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                                    <ul class="pagination">
+                                        @{ var Previous = page - 1;
+                                           var Next = page + 1;
+                                           if (Previous > 0)
+                                           {
+                                               <li class="paginate_button page-item previous " id="example2_previous"><a href="/Admin/Test/Page?page=@Previous" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                                           } 
+                                           }
+
+                                        @for (int i = 1; i <= totalPage; i++)
+                                        {
+                                            if (i == page)
+                                            {
+                                    <li class="paginate_button page-item active"><a href="/Admin/Test/Page?page=@i" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">@i</a></li> }
+                                                    else
+                                                    {
+                                    <li class="paginate_button page-item"><a href="/Admin/Test/Page?page=@i" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">@i</a></li>}
+                                                }
+                                        @if (Next <= totalPage)
+                                        {
+                                            <li class="paginate_button page-item next " id="example2_next"><a href="/Admin/Test/Page?page=@Next" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">Next</a></li>
+                                        }
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+            
+            </div>
+            <!-- /.card-body -->
+            <!-- /.row -->
+        </div><!--/. container-fluid -->
+    </div>
+</section>
+<!-- /.content -->

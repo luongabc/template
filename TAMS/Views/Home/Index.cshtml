@@ -1,31 +1,87 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@{ 
+    Layout= null;
 }
+<!DOCTYPE html>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>HƯỚNG DẪN THI TUYỂN ONLINE</title>
+    <link rel="stylesheet" href="~/Style/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Style/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Style/Css/Home.css" />
+</head>
+<body>
+    <div>
+        <div class="header sticky-top ">
+            <div class="row justify-content-between w-100">
+                <div class="col-sm-3 col-md-3">
+                    <img class="center-block p-2" src="https://tuyendung.vnpt.vn/Styles/ver2/images/logo.png" />
+                </div>
+                <div class="row" style="line-height:60px;">
+                    <a class="a-lienHe h5" style="color:#fff;background:none;padding:10px">Liên hệ</a>
+                    <a class="a-lienHe h5" style="color:#fff;background:none;padding:10px">Liên hệ</a>
+                    <a class="a-lienHe h5" style="color:#fff;background:none;padding:10px">Liên hệ</a>
+                    <a class="a-lienHe h5" style="color:#fff;background:none;padding:10px">Liên hệ</a>
+                </div>
+                <div></div>
+                <div>
+                    <a class=" col-md-5 text-center btn-signIn text-white" title="Đăng ki" id="btn-Register">Đăng ki</a>
+                    <a class=" col-md-5 text-center btn-signIn text-white" title="Đăng nhập" id="btn-Login">Đăng nhập</a>
+                </div>
+            </div>
+            <label class="w-100 text-center text-white h2">THÔNG TIN THI TUYỂN</label>
+        </div>
+        <div class="container-fluid row" style="margin-top:20px">
+            <div class="col-md-3" style="width:300px;">
+                @Html.Partial("../Shared/_LeftContainer");
+            </div>
+            <div class="col-md-9 news">
+                <div class="cards">
+                    <div class="header-container">Sự kiện nổi bật</div>
+                    <div style="margin:10px">
+                        <div class="">
+                            <img class="mx-auto d-block" src="~/Style/img/1.png" />
+                            <h3 class="text-primary "> Hoạt động chúc mừng ngày 8/3 tại VNPT</h3>
+                            <p>Nằm trong chuỗi các hoạt động hợp tác giữa VNPT và các trường Đại học trên toàn Quốc, ngày 05/03/2020 VNPT  tổ chức tiếp nhận các bạn sinh viên năm cuối Khoa Công nghệ thông tin trường Đại học Mở Hà Nội tham gia thực tập và làm việc tại các đơn vị trong Tập đoàn VNPT</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4 col-md-4">
+                                <img class="class=" mx-auto d-block"" src="~/Style/img/5.png" />
+                                <label class="text-primary"> Giới thiệu một số sản phẩm, dịch vụ CNTT của VNPT</label>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4">
+                                <img class="class=" mx-auto d-block"" src="~/Style/img/4.png" />
+                                <label class="text-primary"> Hoạt động chúc mừng ngày 8/3 tại VNPT</label>
+                            </div>
+                            <div class="col-xs-4 col-sm-4 col-md-4">
+                                <img class="class=" mx-auto d-block"" src="~/Style/img/5.png" />
+                                <label class="text-primary"> Giới thiệu một số sản phẩm, dịch vụ CNTT của VNPT</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.Partial("../Shared/Footer");
+    </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+
+    <div class="register form-register d-none fixed-top w-100 h-100" aria-expanded="true" style="background-color:black;opacity:0.6;z-index:300">
+        <div style="height:100vh;width:100vw">
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div class="register fixed-top d-none" aria-expanded="true" style="width:80%; top:50px;left:10%;background-color:white;z-index:300">
+        @Html.Partial("_Register");
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class=" login form-login login d-none fixed-top"style="background-color:black;width:100vw;opacity:0.6">
+        <div style="height:100vh;"></div>
     </div>
-</div>
+    <div id="login" class="login d-none fixed-top" style="width:80%; top:50px;left:10%;background-color:white">
+        @Html.Partial("_Login");
+    </div>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Style/Js/Home.js"></script>
+</body>
+</html>

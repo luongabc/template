@@ -1,0 +1,115 @@
+﻿.sticky-top {
+    position: sticky;
+    top: 0;
+    padding: 5px;
+    z-index:2;
+}
+
+.cards {
+    box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.3);
+    padding-bottom:10px;
+    margin-bottom:10px;
+}
+
+    .header-container {
+        line-height: 54px;
+        height: 54px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        font-size: 20px;
+        color: #fff;
+        padding-left: 20px;
+        background: linear-gradient(180deg, #00C2FF 0%, #0085F0 100%);
+    }
+
+    .cards .card-header {
+        margin: 5px;
+        padding-left: 40px;
+        background-image: url('img/Layer 1.png');
+        background-repeat: no-repeat;
+    }
+    .cards .card-content {
+        margin: 5px;
+        padding-left: 40px;
+        background-image: url('img/8.png');
+        background-repeat: no-repeat;
+    }
+.cards .select {
+    border:1px solid #000000;
+    margin: 10px;
+    height: 30px;
+    line-height:30px;
+    padding-left: 40px;
+    background-image: url('img/8.png');
+    background-repeat: no-repeat;
+    background-position-x:right;
+}
+.news{
+    min-width:900px;
+}
+.new{
+    flex:1;
+    flex-direction:row;
+    display:flex;
+}
+
+.card-news{
+    flex:1;
+    margin:10px;
+}
+.header {
+    background-image: url('https://tuyendung.vnpt.vn/Styles/ver2/images/bg-home22.png');
+    background-repeat: no-repeat;
+    background-position-x: -700px;
+    font-size: 18px;
+    padding-top: 20px;
+    height: 170px;
+    z-index: 200;
+}
+    .header .header-sticky {
+        
+        height:400px;
+        
+    }
+    .btn-register {
+        border-radius: 3px;
+        background-color: #0168c0;
+        border: 1px solid #fff;
+        color: #fff;
+        padding: 5px;
+    }
+    .btn-register:hover {
+        border-radius: 3px;
+        background: linear-gradient(180deg, #00C2FF 0%, #0085F0 100%);
+        color: #fff;
+        padding: 5px;
+        border: none;
+    }
+
+.btn-signIn {
+    border-radius: 3px;
+    background: linear-gradient(180deg, #00C2FF 0%, #0085F0 100%);
+    color: #fff;
+    padding: 5px;
+    border:none;
+}
+.hide{
+    display:none;
+}
+.show{
+    display:block;
+}
+.width-50px{
+    width:50px;
+}
+.height-50px {
+    height: 50px;
+}
+.unSelect {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}

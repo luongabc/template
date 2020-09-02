@@ -1,0 +1,86 @@
+﻿
+@model TAMS.Entity.CategoryQuestion
+@{
+    ViewBag.Title = "CategoryQuestion";
+    Layout= "~/Areas/Admin//Views/Shared/Layout1.cshtml";
+}
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Manager Test</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Test</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <div class="p-1">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="clearTextBox();">Add New Category</button>
+                </div>
+                <div class="card">
+                    <table class="table table-bordered table-hover">
+                        <thead class="">
+                            <tr>
+                                <th>
+                                    Name
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header row justify-content-between">
+                        <div>
+                            <h4 class="modal-title" id="myModalLabel">Add Category</h4>
+                        </div>
+                        <a  class=" btn btn-danger text-white " data-dismiss="modal">×</a>
+
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            @Html.TextBoxFor(model => model.Id, new { @class = "form-control", @placeholder = "Id" })
+
+                            <label for="Name">Name</label>
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Name" })
+
+                            @Html.HiddenFor(model => model.CreateDate)
+
+                            @Html.HiddenFor(model => model.ModifyDate)
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add();">Add</button>
+                        <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Update</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+    @section scripts {
+        <script src="~/Areas/Admin/Style/Js/Category.js"></script>
+    }
+
+
+

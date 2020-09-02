@@ -1,0 +1,90 @@
+﻿
+@{
+    var categoryTest = ViewData["CategoryTest"] as TAMS.Entity.CategoryTest;
+    var listQuestionOut = ViewData["listQuestionOut"] as List<TAMS.Entity.Question>;
+    var listQuestionIn = ViewData["listQuestionIn"] as List<TAMS.Entity.Question>;
+
+    Layout = "~/Areas/Admin//Views/Shared/Layout1.cshtml";
+}
+
+                <!-- Content Header (Page header) -->
+                <div class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1 class="m-0 text-dark">Manager Test</h1>
+                            </div><!-- /.col -->
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active">Test</li>
+                                </ol>
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </div>
+                <!-- /.content-header -->
+                <section class="content">
+                    <div class="container-fluid row">
+                        <div class="col-5 p-1 ">
+                            <div class="card">
+                                <h3 class="w-100 text-center bg-info">Question Out</h3>
+                                <div class="overflow-auto " style="max-height:450px">
+                                    <table id="example2" class="table table-bordered table-hover ">
+                                        <tbody id="tb-out">
+                                            @for (var i = 0; i < listQuestionOut.Count; i++)
+                                            {
+                                                <tr id="@listQuestionOut[i].Id">
+                                                    <td width="30">
+                                                        <input type="checkbox" class="checkbox-out" value="@listQuestionOut[i].Id" />
+                                                    </td>
+                                                    <td id="text-@listQuestionOut[i].Id">
+                                                        @listQuestionOut[i].Text
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-2 ">
+                            <div class=" m-4">
+                            </div>
+                            <div class="justify-content-center row m-4">
+                                <button class="btn btn-success m-4 btn-add" value="category-@categoryTest.Id">
+                                    <img src="~/Style/open-iconic-master/png/arrow-thick-right-4x.png" />
+                                </button>
+                            </div>
+                            
+                        </div>
+                        <div class="col-5 p-1" style="top:0;right:0;bottom:0;">
+                            <div class="card">
+                                <h3 class="w-100 text-center bg-primary">Question In</h3>
+                                <div class="overflow-auto" style="max-height:450px">
+                                    <table id="example2" class="table table-bordered table-hover ">
+                                        <tbody id="tb-in">
+                                            @for (var i = 0; i < listQuestionIn.Count; i++)
+                                            {
+                                                <tr id="@listQuestionIn[i].Id">
+                                                    <td width="30">
+                                                        <input type="checkbox" class="checkbox-in" value="@listQuestionIn[i].Id" />
+                                                    </td>
+                                                    <td id="text-@listQuestionIn[i].Id">
+                                                        @listQuestionIn[i].Text
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                </div>
+                        </div>
+                    </div>
+                </section>
+            
+    @section scripts { <script type="text/javascript" src="@Url.Content("~/Areas/Admin/Style/Js/CategoryTest.js")"   ></script>}
+    
+
+
