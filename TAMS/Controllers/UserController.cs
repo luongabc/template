@@ -1,6 +1,6 @@
 ﻿using TAMS.Entity;
-using ExamOnlineSystem.Common;
-using ExamOnlineSystem.Models;
+using TAMS.Controllers;
+using TAMS.Models;
 using Facebook;
 using System.Web.Security;
 using System.Web.UI.WebControls;
@@ -21,7 +21,10 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
-namespace TAMS.Controllers
+using TAMS.Common;
+using TAMS.DAL;
+
+namespace ExamOnlineSystem.Controllers
 {
     public class UserController : Controller
     {
@@ -37,6 +40,7 @@ namespace TAMS.Controllers
                 return uriBulder.Uri;
             }
         }
+
         private Uri RedirectUriFacebook
         {
             get
@@ -48,6 +52,7 @@ namespace TAMS.Controllers
                 return uriBuilder.Uri;
             }
         }
+
         public ActionResult LoginFacebook()
         {
             var fb = new FacebookClient();
@@ -67,6 +72,7 @@ namespace TAMS.Controllers
             go.ClientId = ConfigurationManager.AppSettings["GoAppId"];
             go.ClientSecret = ConfigurationManager.AppSettings["GoAppSecret"];
         }*/
+
         //public class AppFlowMetadata : User
         //{
         //    public override string GetUserId(Controller controller)
@@ -98,6 +104,7 @@ namespace TAMS.Controllers
         //        DataStore = new Google.Apis.Util.Store.FileDataStore("Drive.Api.Auth.Store")
         //    });
         //}
+
         public class AppFlowMetadata : FlowMetadata
         {
             private static readonly IAuthorizationCodeFlow flow =
@@ -134,6 +141,7 @@ namespace TAMS.Controllers
                 get { return flow; }
             }
         }
+
         public ActionResult LoginGoogle(System.Threading.CancellationToken cancellationToken)
         {
             var result = new AuthorizationCodeMvcApp(this, new AppFlowMetadata()).
@@ -158,6 +166,7 @@ namespace TAMS.Controllers
                 return new RedirectResult(result.RedirectUri);
             }
         }
+
         public ActionResult FacebookCallback(string code)
         {
             var fb = new FacebookClient();
@@ -203,35 +212,14 @@ namespace TAMS.Controllers
             }
             return Redirect("/");
         }
+
         // GET: /Admin/Login
         public ActionResult LogIn()
         {
             return View();
         }
         //Post: /Admin/Login
-        [HttpPost]
-        public ActionResult Login(LoginModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new TAMS.DAL.UserContext();
-                var result = user.Login(model.UserName, model.Password);
-                if (result)
-                {
-                    var userGet = user.GetByUserName(model.UserName);
-                    var Useression = new UserLogin();
-                    Useression.UserName = userGet.UserName;
-                    Useression.UserId = userGet.Id;
-                    Session.Add(CommonConstants.USER_SESSION, Useression);
-                    return RedirectToAction("Index", "HomeAdmin");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Vui lòng kiểm tra lại Tài khoản.");
-                }
-            }
-            return View("Login");
-        }
+        
         public ActionResult SignUp()
         {
             return View();
@@ -339,7 +327,7 @@ namespace TAMS.Controllers
                 //Verify Email ID
                 //Generate Reset password link 
                 //Send Email 
-                var db = new TAMS.DAL.UserContext();
+                var db = new UserContext();
 
                 if (db.IsEmail(model.Email))
                 {
@@ -403,7 +391,7 @@ namespace TAMS.Controllers
             }
             if (ModelState.IsValid)
             {
-                var db = new TAMS.DAL.UserContext();
+                var db = new UserContext();
                 var user = new User();
                 if (user.ResetPasswordCode == resetPassword)
                 {
@@ -433,7 +421,7 @@ namespace TAMS.Controllers
         public ActionResult ResetPassword(ResetPasswordModel model)
         {
             var message = "";
-            var db = new TAMS.DAL.UserContext();
+            var db = new UserContext();
             if (ModelState.IsValid)
             {
                 if (db.IsResetPasswordCodeExist(model.ResetPasswordCode))

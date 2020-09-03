@@ -5,7 +5,7 @@ using System.Web;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace ExamOnlineSystem.Common
+namespace TAMS.Common
 {
     public static class Encryptor
     {

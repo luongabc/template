@@ -130,7 +130,7 @@ function showTest() {
     }
     showNavQuestion();
 }
-function testSendResult() {
+async function testSendResult() {
     var res = [];
     $.each($(".answerCheck"), (key, value) => {
         res.push({
@@ -151,7 +151,7 @@ function testSendResult() {
         });
     });
     var resultPost = JSON.stringify({ "userResults": res, "IdTest": $("#idTest").text() });
-    $.ajax({
+    await $.ajax({
         method: 'POST',
         url: "/InfoUser/SaveResult",
         data: JSON.stringify({ "userResults": res, "IdTest": $("#idTest").text() }),
@@ -161,15 +161,19 @@ function testSendResult() {
     }).fail(() => {
         console.log(resultPost);
     })
+    console.log("ok");
 }
-function testFinishTest() {
-    testSendResult();
+ function testFinishTest() {
+     testSendResult();
+    console.log("asdfasdfs");
     window.location.href = "/InfoUser/FinishTest?IdTest=" + $("#idTest").text();
 }
 function testTime() {
-    var hours = parseInt($("#h").text());
-    var Mn = parseInt($("#Mn").text());
-    var Ms = 59;
+    var time = $("#h").text().split(':');
+    console.log(time);
+    var hours = parseInt(time[0]);
+    var Mn = parseInt(time[1]);
+    var Ms = parseInt(time[2]);
     testCount(hours, Mn, Ms);
 }
 function testCount(hours, minute, secon) {
@@ -177,10 +181,8 @@ function testCount(hours, minute, secon) {
         if (secon == 0) {
             if (minute == 0) {
                 if (hours == 0) {
-                    //Nop bai
-                    //
+                    testFinishTest();
                     clearInterval(x);
-                    return;
                 }
                 hours--;
                 minute = 59;
@@ -219,5 +221,8 @@ function testShowCountDown(hours, minute, secon) {
     else {
         $("#secon2").text(secon.toString().charAt(0));
         $("#secon1").text(secon.toString().charAt(1));
+    }
+    if (hours == 0 && minute < 5) {
+        $(".time-warn").addClass("text-danger")
     }
 }

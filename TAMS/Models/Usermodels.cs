@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace ExamOnlineSystem.Models
+namespace TAMS.Models
 {
     public class Usermodels
     {

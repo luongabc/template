@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace TAMS
+namespace TAMS.Controllers
 {
     public static class Common
     {

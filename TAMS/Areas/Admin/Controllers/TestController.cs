@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TAMS.Controllers;
 using TAMS.DAL.BL;
 using TAMS.DAL.ModelEntity;
 using TAMS.Entity;
 
 namespace TAMS.Areas.Admin.Controllers
 {
-    public class TestController : Controller
+    public class TestController : SessionController
     {
         private int numItem = 3;
         // GET: Admin/Test

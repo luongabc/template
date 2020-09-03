@@ -6,10 +6,10 @@ using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.UI.WebControls;
 using TAMS.Entity;
-using ExamOnlineSystem.Areas.Admin.Models;
+using TAMS.Areas.Admin.Models;
 using TAMS.DAL;
 using System.Web.ModelBinding;
-using ExamOnlineSystem.Common;
+using TAMS.Common;
 using System.Net.Mail;
 using System.Net;
 using Facebook;
@@ -24,7 +24,7 @@ using Google.Apis.AnalyticsReporting.v4;
 
 using Google.Apis.Util.Store;
 
-namespace ExamOnlineSystem.Areas.Admin.Controllers
+namespace TAMS.Areas.Admin.Controllers
 {
     public class AccountController : Controller
     {
@@ -235,7 +235,7 @@ namespace ExamOnlineSystem.Areas.Admin.Controllers
                     userSession.UserName = User.UserName;
                     userSession.UserId = User.Id;
                     Session.Add(CommonConstants.USER_SESSION, userSession);
-                    return RedirectToAction("Index", "HomeAdmin");
+                    return RedirectToAction("index", "Test");
                 }
                 else
                 {

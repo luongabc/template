@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace ExamOnlineSystem.Areas.Admin.Models
+namespace TAMS.Areas.Admin.Models
 {
     public class ChangePasswordModel: User
     {
@@ -30,8 +30,6 @@ namespace ExamOnlineSystem.Areas.Admin.Models
     {
         [Required (ErrorMessage ="Mời nhập tên đăng nhập")]
         [Display(Name = "User name")]
-        
-
         public new string UserName { get; set; }
 
         [Required(ErrorMessage = "Mời nhập tên mật khẩu")]

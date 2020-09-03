@@ -15,10 +15,8 @@
     <link rel="stylesheet" href="~/Style/Css/Home.css" />
 </head>
 <body class="position-relative unSelect"  >
-    @{var hours = test.Time.Hours;
-        var Mn = test.Time.Minutes;
+    @{var hours = test.Time;
         <div id="h" class="d-none">@hours</div>
-        <div id="Mn" class="d-none">@Mn</div>
         <div id="idTest" class="d-none">@test.Id</div>
     }
     <div>
@@ -48,18 +46,18 @@
             <div class="   col-md-3 position-fixed  "  style="right:20px">
                 <div class="row text-center m-4 justify-content-center " id="count-down">
                     <div>
-                        <label class="bg-primary text-white h3 " id="hours2" style="width:30px; border-radius:4px;margin:2px">0 </label>
-                        <label class="bg-primary text-white h3 " id="hours1" style="width: 30px; border-radius: 4px; margin: 2px">0 </label>
+                        <label class="bg-primary text-white h3 time-warn  " id="hours2" style="width:30px; border-radius:4px;margin:2px">0 </label>
+                        <label class="bg-primary text-white h3 time-warn" id="hours1" style="width: 30px; border-radius: 4px; margin: 2px">0 </label>
                         <label class="h3">:</label>
                     </div>
                     <div>
-                        <label class="bg-primary text-white h3" id="minute2" style="width: 30px; border-radius: 4px; margin: 2px">0 </label>
-                        <label class="bg-primary text-white h3" id="minute1" style="width: 30px; border-radius: 4px; margin: 2px">0 </label>
+                        <label class="bg-primary text-white h3 time-warn" id="minute2" style="width: 30px; border-radius: 4px; margin: 2px">0 </label>
+                        <label class="bg-primary text-white h3 time-warn" id="minute1" style="width: 30px; border-radius: 4px; margin: 2px">0 </label>
                         <label class="h3 ">:</label>
                     </div>
                     <div>
-                        <label class="bg-primary text-white h3" id="secon2" style="width: 30px; border-radius: 4px; margin: 2px">0 </label>
-                        <label class="bg-primary text-white h3" id="secon1" style="width: 30px; border-radius: 4px; margin: 2px">0 </label>
+                        <label class="bg-primary text-white h3 time-warn" id="secon2" style="width: 30px; border-radius: 4px; margin: 2px">0 </label>
+                        <label class="bg-primary text-white h3 time-warn" id="secon1" style="width: 30px; border-radius: 4px; margin: 2px">0 </label>
                     </div>
 
                 </div>

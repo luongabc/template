@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ExamOnlineSystem.Common
+namespace TAMS.Common
 {
     [Serializable]
     public class UserLogin

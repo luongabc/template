@@ -6,11 +6,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using TAMS.Controllers;
 using TAMS.DAL;
 
 namespace TAMS.Areas.Admin.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : SessionController
     {
         // GET: Admin/Admin
         public ActionResult Index()

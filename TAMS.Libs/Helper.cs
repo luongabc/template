@@ -292,19 +292,19 @@ namespace TAMS.Libs
             // KiênCT tạm bỏ phần SQLInjection
             return false;
 
-            //bool isNotInject = false;
+            bool isNotInject = false;
 
-            //if (string.IsNullOrEmpty(keyword)) { return isNotInject; }
-            //keyword = keyword.ToLower().UnicodeToKoDau();
-            //try
-            //{
-            //    isNotInject = !CharacterOk(keyword);
-            //}
-            //catch (Exception)
-            //{
-            //    isNotInject = true;
-            //}
-            //return isNotInject;
+            if (string.IsNullOrEmpty(keyword)) { return isNotInject; }
+            keyword = keyword.ToLower().UnicodeToKoDau();
+            try
+            {
+                isNotInject = !CharacterOk(keyword);
+            }
+            catch (Exception)
+            {
+                isNotInject = true;
+            }
+            return isNotInject;
         }
 
 

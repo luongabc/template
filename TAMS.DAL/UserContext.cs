@@ -161,24 +161,14 @@ namespace TAMS.DAL
         }
         public bool Login(string userName, string password)
         {
-            int result = 0;
-            bool type;
             using (var context = MasterDBContext())
             {
-                var cmd = context.StoredProcedure("User_Login")
+                var cmd = context.StoredProcedure("User_SearchAdmin")
                     .Parameter("UserName", userName)
-                    .Parameter("Password", password)
-                    .ParameterOut("Result", FluentData.DataTypes.Int32);
-                type = cmd.QuerySingle<bool>();
-                result = cmd.ParameterValue<int>("Result");
-            }
-            if (result == 1)
-            {
-                return type = true;
-            }
-            else
-            {
-                return type = false;
+                    .Parameter("Password", password);
+                User result = cmd.QuerySingle<User>();
+                if (result != null) return true;
+                else return false;
             }
         }
         public bool IsExistUserName(string username)

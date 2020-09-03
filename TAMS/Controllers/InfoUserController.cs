@@ -21,12 +21,7 @@ namespace TAMS.Controllers
             List<Test> listTest= BLTest.TestOfUser(user.Id);
             ViewData["user"] = user;
             ViewData["ListTest"] = listTest;
-            foreach(Test test in listTest)
-            {
-                if(test.TimeStart!=null 
-                    && test.Status==(int)Entity.baseEmun.StaticTest.Doing)
-                test.Time = (test.Time - (TimeSpan)(DateTime.Now - test.TimeStart));
-            }
+            
             return View();
         }
         public ActionResult Test(int IdUser,int IdTest)
@@ -81,13 +76,13 @@ namespace TAMS.Controllers
         {
             User user = (User)Session[Common.USER_SESSION];
             int countUpdate = TestContext.SaveResultOfUser(userResults, IdTest);
-
             return RedirectToAction("Index");
         }
         public ActionResult FinishTest(int IdTest)
         {
-            TestContext.ChangeStatusTest(IdTest, (int)Entity.baseEmun.StaticTest.Finish);
-            BLTest.CheckIsFinish(IdTest);
+            Test test = TestContext.Get_Test(IdTest);
+            TestContext.ChangeStatusTest(test.Id, (int)Entity.baseEmun.StaticTest.Finish);
+            BLTest.CheckIsFinish(test);
             return RedirectToAction("Index");
         }
     }

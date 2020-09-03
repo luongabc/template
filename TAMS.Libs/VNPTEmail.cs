@@ -1,7 +1,6 @@
 ﻿using Mailzory;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -44,7 +43,6 @@ namespace TAMS.Libs
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
                 return false;
             }
         }

@@ -5,9 +5,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TAMS;
+using TAMS.Controllers;
 using TAMS.DAL.ModelEntity;
-
-namespace exam.Controllers
+using TAMS.Entity;
+namespace TAMS.Controllers
 {
     public class LoginAndRegisterController : Controller
     {
@@ -26,8 +27,9 @@ namespace exam.Controllers
             }
             return RedirectToAction("Index");
         }
-        public ActionResult Register()
+        public ActionResult Register(User user)
         {
+
             return View();
         }
     }

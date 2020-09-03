@@ -58,10 +58,10 @@ namespace TAMS.DAL.ModelEntity
             using (var context = MasterDBContext())
             {
                 //getUserTest
-                Test test = Get_Test(IdTest);
                 DateTime now = DateTime.Now;
+                Test test = Get_Test(IdTest);
                 if (test == null) return 0;
-                TimeSpan? v = (TimeSpan)(now - test.TimeStart);
+                TimeSpan? v = (TimeSpan)(now - test.TimeStart)- new TimeSpan(0,0,10);
                 if (v > test.Time) return 0;
                 if (test.Status != (int)baseEmun.StaticTest.Doing) return 0;
                 foreach (UserResult item in userResults)

@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Mvc;
+using TAMS.Controllers;
 using TAMS.DAL.ModelEntity;
 using TAMS.Entity;
 
 namespace TAMS.Areas.Admin.Controllers
 {
-    public class CategoriesTestController : Controller
+    public class CategoriesTestController : SessionController
     {
         // GET: Admin/CategoriesTest
         public ActionResult Index()

@@ -28,6 +28,11 @@ namespace TAMS.DAL.BL
             }
             for (int countT = 0; countT < tests.Count; countT++)
             {
+                if (tests[countT].Status == (int)Entity.baseEmun.StaticTest.Doing)
+                {
+                    tests[countT] =CheckIsFinish(tests[countT]);
+                    tests[countT].Time = (tests[countT].Time - (TimeSpan)(DateTime.Now - tests[countT].TimeStart));
+                }
                 formTests.Add(tests[countT]);
             }
             return formTests;
@@ -66,18 +71,16 @@ namespace TAMS.DAL.BL
             return TestContext.Create(formTest);
         }   
         //if is Finish then count score
-        public static int CheckIsFinish(int IdTest)
+        public static Test CheckIsFinish(Test test)
         {
-            Test test = TestContext.Get_Test(IdTest);
-            if (test==null) return 0;
-            if ((test.TimeStart + test.Time) < DateTime.Now) TestContext.ChangeStatusTest(IdTest, (int)Entity.baseEmun.StaticTest.Finish);
-            if (test.Status == (int)Entity.baseEmun.StaticTest.Finish)
+            if (test==null) return null;
+            if ((test.TimeStart + test.Time) < DateTime.Now)
             {
-                int countQuestionFail = UserResultContext.CountQuestionFail(IdTest).Count;
-                TestContext.UpdateScore(IdTest, test.NumQuestion - countQuestionFail);
-                return 1;
+                TestContext.ChangeStatusTest(test.Id, (int)Entity.baseEmun.StaticTest.Finish);
             }
-            return 0;
+            int countQuestionFail = UserResultContext.CountQuestionFail(test.Id).Count;
+            TestContext.UpdateScore(test.Id, test.NumQuestion - countQuestionFail);
+            return TestContext.Get_Test(test.Id);
         }
         public static Tuple<List<Question>, List<UserResult>> GetContentOfTest(Test test)
         {

@@ -8,10 +8,11 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TAMS.Controllers;
 
 namespace TAMS.Areas.Admin.Controllers
 {
-    public class UserManagerController : Controller
+    public class UserManagerController : SessionController
     {
         // GET: Admin/User
         private int pageSize = 10;

@@ -1,4 +1,4 @@
-﻿@model ExamOnlineSystem.Areas.Admin.Models.LoginModel
+﻿@model TAMS.Areas.Admin.Models.LoginModel
     @{ 
         Layout = null;
     }
@@ -12,13 +12,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="/Assets/Admin/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="~/Areas/Admin/Style/AdminLTE-3.0.5/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="/Assets/Admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="~/Areas/Admin/Style/AdminLTE-3.0.5/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="/Assets/Admin/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="~/Areas/Admin/Style/AdminLTE-3.0.5/dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -31,7 +31,7 @@
         <div class="card-body login-card-body" style="position: static; margin-bottom: 185px; width: 400px; margin-left: -45px; }">
             <p class="login-box-msg">Sign in to start your session</p>
 
-            @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+            @using (Html.BeginForm("Login", "/Account", FormMethod.Post))
             {
                 @Html.ValidationSummary(false, "", new { @class = "text-danger" });
                 <div class="input-group mb-3">
@@ -90,11 +90,11 @@
     </div>
     <!-- /.login-box -->
     <!-- jQuery -->
-    <script src="/Assets/Admin/plugins/jquery/jquery.min.js"></script>
+    <script src="~/Areas/Admin/Style/AdminLTE-3.0.5/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
-    <script src="/Assets/Admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Areas/Admin/Style/AdminLTE-3.0.5/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="/Assets/Admin/dist/js/adminlte.min.js"></script>
+    <script src="~/Areas/Admin/Style/AdminLTE-3.0.5/dist/js/adminlte.min.js"></script>
 
 </body>
 </html>
