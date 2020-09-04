@@ -20,6 +20,26 @@ namespace TAMS.Areas.Admin.Controllers
             ViewData["Page"] = 1;
             return View();
         }
+        public int GetLengthMax(String post)
+        {
+            try
+            {
+                string[] res = post.Split('-');
+                if (res.Length != 2) return 0;
+                int idCategoryTest = Convert.ToInt32(res[1]);
+                List<Test> tests= TestContext.Get_FormByCategory(idCategoryTest);
+                int max = 0;
+                for(int i = 0; i < tests.Count; i++)
+                {
+                    if (max < tests[i].NumQuestion) max = tests[i].NumQuestion;
+                }
+                return max;
+            }catch(Exception e)
+            {
+
+            }
+            return 0;
+        }
         public ActionResult Page(int page)
         {
             Tuple<List<CategoryTest>, int> tuple = CategoriesTestContext.Get(-1, 5, page);

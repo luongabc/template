@@ -25,26 +25,32 @@ class adminCategoryTest {
         this.addQuestion();
     }
      removeQuestion() {
-         var post = $(".btn-add").val();
-
-        var cardsCheckIn = $(".checkbox-in:checked");
-        if (cardsCheckIn.length > 0) {
-            var arr = new Array();
-            for (var i = 0; i < cardsCheckIn.length; i++) {
-                arr.push(cardsCheckIn[i].value)
-            }
-            var resPost = JSON.stringify(arr);
-            $.ajax({
-                url: "/Admin/CategoriesTest/removeQuestionForTest?post=" + post,
-                method: "POST",
-                data: resPost,
-                contentType: 'application/json',
-            }).done((res) => {
-                if (res == 1) {
-                    for (var i = 0; i < arr.length; i++) {
-                        var text = $("#text-" + arr[i]).text();
-                        $("#" + arr[i]).remove();
-                        $("#tb-out").append(`
+         $.ajax({
+             url: "/Admin/CategoriesTest/GetLengthMax?post=" + $(".btn-add").val(),
+             method: "GET",
+         }).done((res) => {
+             var cardsCheckIn = $(".checkbox-in:checked");
+             if (res > $(".checkbox-in").length - cardsCheckIn.length) {
+                 alert("Check number question of test");
+                 return;
+             }
+             if (cardsCheckIn.length > 0) {
+                 var arr = new Array();
+                 for (var i = 0; i < cardsCheckIn.length; i++) {
+                     arr.push(cardsCheckIn[i].value)
+                 }
+                 var resPost = JSON.stringify(arr);
+                 $.ajax({
+                     url: "/Admin/CategoriesTest/removeQuestionForTest?post=" + $(".btn-add").val(),
+                     method: "POST",
+                     data: resPost,
+                     contentType: 'application/json',
+                 }).done((res) => {
+                     if (res == 1) {
+                         for (var i = 0; i < arr.length; i++) {
+                             var text = $("#text-" + arr[i]).text();
+                             $("#" + arr[i]).remove();
+                             $("#tb-out").append(`
                             <tr class="" id="`+ arr[i] + `">
                                 <td width="30">
                                     <input type="checkbox" class="checkbox-out" value="`+ arr[i] + `" />
@@ -53,17 +59,18 @@ class adminCategoryTest {
                                    `+ text + `
                                 </td>
                             </tr>`);
-                    }
-                }
-                else {
-                    console.log(arr);
-                };
-            }).fail(() => {
-                console.log("remove");
-                console.log("fail remove")
-            }).always(() => {
-            })
-        }
+                         }
+                     }
+                     else {
+                         console.log(arr);
+                     };
+                 }).fail(() => {
+                     console.log("remove");
+                     console.log("fail remove")
+                 }).always(() => {
+                 })
+             }
+         })
     }
     addQuestion() {
         var post = $(".btn-add").val();

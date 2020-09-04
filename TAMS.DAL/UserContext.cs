@@ -38,6 +38,31 @@ namespace TAMS.DAL
                 return result;
             }
         }
+        public static int Create(User obj)
+        {
+            using (var context = MasterDBContext())
+            {
+                var result = context.StoredProcedure("User_Create")
+                    .Parameter("Name", obj.Name)
+                    .Parameter("UserName", obj.UserName)
+                    .Parameter("Email", obj.Email)
+                    .Parameter("Password", obj.Password)
+                    .Parameter("Birthday", obj.Birthday)
+                    .Execute();
+                return result;
+            }
+        }
+        public static int Check(User obj)
+        {
+            using (var context = MasterDBContext())
+            {
+                var result = context.StoredProcedure("User_Check")
+                    .Parameter("UserName", obj.UserName)
+                    .Parameter("Email", obj.Email)
+                    .Execute();
+                return result;
+            }
+        }
         public int InsertForFacebook(User obj)
         {
             if (IsExistUserName(obj.UserName))

@@ -29,8 +29,10 @@ namespace TAMS.Controllers
         }
         public ActionResult Register(User user)
         {
-
-            return View();
+            if (TAMS.DAL.UserContext.Check(user) > 0) return View();
+            if (TAMS.DAL.UserContext.Create(user) < 1) return View();
+            Session.Add(Common.USER_SESSION, user);
+            return RedirectToAction("Index", "InfoUser");
         }
     }
 }

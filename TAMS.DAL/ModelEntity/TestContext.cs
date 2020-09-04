@@ -19,6 +19,15 @@ namespace TAMS.DAL.ModelEntity
                 return cmd.QuerySingle<Test>();
             }
         }
+        public static List<Test> Get_FormByCategory(int Id)
+        {
+            using (var context = MasterDBContext())
+            {
+                return context.StoredProcedure("Test_GetByCategory")
+                    .Parameter("IdCategory", Id)
+                    .QueryMany<Test>();
+            }
+        }
         public static List<Test> Get_ByForm(int idForm)
         {
             using (var context = MasterDBContext())
