@@ -33,10 +33,13 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover >
+                <table id="example2" class="table table-bordered table-hover" >
                     <thead>
                         <tr>
-                            <th></th>
+                            @if (formTest == null)
+                            {
+                                <th>Test</th>
+                            }
                             <th>Name User</th>
                             <th>Score</th>
                             <th>Action</th>
@@ -46,25 +49,29 @@
 
                         @foreach (var item in listTests)
                         {
-                            <tr id="Test_@item.Id">
-                                <td><input type="checkbox" class="w-100 checkbox-test" /></td>  
-                                <th>@item.UserName</th>
-                                <th>
-                                    @if (item.Score == null &&
-                                        item.Status != (int)(TAMS.Entity.baseEmun.StaticTest.NotStart))
-                                    {
-                                        <a href="/Admin/Test/ViewTest?IdTest=@item.Id">Chấm</a>
-                                    }
-                                    else if (item.Status == (int)(TAMS.Entity.baseEmun.StaticTest.Finish))
-                                    {
-                                        <a href="#">@item.Score</a>
-                                    }
-                                </th>
-                                <th>
-                                    <a href="/Admin/Test/Detail?IdTest=@item.Id">Detail |</a>
-                                    <a href="/Admin/Test/Delete?IdTest=@item.Id">Delete</a>
-                                </th>
-                            </tr>
+                        <tr id="Test_@item.Id">
+                            @if (formTest == null)
+                            {
+                            <td>@item.Name</td>
+                            }
+
+                            <th>@item.UserName</th>
+                            <th>
+                                @if (item.Score == null &&
+                                    item.Status != (int)(TAMS.Entity.baseEmun.StaticTest.NotStart))
+                                {
+                                    <a href="/Admin/Test/ViewTest?IdTest=@item.Id">Chấm</a>
+                                }
+                                else if (item.Status == (int)(TAMS.Entity.baseEmun.StaticTest.Finish))
+                                {
+                                    <a href="#">@item.Score</a>
+                                }
+                            </th>
+                            <th>
+                                <a href="/Admin/Test/Detail?IdTest=@item.Id">Detail |</a>
+                                <a href="/Admin/Test/Delete?IdTest=@item.Id">Delete</a>
+                            </th>
+                        </tr>
                         }
                     </tbody>
                 </table>
@@ -73,34 +80,38 @@
             <!-- /.row -->
 
         </div>
-        <div class="card card-widget widget-user-2 col-4">
-            <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-info">
-                <!-- /.widget-user-image -->
-                <h3 class="text-center">@formTest.Name</h3>
-                <h5 class="text-center">@formTest.CategoryTestName</h5>
+        @if (@formTest != null)
+        {
+            <div class="card card-widget widget-user-2 col-4">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header bg-info">
+                    <!-- /.widget-user-image -->
+                    <h3 class="text-center">@formTest.Name</h3>
+                    <h5 class="text-center">@formTest.CategoryTestName</h5>
+                </div>
+                <div class="card-footer p-0">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                Time <p class="float-right ">@formTest.Time</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                Questions <p class="float-right  ">@formTest.NumQuestion</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                Create Date <p class="float-right ">@formTest.CreateDate</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="card-footer p-0">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            Time <p class="float-right ">@formTest.Time</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            Questions <p class="float-right  ">@formTest.NumQuestion</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            Create Date <p class="float-right ">@formTest.CreateDate</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    <!--/. container-fluid -->
+
+        }
+        <!--/. container-fluid -->
     </div>
 </section>
 <!-- /.content -->

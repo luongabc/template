@@ -15,8 +15,10 @@ namespace TAMS.Areas.Admin.Controllers
         public ActionResult Index()
         {
             Tuple<List<CategoryTest>, int> tuple= CategoriesTestContext.Get(-1, 5, 1);
+            var numPage = tuple.Item2 / 5;
+            if (tuple.Item2 % 5 != 0) numPage++;
             ViewData["listCategoriesTest"] = tuple.Item1;
-            ViewData["totalPage"] = tuple.Item2 / 5 +1;
+            ViewData["totalPage"] = numPage;
             ViewData["Page"] = 1;
             return View();
         }
@@ -43,8 +45,10 @@ namespace TAMS.Areas.Admin.Controllers
         public ActionResult Page(int page)
         {
             Tuple<List<CategoryTest>, int> tuple = CategoriesTestContext.Get(-1, 5, page);
+            var numPage = tuple.Item2 / 5;
+            if (tuple.Item2 % 5 != 0) numPage++;
             ViewData["listCategoriesTest"] = tuple.Item1;
-            ViewData["totalPage"] = tuple.Item2 / 5 + 1;
+            ViewData["totalPage"] = numPage;
             ViewData["Page"] = page;
             return View("~/Areas/Admin/Views/CategoriesTest/Index.cshtml");
         }

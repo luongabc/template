@@ -17,6 +17,7 @@ namespace TAMS.Controllers
         {
             return View();
         }
+        [HttpPost]
         public ActionResult Login(string name,string password)
         {
             var userSession = UserContext.Search(name, password);
@@ -27,6 +28,12 @@ namespace TAMS.Controllers
             }
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public ActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
         public ActionResult Register(User user)
         {
             if (TAMS.DAL.UserContext.Check(user) > 0) return View();

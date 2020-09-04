@@ -31,7 +31,7 @@
         <div class="card-body login-card-body" style="position: static; margin-bottom: 185px; width: 400px; margin-left: -45px; }">
             <p class="login-box-msg">Sign in to start your session</p>
 
-            @using (Html.BeginForm("Login", "/Account", FormMethod.Post))
+            @using (Html.BeginForm("Login", "/Home", FormMethod.Post))
             {
                 @Html.ValidationSummary(false, "", new { @class = "text-danger" });
                 <div class="input-group mb-3">
@@ -67,23 +67,6 @@
                 </div>
             }
 
-            <div class="social-auth-links text-center mb-3">
-                <p>- OR -</p>
-                <a href="/Account/LoginFacebook" class="btn btn-block btn-primary">
-                    <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-                </a>
-                <a href="/Account/LoginGoogle" class="btn btn-block btn-danger">
-                    <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-                </a>
-            </div>
-            <!-- /.social-auth-links -->
-
-            <p class="mb-1">
-                <a href="/Admin/Account/ForgotPassword">I forgot my password</a>
-            </p>
-            <p class="mb-0">
-                <a href="/Admin/Account/SignUp" class="text-center">SignUp</a>
-            </p>
         </div>
         <!-- /.login-card-body -->
 

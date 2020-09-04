@@ -193,9 +193,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\App_Strart\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\App_Strart\Startup.Auth.cs" />
-    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesTestController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Common.cs" />
+    <Compile Include="Areas\Admin\Controllers\SessionController.cs" />
     <Compile Include="Areas\Admin\Controllers\TestController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserManagerController.cs" />
     <Compile Include="Areas\Admin\Models\AccountModels.cs" />
@@ -2111,10 +2113,10 @@
     <Content Include="Areas\Admin\Views\Test\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Test\FormTest.cshtml" />
     <Content Include="Areas\Admin\Views\CategoriesTest\AddQuestion.cshtml" />
-    <Content Include="Areas\Admin\Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
-    <Content Include="Areas\Admin\Views\Account\ResetPassword.cshtml" />
-    <Content Include="Areas\Admin\Views\Account\SignUp.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\ForgotPassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\ResetPassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\SignUp.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LeftMenu.cshtml" />
     <Content Include="Areas\Admin\Views\UserManager\Create.cshtml" />

@@ -32,9 +32,13 @@ namespace TAMS.Entity
         public int IdFormTest { get; set; }
         public int CompareTo(Test other)
         {
-            if (this.Score == null) return -1;
-            if (other.Score == null) return 1;
-                return (int)(other.Score  - this.Score);
+            if (this.IdCategory == other.IdCategory)
+            {
+                if (this.Score == null) return -1;
+                if (other.Score == null) return 1;
+                return (int)(other.Score - this.Score);
+            }
+            else return this.IdCategory - other.IdCategory;
         }
     }
 }

@@ -51,6 +51,7 @@
                     <div class="form-group col-6">
                         <label class="">Category test: </label>
                         <select name="IdCategory" form="form-Create-Test" class="form-control col-10" id="Create-categoryTest" autocomplete="off">
+                            <option >Select</option>
                             @foreach (var categoryTest in listCategoryTest)
                             {
                                 <option value="@categoryTest.Id" name="IdCategory">@categoryTest.Name</option>

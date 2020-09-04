@@ -26,7 +26,7 @@ using Google.Apis.Util.Store;
 
 namespace TAMS.Areas.Admin.Controllers
 {
-    public class AccountController : Controller
+    public class HomeController : Controller
     {
         /*public string Scope { get; private set; }
 
@@ -230,11 +230,8 @@ namespace TAMS.Areas.Admin.Controllers
                 var result = users.Login(model.UserName, model.Password);
                 if (result)
                 {
-                    var User = users.GetByUserName(model.UserName);
-                    var userSession = new UserLogin();
-                    userSession.UserName = User.UserName;
-                    userSession.UserId = User.Id;
-                    Session.Add(CommonConstants.USER_SESSION, userSession);
+                    User user = users.GetByUserName(model.UserName);
+                    Session.Add(CommonConstants.USER_SESSION, user);
                     return RedirectToAction("index", "Test");
                 }
                 else
