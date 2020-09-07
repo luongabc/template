@@ -80,6 +80,7 @@ namespace TAMS.Areas.Admin.Controllers
         {
             TimeSpan time = new TimeSpan(Hours,Minutes,0);
             test.Time = time;
+            test.IdUser = 0;
             if (TestContext.Create(test) == 0) return View();
             return RedirectToAction("Index");
         }

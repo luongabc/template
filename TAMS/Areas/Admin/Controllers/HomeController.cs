@@ -224,6 +224,7 @@ namespace TAMS.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Login(LoginModel model)
         {
+            Session.Remove(Common.USER_SESSION);
             if (ModelState.IsValid)
             {
                 var users = new TAMS.DAL.UserContext();
