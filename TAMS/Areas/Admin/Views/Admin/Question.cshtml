@@ -21,11 +21,16 @@
 <!-- /.content-header -->
 <section class="content">
     <div class="container-fluid p-3">
-            <div class="row ">
+        <div class="row justify-content-between">
+            <div class="row">
                 <button type="button" class="btn btn-primary m-2" data-toggle="modal" data-target="#myModal" onclick="clearTextBox();">Thêm loại câu hỏi</button>
                 <a class="m-2 btn btn-primary" href="@Url.Action("ManageQuestion","admin")"> Quản lý câu hỏi</a>
-
             </div>
+            <form action="~/Admin/Admin/addQuestionFromExcel" enctype = "multipart/form-data" class="row p-2 border border-dark rounded" method="post">
+                <button type="submit" class="btn btn-primary">Up file excel</button>
+                <input type="file" required name="file" class="m-1" />
+            </form>
+        </div>
             <form>
                 <div class="form-group">
                     <label for="formGroupExampleInput">Tên câu hỏi:</label>

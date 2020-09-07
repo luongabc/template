@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TAMS.Entity;
 
 namespace TAMS.DAL
 {
@@ -19,7 +20,7 @@ namespace TAMS.DAL
         }
 
 
-        public int AddQuestion(Entity.Question obj)
+        public static int AddQuestion(Entity.Question obj)
         {
             using (var context = MasterDBContext())
             {
@@ -29,7 +30,7 @@ namespace TAMS.DAL
                    .Execute();
             }
         }
-        public int AddCategoryQuestion(Entity.CategoryQuestion obj)
+        public static int AddCategoryQuestion(Entity.CategoryQuestion obj)
         {
             using (var context = MasterDBContext())
             {
@@ -40,7 +41,7 @@ namespace TAMS.DAL
                   .Execute();
             }
         }
-        public Entity.CategoryQuestion GetByIdCategory(int Id)
+        public static Entity.CategoryQuestion GetByIdCategory(int Id)
         {
             using (var context = MasterDBContext())
             {
@@ -49,7 +50,7 @@ namespace TAMS.DAL
                     .QuerySingle<Entity.CategoryQuestion>();
             }
         }
-        public void UpdateCategory(Entity.CategoryQuestion obj)
+        public static void UpdateCategory(Entity.CategoryQuestion obj)
 
         {
 
@@ -66,7 +67,7 @@ namespace TAMS.DAL
             }
 
         }
-        public void DeleteCategory(int Id)
+        public static void DeleteCategory(int Id)
         {
             using (var context = MasterDBContext())
             {
@@ -75,7 +76,7 @@ namespace TAMS.DAL
                      .Execute();
             }
         }
-        public List<Entity.CategoryQuestion> GetDataCategory()
+        public static List<Entity.CategoryQuestion> GetDataCategory()
 
         {
 
@@ -90,7 +91,7 @@ namespace TAMS.DAL
 
         }
         
-        public int AddAnswer(List<Entity.Answer> obj)
+        public static int AddAnswer(List<Entity.Answer> obj)
         {
             using (var context = MasterDBContext())
             {
@@ -105,7 +106,7 @@ namespace TAMS.DAL
                 return count;
             }
         }
-        public List<Entity.Question> GetDataQuestion(int Id)
+        public static List<Entity.Question> GetDataQuestion(int Id)
         {
             using (var context = MasterDBContext())
             {
@@ -117,7 +118,7 @@ namespace TAMS.DAL
 
             }
         }
-        public int DeleteQuestion(int Id)
+        public static int DeleteQuestion(int Id)
         {
             using (var context = MasterDBContext())
             {
@@ -126,7 +127,7 @@ namespace TAMS.DAL
                   .Execute();
             }
         }
-        public Entity.Question GetByIdQuestion(int Id)
+        public static Entity.Question GetByIdQuestion(int Id)
         {
             using(var context = MasterDBContext())
             {
@@ -135,7 +136,7 @@ namespace TAMS.DAL
                     .QuerySingle<Entity.Question>();
             }
         }
-        public List<Entity.Answer> GetByIdAnswer(int IdQuestion)
+        public static List<Entity.Answer> GetByIdAnswer(int IdQuestion)
         {
             using (var context = MasterDBContext())
             {
@@ -144,7 +145,7 @@ namespace TAMS.DAL
                     .QueryMany<Entity.Answer>();
             }
         }
-        public void UpdateAnswer(List<Entity.Answer> obj)
+        public static void UpdateAnswer(List<Entity.Answer> obj)
         {
             using (var context = MasterDBContext())
             {
@@ -158,7 +159,7 @@ namespace TAMS.DAL
                 }
             }
         }
-        public void UpdateQuestion(Entity.Question obj)
+        public static void UpdateQuestion(Entity.Question obj)
         {
             using (var context = MasterDBContext())
             {
@@ -171,7 +172,7 @@ namespace TAMS.DAL
                .Execute();
             }
         }
-        public int CountAnswer (int IdQuestion)
+        public static int CountAnswer (int IdQuestion)
         {
             int Count = 0;
             using (var context = MasterDBContext())
@@ -184,7 +185,7 @@ namespace TAMS.DAL
             }
             return Count;
         }
-        public int CountQuestion()
+        public static int CountQuestion()
         {
             int Count = 0;
             using (var context = MasterDBContext())
@@ -197,15 +198,24 @@ namespace TAMS.DAL
             }
             return Count;
         }
-        public void DeleteAnswer(int IdQuestion)
+        public static void DeleteAnswer(int IdQuestion)
         {
             using (var context = MasterDBContext())
             {
                 context.StoredProcedure("dbo.DeleteAnswer")
                    .Parameter("IdQuestion", IdQuestion)
                   .Execute();
-
-
+            }
+        }
+        public static bool Search(string text)
+        {
+            using (var context = MasterDBContext())
+            {
+                List<Question> questions=context.StoredProcedure("dbo.Question_Search")
+                  .Parameter("TextQuestion", text)
+                  .QueryMany<Question>();
+                if (questions.Count > 0) return true;
+                return false;
             }
         }
     }
