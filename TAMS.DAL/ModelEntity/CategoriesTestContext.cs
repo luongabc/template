@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TAMS.DAL;
-using TAMS.Entity;
+using TAMS.Entity.Models;
 
 namespace TAMS.DAL.ModelEntity
 {
     public class CategoriesTestContext : BaseContext
     {
-        public static Tuple<List<CategoryTest>,int> Get(int IdCategoryTest,int NumItem, int Page)
+        public static Tuple<List<CategoryQuestion>,int> Get(int IdCategoryTest,int NumItem, int Page)
         {
             using(var context = MasterDBContext())
             {

@@ -1,44 +1,31 @@
-namespace TAMS.Entity
+namespace TAMS.Entity.Models
 {
     using System;
     using System.Collections.Generic;
-    public class Test :IComparable<Test>
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    [Table("Test")]
+    public partial class Test
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Test()
+        {
+            QuestionOfTests = new HashSet<QuestionOfTest>();
+            TestOfUsers = new HashSet<TestOfUser>();
+        }
+
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public int IdForm { get; set; }
 
-        public TimeSpan Time { get; set; }
+        public virtual FormTest FormTest { get; set; }
 
-        public int NumQuestion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<QuestionOfTest> QuestionOfTests { get; set; }
 
-        public DateTime CreateDate { get; set; }
-
-        public string Description { get; set; }
-
-        public DateTime ModifyDate { get; set; }
-
-        public int IdCategory { get; set; }
-
-        public String UserName { get; set; }
-        public String CategoryTestName { get; set; }
-        public int IdUser { get; set; }
-
-        public int Status { get; set; }
-
-        public DateTime? TimeStart { get; set; }
-
-        public int? Score { get; set; }
-        public int IdFormTest { get; set; }
-        public int CompareTo(Test other)
-        {
-            if (this.IdCategory == other.IdCategory)
-            {
-                if (this.Score == null) return -1;
-                if (other.Score == null) return 1;
-                return (int)(other.Score - this.Score);
-            }
-            else return this.IdCategory - other.IdCategory;
-        }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TestOfUser> TestOfUsers { get; set; }
     }
 }

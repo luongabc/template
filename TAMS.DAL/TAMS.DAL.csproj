@@ -50,16 +50,9 @@
     <Compile Include="AdminContext.cs" />
     <Compile Include="BaseContext.cs" />
     <Compile Include="BL\BLTest.cs" />
-    <Compile Include="LoginAdminContext.cs" />
-    <Compile Include="ModelEntity\AnswerContext.cs" />
-    <Compile Include="ModelEntity\CategoriesTestContext.cs" />
-    <Compile Include="ModelEntity\QuestionContext.cs" />
-    <Compile Include="ModelEntity\QuestionOfTestContext.cs" />
     <Compile Include="ModelEntity\TestContext.cs" />
     <Compile Include="ModelEntity\UserContext.cs" />
-    <Compile Include="ModelEntity\UserResultContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TAMS.Entity\TAMS.Entity.csproj">

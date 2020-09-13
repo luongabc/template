@@ -9,7 +9,7 @@ namespace TAMS.Models
 {
     public class Usermodels
     {
-         [Required]
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Current password")]
         public string OldPassword { get; set; }
@@ -32,14 +32,14 @@ namespace TAMS.Models
         [Display(Name = "User name")]
 
 
-        public string UserName { get; set; }
+        public new string UserName { get; set; }
 
         [Required(ErrorMessage = "Mời nhập tên mật khẩu")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         /*[RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
 */
-        public string Password { get; set; }
+        public new string Password { get; set; }
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
@@ -49,25 +49,25 @@ namespace TAMS.Models
     {
         [Required(ErrorMessage = "Mời nhập tên đăng nhập")]
         [Display(Name = "User name")]
-        public string UserName { get; set; }
+        public new string UserName { get; set; }
 
         [Required(ErrorMessage = "Mời nhập tên")]
         [Display(Name = "Name")]
 
-        public string Name { get; set; }
+        public new string Name { get; set; }
 
         [Required(ErrorMessage = "Mời nhập Email")]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email address")]
 
-        public string Email { get; set; }
+        public new string Email { get; set; }
 
         [Required(ErrorMessage = "Mời nhập Password")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
 
-        public string Password { get; set; }
+        public new string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
@@ -76,13 +76,13 @@ namespace TAMS.Models
         public string ConfirmPassword { get; set; }
         [Required(ErrorMessage = "Mời nhập ngày sinh")]
         [Display(Name = "Birthday")]
-        public DateTime Birthday { get; set; }
+        public new DateTime Birthday { get; set; }
     }
     public class ForgotPasswordModel : User
     {
         [Required(ErrorMessage = "Email không đúng.")]
         [EmailAddress]
-        public string Email { get; set; }
+        public new string Email { get; set; }
 
     }
     public class ResetPasswordModel

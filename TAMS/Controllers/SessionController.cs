@@ -1,7 +1,7 @@
 ﻿
 using System.Web.Mvc;
 using System.Web.Routing;
-using TAMS.Entity;
+using TAMS.Entity.Models;
 
 namespace TAMS.Controllers
 {

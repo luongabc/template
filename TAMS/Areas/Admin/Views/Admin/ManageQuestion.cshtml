@@ -1,4 +1,4 @@
-﻿@model TAMS.Entity.Question
+﻿@model TAMS.Entity.Models.Question
 @{
     ViewBag.Title = "ManageQuestion";
     Layout = "~/Areas/Admin//Views/Shared/Layout1.cshtml";
@@ -23,7 +23,26 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
+                <div class="row justify-content-between">
                     <a class="btn btn-primary m-2" href='@Url.Action("Question","Admin")'>Add New Question</a>
+                    <div class="row m-2">
+                        <input type="text" class="rounded pl-2" id="search" />
+                        <label class="m-2">Search</label>
+                    </div>
+                    <div class="row m-2">
+                        <select id="FilterCategoryAnswer" name="FilterCategoryAnswer" class="mr-2">
+                            <option name="FilterCategoryAnswer" value="">Category Answer</option>
+                            <option name="FilterCategoryAnswer" value="CheckBox">CheckBox</option>
+                            <option name="FilterCategoryAnswer" value="Radio">Radio</option>
+                            <option name="FilterCategoryAnswer" value="Text">Text</option>
+                        </select>
+                        <select id="FilterCategoryQuestion" name="FilterCategoryQuestion">
+                            <option name="FilterCategoryQuestion" value="">Category Question</option>
+                        </select>
+                        <label class="m-2">Filter</label>
+                    </div>
+                </div>
+                    
                     
                 <table class="table table-bordered table-hover">
                     <thead>
@@ -35,7 +54,7 @@
                                 Category Name
                             </th>
                             <th>
-                                ModifyDate
+                                Type Answer
                             </th>
                             <th>
                                 Action
@@ -89,8 +108,9 @@
             </div>
 </section>
 @section scripts {
-    <script src="~/Areas/Admin/Style/Js/Question.js"></script>
+    <script src="~/Areas/Admin/Style/Js/Admin/ManagerQuestion.js"></script>
 }
+
 @section style {
     <link  rel="stylesheet" href="~/Areas/Admin/Style/Css/Admin.css">
 }

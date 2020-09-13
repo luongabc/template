@@ -321,7 +321,6 @@ namespace ExamOnlineSystem.Controllers
         public ActionResult ForgotPassword(ForgotPasswordModel model)
         {
             string message = "";
-            bool status = false;
             if (ModelState.IsValid)
             {
                 //Verify Email ID
@@ -385,7 +384,7 @@ namespace ExamOnlineSystem.Controllers
             //Verify the reset password link
             //Find account associated with this link
             //redirect to reset password page
-            if (resetPassword == null)
+            if (resetPassword == 0)
             {
                 return HttpNotFound();
             }

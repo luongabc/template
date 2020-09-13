@@ -1,16 +1,7 @@
-﻿$(document).ready(function () {
-    loadCategory();
-    loaddataQuestion(1);
-    loadPagination();
-    $("#CategoryId").change(function () {
-        displayAnswer(total);
-        console.log(total);
-    });
-});
+﻿
 $("#Id").hide();
 function loadCategory() {
     $.ajax({
-
         url: "/Admin/Admin/GetDataCategory",
         type: "GET",
         contentType: "application/json;charset=utf-8",
@@ -21,35 +12,30 @@ function loadCategory() {
             $.each(result, function (key, item) {
                 html += "<option id='Catagory-" + item.Id + "'  value='" + item.Name + "'>" + item.Name + '</option>';
             });
-            $("#CategoryId option[value='']").prop('selected', 'selected');
-            $('#CategoryId').html(html);
+            $("#CategoryQuestion option[value='']").prop('selected', 'selected');
+            $('#CategoryQuestion').html(html);
         },
         error: function (errormessage) {
             alert(errormessage.responseText);
         }
     });
 }
-    function loaddataQuestion(Id) {
+function loaddataQuestion( Page,  Size,  Search,  FilterQuestion,  FilterAnswer) {
         $.ajax({
 
-            url: "/Admin/Admin/GetDataQuestion/" + Id,
+            url: "/Admin/Admin/GetDataQuestion?Page=" + Page + "&&Size=" + Size + "&&Search=" + Search + "&&FilterQuestion=" + FilterQuestion + "&&FilterAnswer" + FilterAnswer,
             type: "GET",
             contentType: "application/json;charset=utf-8",
             dataType: "json",
             success: function (result) {
                 var html = '';
-               
-                $.each(result, function (key, item) {
-
+                $.each(result.Item1, function (key, item) {
                     html += '<tr id=Question-' + item.Id + '>';
                     html += '<td>' + item.Text + '</td>';
-                    html += '<td>' + item.Name + '</td>';
-                    html += '<td>' + item.ModifyDate + '</td>';
-               
+                    html += '<td>' + item.CategoryName + '</td>';
+                    html += '<td>' + item.CategoryAnswer + '</td>';
                     html += '<td><a href="#" onclick=" CountAnswer(' + item.Id + ');">Edit</a> | <a href="#" onclick="Delele(' + item.Id + ')">Delete</a></td>';
                     html += '</tr>';
-
-
                 });
                 $('.tbody').html(html);
             },
@@ -89,7 +75,7 @@ function to_slug(str) {
 }
 var total = 4;
 function displayAnswer(total) {
-    var st = to_slug($("#CategoryId").val());
+    var st = to_slug($("#CategoryAnswer").val());
     if (st == "radio") {
         console.log("Radio");
         var html = "";
@@ -99,12 +85,13 @@ function displayAnswer(total) {
             html += '<label for="formGroupExampleInput2">Câu trả lời số ' + i +':</label>';
             html += '<div class="row">';
             html += '<div class="col-md-11">';
-            html += '<input type="text" class="form-control" id="Answer-'+i+'" placeholder="Câu trả lời số '+i+'"></div>';
+            html += '<input type="text" class="form-control answerText" id="Answer-'+i+'" placeholder="Câu trả lời số '+i+'"></div>';
             html += '<div class="col-md-1">';
             html += '<label class="SelectResult">';
             html += '<input type="radio" id="ResultAnswer-'+ i +'" name="radio">';
             html += '<span class="checkmark"></span>';
             html += '</label>';
+
             html +='<button type="button" onclick="deleteDisplayAnswer();" class="close">×</button></div></div></div></div>';
           
         }
@@ -119,7 +106,7 @@ function displayAnswer(total) {
             html += '<div class="form-group">';
         html += '<label for="formGroupExampleInput2">Nhập câu trả lời:</label>';
            
-            html += '<input type="text" class="form-control" id="TextAnswer" placeholder="Nhập câu trả lời"></div>';
+        html += '<input type="text" class="form-control answerText" id="Answer-1" placeholder="Nhập câu trả lời"></div>';
            
            
         $('#answer').html(html);
@@ -132,7 +119,7 @@ function displayAnswer(total) {
             html += '<label for="formGroupExampleInput2">Câu trả lời số ' + i + ':</label>';
             html += '<div class="row">';
             html += '<div class="col-md-11">';
-            html += '<input type="text" class="form-control" id="Answer-' + i + '" placeholder="Câu trả lời số ' + i + '"></div>';
+            html += '<input type="text" class="form-control answerText" id="Answer-' + i + '" placeholder="Câu trả lời số ' + i + '"></div>';
             html += '<div class="col-md-1">';
             html += '<label class="SelectResult1">';
             html += '<input type="checkbox" id="ResultAnswer-' + i + '" name="radio">';
@@ -149,7 +136,7 @@ function displayAnswer(total) {
     }
 }
 function displayAnswer1(total) {
-    if (to_slug($("#CategoryId").val()) == "radio") {
+    if (to_slug($("#CategoryAnswer").val()) == "radio") {
         var html = "";
         for (var i = 1; i <= total; i++) {
             html += '<div class="form-group">';
@@ -157,7 +144,7 @@ function displayAnswer1(total) {
             html += '<label for="formGroupExampleInput2">Câu trả lời số ' + i + ':</label>';
             html += '<div class="row">';
             html += '<div class="col-md-11">';
-            html += '<input type="text" class="form-control" id="Answer-' + i + '" placeholder="Câu trả lời số ' + i + '"></div>';
+            html += '<input type="text" class="form-control answerText" id="Answer-' + i + '" placeholder="Câu trả lời số ' + i + '"></div>';
             html += '<div class="col-md-1">';
             html += '<label class="SelectResult">';
             html += '<input type="radio" id="ResultAnswer-' + i + '" name="radio">';
@@ -171,18 +158,18 @@ function displayAnswer1(total) {
         $('#answer').html(html);
         
     }
-    if (to_slug($("#CategoryId").val()) == "text") {
+    if (to_slug($("#CategoryAnswer").val()) == "text") {
         var html = "";
 
         html += '<div class="form-group">';
         html += '<label for="formGroupExampleInput2">Nhập câu trả lời:</label>';
 
-        html += '<input type="text" class="form-control" id="TextAnswer" placeholder="Nhập câu trả lời"></div>';
+        html += '<input type="text" class="form-control answerText" id="Answer-1" placeholder="Nhập câu trả lời"></div>';
 
 
         $('#answer').html(html);
     }
-    if (to_slug($("#CategoryId").val()) == "checkbox") {
+    if (to_slug($("#CategoryAnswer").val()) == "checkbox") {
         var html = "";
         for (var i = 1; i <= total; i++) {
             html += '<div class="form-group">';
@@ -190,7 +177,7 @@ function displayAnswer1(total) {
             html += '<label for="formGroupExampleInput2">Câu trả lời số ' + i + ':</label>';
             html += '<div class="row">';
             html += '<div class="col-md-11">';
-            html += '<input type="text" class="form-control" id="Answer-' + i + '" placeholder="Câu trả lời số ' + i + '"></div>';
+            html += '<input type="text" class="form-control answerText" id="Answer-' + i + '" placeholder="Câu trả lời số ' + i + '"></div>';
             html += '<div class="col-md-1">';
             html += '<label class="SelectResult1">';
             html += '<input type="checkbox" id="ResultAnswer-' + i + '" name="radio">';
@@ -215,7 +202,7 @@ function deleteDisplayAnswer() {
     }
 }
 function addDisplayAnswer() {
-    if (to_slug($("#CategoryId").val()) == "radio") {
+    if (to_slug($("#CategoryAnswer").val()) == "radio") {
         var html = "";
 
         html += '<div class="form-group">';
@@ -235,7 +222,7 @@ function addDisplayAnswer() {
         $('#more').append(html);
         total++;
     }
-    if (to_slug($("#CategoryId").val()) == "checkbox ") {
+    if (to_slug($("#CategoryAnswer").val()) == "checkbox ") {
         var html = "";
 
         html += '<div class="form-group">';
@@ -337,29 +324,22 @@ function AddQuestion() {
     if (res == false) {
         return false;
     }
-    var category =$('#CategoryId').val();
+    var category = $('#CategoryAnswer').val();
     var Qs = {
         Text: $('#Text').val().toString(),
-        CategoryName: category,
+        CategoryAnswer: category,
+        CategoryName : $('#CategoryQuestion').val()
     };
     var obj;
     var Answer = [];
-    if (category == "CheckBox") {
-        res = validate2();
-        if (res == false) {
-            return false;
-        }
-        for (var i = 1; i <= total; i++) {
-            var result = $("#ResultAnswer-" + i + "").prop("checked");
-            var TextAnswer = $("#Answer-" + i + "").val().toString();
-            Answer.push({ "result": result, "TextAnswer": TextAnswer });
-        }
+    if (validateAnswer() == false) {
+        return false;
     }
-    else if (category == "Text") {
-        var textAnswer = $('#TextAnswer').val();
-        if (textAnswer == null || textAnswer.trim() == "") return fasle;
-        Answer.push({ "result": false, "TextAnswer": textAnswer })
-    }
+    for (var i = 1; i <= $('.answerText').length; i++) {
+        var result = $("#ResultAnswer-" + i + "").prop("checked");
+        var TextAnswer = $("#Answer-" + i + "").val().toString();
+        Answer.push({ "result": result, "TextAnswer": TextAnswer });
+    }   
     obj = { 'Answer': Answer, 'Qs': Qs };
     $.ajax({
         contentType: 'application/json',
@@ -375,26 +355,6 @@ function AddQuestion() {
         }
     });
 }
-
-function AddAnswerCheckBox() {
-        var Answer = [];
-        for (var i = 1; i <= total; i++) {
-            var result = $("#ResultAnswer-" + i + "").prop("checked");
-            var TextAnswer = $("#Answer-" + i + "").val().toString();
-            Answer.push({ "result": result, "TextAnswer": TextAnswer });
-        }
-        $.ajax({
-            contentType: 'application/json',
-            url: "/Admin/Admin/AddAnswer",
-            data: JSON.stringify(Answer),
-            method: "POST",
-            dataType: "json",
-            success: function (result) {
-            },
-            error: function (response) {
-            }
-        });
-}
 function GetByIdQuestion(Id) {
     $.ajax({
         url: "/Admin/Admin/GetByIdQuestion/" + Id,
@@ -404,7 +364,7 @@ function GetByIdQuestion(Id) {
         success: function (result) {
             $('#Id').val(Id);
             $('#Text').val(result.Text);
-            $('#CategoryId').val(result.Name);
+            $('#CategoryQuestion').val(result.Name);
             $('#myModal').modal('show');
             displayAnswer1(total);
             GetByIdAnswer(Id);
@@ -449,7 +409,7 @@ function UpdateQuestion() {
             Id: $('#Id').val(),
             Text: $('#Text').val().toString(),
             Mark: $('#Mark').val(),
-            CategoryName: $('#CategoryId').val(),
+            CategoryName: $('#CategoryQuestion').val(),
 
             ModifyDate: new Date().toISOString()
         };
@@ -489,7 +449,6 @@ function UpdateAnswer() {
             Answer.push({ "IdQuestion": IdQuestion, "result": result, "TextAnswer": TextAnswer });
 
         }
-
         $.ajax({
             contentType: 'application/json',
             url: "/Admin/Admin/UpdateAnswer",
@@ -533,8 +492,6 @@ var currentPage = 1;
 function page(a) {
     currentPage = a;
     loadPagination();
-
-
 }
 function loadPagination() {
     $.ajax({
@@ -543,7 +500,6 @@ function loadPagination() {
         contentType: "application/json;charset=UTF-8",
         dataType: "json",
         success: function (result) {
-
             var html = '';
             html += '<nav aria-label="Page navigation example" ><ul class="pagination">';
 
@@ -619,18 +575,18 @@ function validate() {
     else {
         $('#Text').css('border-color', 'lightgrey');
     }
-    if ($('#CategoryId').val().trim() == "") {
-        $('#CategoryId').css('border-color', 'Red');
+    if ($('#CategoryQuestion').val().trim() == "") {
+        $('#CategoryQuestion').css('border-color', 'Red');
         isValid = false;
     }
     else {
-        $('#CategoryId').css('border-color', 'lightgrey');
+        $('#CategoryQuestion').css('border-color', 'lightgrey');
     }
     return isValid;
 }
-function validate2() {
+function validateAnswer() {
     var isValid = true;
-    for (var i = 1; i <= total; i++) {
+    for (var i = 1; i <= $('.answerText').length; i++) {
         var val = $('#Answer-' + i).val();
         if (val == null
             || val.trim() == "") {

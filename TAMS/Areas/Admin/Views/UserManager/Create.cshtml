@@ -1,4 +1,4 @@
-﻿@model TAMS.Entity.User
+﻿@model TAMS.Entity.Models.User
 
 @{
     Layout = "~/Areas/Admin/Views/Shared/Layout1.cshtml";
@@ -48,7 +48,7 @@
                                     @Html.LabelFor(model => model.Avatar, htmlAttributes: new { @class = "control-label ", })
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" name="AvatarUpload" id="file" class="btn btn-info w-100"  required />
+                                            <input type="file" name="AvatarUpload" id="file" accept=".jpg,.png" class="btn btn-info w-100"  required />
                                             @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger",})
                                         </div>
                                     </div>
@@ -86,6 +86,11 @@
                         <script type="text/javascript">
                             $(document).ready(function () {
                                 bsCustomFileInput.init();
+                                loadCategory();
+                                $("#CategoryAnswer").change(function () {
+                                    displayAnswer(total);
+                                    console.log(total);
+                                });
                             });
                         </script>
                     }

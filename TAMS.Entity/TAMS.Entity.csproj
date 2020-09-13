@@ -32,9 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\TAMS\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\TAMS\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,18 +52,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Answer.cs" />
     <Compile Include="baseEnum.cs" />
+    <Compile Include="EQuestion.cs" />
+    <Compile Include="ETest.cs" />
     <Compile Include="LoginAdmin.cs" />
     <Compile Include="Md5.cs" />
+    <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\CategoryQuestion.cs" />
-    <Compile Include="Models\CategoryTest.cs" />
+    <Compile Include="Models\FormTest.cs" />
+    <Compile Include="Models\Model1.cs" />
+    <Compile Include="Models\Question.cs" />
     <Compile Include="Models\QuestionOfTest.cs" />
     <Compile Include="Models\Test.cs" />
+    <Compile Include="Models\TestOfUser.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\Question.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

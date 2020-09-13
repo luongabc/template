@@ -36,7 +36,7 @@ namespace TAMS.Areas.Admin.Controllers
                     if (max < tests[i].NumQuestion) max = tests[i].NumQuestion;
                 }
                 return max;
-            }catch(Exception e)
+            }catch (Exception)
             {
 
             }

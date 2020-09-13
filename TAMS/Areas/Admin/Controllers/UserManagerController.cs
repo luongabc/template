@@ -1,5 +1,5 @@
-﻿using TAMS.DAL;
-using TAMS.Entity;
+﻿using TAMS.DAL.ModelEntity;
+using TAMS.Entity.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
@@ -12,15 +12,14 @@ using TAMS.Controllers;
 
 namespace TAMS.Areas.Admin.Controllers
 {
-    public class UserManagerController : SessionController
+    public class UserManagerController : Controller
     {
         // GET: Admin/User
         private int pageSize = 10;
         [HttpGet]
         public ActionResult Index()
         {
-            UserContext usercontext = new UserContext();
-            Tuple<List<User>, int> getDatas = usercontext.GetUserByPage(1, this.pageSize);
+            Tuple<List<User>, int> getDatas = UserContext.GetUserByPage(1, this.pageSize);
             int PageSize = getDatas.Item2 / pageSize;
             int div = getDatas.Item2 % pageSize;
             if (div > 0) PageSize++;
@@ -31,8 +30,7 @@ namespace TAMS.Areas.Admin.Controllers
         public ActionResult Index(int pageIndex)
         {
             User user = new User();
-            UserContext usercontext = new UserContext();
-            Tuple<List<User>, int> getDatas = usercontext.GetUserByPage(pageIndex, this.pageSize);
+            Tuple<List<User>, int> getDatas = UserContext.GetUserByPage(pageIndex, this.pageSize);
             int PageSize = getDatas.Item2 / pageSize;
             int div = getDatas.Item2 % pageSize;
             if (div > 0) PageSize++;
@@ -44,8 +42,7 @@ namespace TAMS.Areas.Admin.Controllers
         [HttpGet]
         public IEnumerable GetUserByPage(int page)
         {
-            UserContext usercontext = new UserContext();
-            return JsonConvert.SerializeObject(usercontext.GetUserByPage(page, this.pageSize));
+            return JsonConvert.SerializeObject(UserContext.GetUserByPage(page, this.pageSize));
         }
         public ActionResult Create()
         {
@@ -58,7 +55,6 @@ namespace TAMS.Areas.Admin.Controllers
             if(arr[arr.Length-1]=="png"||
                 arr[arr.Length - 1] == "jpg")
             {
-                var con = new UserContext();
                 string namefile = Path.GetFileName(AvatarUpload.FileName);
                 string path = Server.MapPath("/Content/Image" + "/" + namefile);
                 User.Avatar = namefile;
@@ -74,17 +70,17 @@ namespace TAMS.Areas.Admin.Controllers
                 AvatarUpload.SaveAs(SaveFolder);
                 if (ModelState.IsValid)
                 {
-                    if (con.IsEmail(User.Email))
+                    if (UserContext.IsEmail(User.Email))
                     {
                         ModelState.AddModelError("", "Email dã tồn tại.");
                     }
-                    else if (con.IsExistUserName(User.UserName))
+                    else if (UserContext.IsExistUserName(User.UserName))
                     {
                         ModelState.AddModelError("", "UserName đã tồn tại.");
                     }
                     else
                     {
-                        if (con.Insert(User) > 0)
+                        if (UserContext.Insert(User) > 0)
                         {
                             return RedirectToAction("Index");
                         }
@@ -94,21 +90,19 @@ namespace TAMS.Areas.Admin.Controllers
                         }
                     }
                 }
-                return View("Index");
+                return View();
             }
             return View();
         }
         [HttpGet]
         public ActionResult Edit(int Id)
         {
-            UserContext userContext = new UserContext();
-            ViewData["user"] = userContext.GetById(Id);
+            ViewData["user"] = UserContext.GetById(Id);
             return View();
         }
         [HttpPost]
         public ActionResult Edit(User User, HttpPostedFileBase AvatarUpload)
         {
-            var con = new UserContext();
             if (AvatarUpload == null) User.Avatar = null;
             else User.Avatar = AvatarUpload.FileName.ToString();
             string[] arr = AvatarUpload.FileName.Split('.');
@@ -126,9 +120,9 @@ namespace TAMS.Areas.Admin.Controllers
                 }
                 if (ModelState.IsValid)
                 {
-                    if (con.IsExistsId(User.Id))
+                    if (UserContext.IsExistsId(User.Id))
                     {
-                        if (con.Update(User) >= 0)
+                        if (UserContext.Update(User) >= 0)
                         {
                             return RedirectToAction("Index", "UserManager");
                         }
@@ -147,13 +141,12 @@ namespace TAMS.Areas.Admin.Controllers
             return View();
             
         }
-        [HttpGet]
-        public ActionResult Delete(int id)
-        {
-            UserContext usercon = new UserContext();
-            usercon.Delete(id);
-            return RedirectToAction("Index");
-        }
+        //[HttpGet]
+        //public ActionResult Delete(int id)
+        //{
+        //    UserContext.Delete(id);
+        //    return RedirectToAction("Index");
+        //}
 
     }
 }

@@ -36,13 +36,12 @@ namespace TAMS.Areas.Admin.Controllers
         public ActionResult FormTest(int IdForm)
         {
             List<Test> test = TestContext.Get_ByForm(IdForm);
-            Test formTest = TestContext.Get_Test(IdForm); ;
+            Test formTest = TestContext.Get_Test(IdForm);
             test.Sort();
             ViewData["listTest"] = test;
             ViewData["FormTest"] = formTest;
             return View();
         }
-
         public ActionResult ViewTest(int IdTest)
         {
             Test test = TestContext.Get_Test(IdTest);

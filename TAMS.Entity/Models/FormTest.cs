@@ -6,30 +6,36 @@ namespace TAMS.Entity.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("CategoryQuestion")]
-    public partial class CategoryQuestion
+    [Table("FormTest")]
+    public partial class FormTest
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CategoryQuestion()
+        public FormTest()
         {
-            Questions = new HashSet<Question>();
-            QuestionOfTests = new HashSet<QuestionOfTest>();
+            Tests = new HashSet<Test>();
         }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
 
+        public TimeSpan Time { get; set; }
+
+        public int TotalQuestion { get; set; }
+
+        [Required]
+        public string Description { get; set; }
+
+        public int IdCategory { get; set; }
+
         public DateTime CreateDate { get; set; }
 
         public DateTime ModifyDate { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Question> Questions { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<QuestionOfTest> QuestionOfTests { get; set; }
+        public virtual ICollection<Test> Tests { get; set; }
     }
 }

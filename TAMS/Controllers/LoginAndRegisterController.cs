@@ -8,6 +8,7 @@ using TAMS;
 using TAMS.Controllers;
 using TAMS.DAL.ModelEntity;
 using TAMS.Entity;
+using TAMS.Entity.Models;
 namespace TAMS.Controllers
 {
     public class LoginAndRegisterController : Controller
@@ -36,8 +37,8 @@ namespace TAMS.Controllers
         [HttpPost]
         public ActionResult Register(User user)
         {
-            if (TAMS.DAL.UserContext.Check(user) > 0) return View();
-            if (TAMS.DAL.UserContext.Create(user) < 1) return View();
+            if (UserContext.Check(user) > 0) return View();
+            if (UserContext.Create(user) < 1) return View();
             Session.Add(Common.USER_SESSION, user);
             return RedirectToAction("Index", "InfoUser");
         }

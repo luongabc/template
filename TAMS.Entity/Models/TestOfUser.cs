@@ -6,25 +6,33 @@ namespace TAMS.Entity.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Answer")]
-    public partial class Answer
+    [Table("TestOfUser")]
+    public partial class TestOfUser
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Answer()
+        public TestOfUser()
         {
             UserResults = new HashSet<UserResult>();
         }
 
-        public int Id { get; set; }
+        public int IdTest { get; set; }
+
+        public int IdUser { get; set; }
+
+        public double Score { get; set; }
 
         [Required]
-        public string TextAnswer { get; set; }
+        [StringLength(50)]
+        public string Status { get; set; }
 
-        public int IdQuestion { get; set; }
+        public DateTime? TimeStart { get; set; }
 
-        public bool result { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; }
 
-        public virtual Question Question { get; set; }
+        public virtual Test Test { get; set; }
+
+        public virtual User User { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserResult> UserResults { get; set; }

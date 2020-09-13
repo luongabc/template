@@ -1,7 +1,7 @@
-﻿@model TAMS.Entity.User
+﻿@model TAMS.Entity.Models.User
 
 @{
-    var listUsers = ViewData["ListUser"] as Tuple<List<TAMS.Entity.User>, int>;
+    var listUsers = ViewData["ListUser"] as Tuple<List<TAMS.Entity.Models.User>, int>;
     Layout = "~/Areas/Admin/Views/Shared/Layout1.cshtml";
     ViewBag.Title = "Index";
 }
@@ -60,36 +60,31 @@
                             </div>
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
-
                                     <tr>
-                                        <th class="text-center">Id</th>
-                                        <th class="text-center">UserName</th>
-                                        <th class="text-center">Email</th>
-                                        <th class="text-center">Password</th>
+                                        <th class="text-center">Avatar</th>
                                         <th class="text-center">Name</th>
+                                        <th class="text-center">Email</th>
                                         <th class="text-center">Birthday</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tbody">
-                                    @foreach (var item in listUsers.Item1)
+                                    @for (var i=0 ; i < listUsers.Item1.Count;i++)
                                     {
-                                        <tr>
-                                            <td class="text-center">@item.Id</td>
-                                            <td class="text-center">@item.UserName</td>
-                                            <td class="text-center">@item.Email</td>
-                                            <td class="text-center">@item.Password</td>
-                                            <td class="text-center">@item.Name</td>
-                                            <td>@item.Birthday</td>
-                                            <td>
-                                                <a class="btn-edit" href="/Admin/UserManager/Edit?id=@item.Id" value="@item.Id"><i class="fas fa-edit"></i>Edit</a>
-                                                |
-                                                <a class="btn-delete" href="/Admin/UserManager/Delete?id=@item.Id" value="@item.Id">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                    Delete
-                                                </a>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td class="text-center"><img src="~/Content/Image/@listUsers.Item1[i].Avatar" height="50"></td>
+                                        <td class="text-center">@listUsers.Item1[i].Name</td>
+                                        <td class="text-center">@listUsers.Item1[i].Email</td>
+                                        <td>@listUsers.Item1[i].Birthday</td>
+                                        <td>
+                                            <a class="btn-edit" href="/Admin/UserManager/Edit?id=@listUsers.Item1[i].Id" value="@listUsers.Item1[i].Id"><i class="fas fa-edit"></i>Edit</a>
+                                            |
+                                            <a class="btn-delete" href="/Admin/UserManager/Delete?id=@listUsers.Item1[i].Id" value="@listUsers.Item1[i].Id">
+                                                <i class="fas fa-trash-alt"></i>
+                                                Delete
+                                            </a>
+                                        </td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>

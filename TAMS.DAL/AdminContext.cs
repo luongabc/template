@@ -4,33 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TAMS.Entity;
-
+using TAMS.Entity.Models;
 namespace TAMS.DAL
 {
     public class AdminContext:BaseContext
     {
-        private static AdminContext _instance;
-        public static AdminContext Instance()
-        {
-            if (null == _instance)
-            {
-                _instance = new AdminContext();
-            }
-            return _instance;
-        }
-
-
-        public static int AddQuestion(Entity.Question obj)
+        public static int AddQuestion(EQuestion obj)
         {
             using (var context = MasterDBContext())
             {
                  return context.StoredProcedure("dbo.AddQuestion")
                    .Parameter("Text", obj.Text)
                    .Parameter("CategoryName", obj.CategoryName)
+                   .Parameter("CategoryAnswer", obj.CategoryAnswer)
                    .Execute();
             }
         }
-        public static int AddCategoryQuestion(Entity.CategoryQuestion obj)
+        public static int AddCategoryQuestion(CategoryQuestion obj)
         {
             using (var context = MasterDBContext())
             {
@@ -41,16 +31,16 @@ namespace TAMS.DAL
                   .Execute();
             }
         }
-        public static Entity.CategoryQuestion GetByIdCategory(int Id)
+        public static CategoryQuestion GetByIdCategory(int Id)
         {
             using (var context = MasterDBContext())
             {
                 return context.StoredProcedure("dbo.GetByIdCategory")
                     .Parameter("Id", Id)
-                    .QuerySingle<Entity.CategoryQuestion>();
+                    .QuerySingle<CategoryQuestion>();
             }
         }
-        public static void UpdateCategory(Entity.CategoryQuestion obj)
+        public static void UpdateCategory(CategoryQuestion obj)
 
         {
 
@@ -76,22 +66,17 @@ namespace TAMS.DAL
                      .Execute();
             }
         }
-        public static List<Entity.CategoryQuestion> GetDataCategory()
-
+        public static List<CategoryQuestion> GetDataCategory()
         {
-
-
             using (var context = MasterDBContext())
             {
                 return context.StoredProcedure("dbo.GetDataCategory")
-                      .QueryMany<Entity.CategoryQuestion>();
-
-
+                      .QueryMany<CategoryQuestion>();
             }
 
         }
         
-        public static int AddAnswer(List<Entity.Answer> obj)
+        public static int AddAnswer(List<Answer> obj)
         {
             using (var context = MasterDBContext())
             {
@@ -106,16 +91,21 @@ namespace TAMS.DAL
                 return count;
             }
         }
-        public static List<Entity.Question> GetDataQuestion(int Id)
+        public static Tuple<List<EQuestion>,int> GetDataQuestion(string Search,string FinterCategoryQuestion, string FilterCategoryAnswer ,int sizePage,int Page)
         {
             using (var context = MasterDBContext())
-            {
-                return context.StoredProcedure("dbo.GetDataQuestion")
-                  .Parameter("PageIndex", Id)
-                    .Parameter("PageSize", 10)
-                  .QueryMany<Entity.Question>();
-
-
+            { 
+                int total = 0;
+                var con= context.StoredProcedure("dbo.Question_GetPage")
+                  .Parameter("PageIndex", Page)
+                  .Parameter("PageSize", sizePage)
+                  .Parameter("Search", Search)
+                  .Parameter("FilterCategoryAnswer", FilterCategoryAnswer)
+                  .Parameter("FinterCategoryQuestion", FinterCategoryQuestion)
+                  .ParameterOut("Total", FluentData.DataTypes.Int32);
+                List<EQuestion> eQuestions= con.QueryMany<EQuestion>();
+                total = con.ParameterValue<int>("Total");
+                return Tuple.Create(eQuestions, total);
             }
         }
         public static int DeleteQuestion(int Id)
@@ -127,25 +117,25 @@ namespace TAMS.DAL
                   .Execute();
             }
         }
-        public static Entity.Question GetByIdQuestion(int Id)
+        public static EQuestion GetByIdQuestion(int Id)
         {
             using(var context = MasterDBContext())
             {
                 return context.StoredProcedure("dbo.GetByIdQuestion")
                     .Parameter("Id", Id)
-                    .QuerySingle<Entity.Question>();
+                    .QuerySingle<EQuestion>();
             }
         }
-        public static List<Entity.Answer> GetByIdAnswer(int IdQuestion)
+        public static List<Answer> GetByIdAnswer(int IdQuestion)
         {
             using (var context = MasterDBContext())
             {
                 return context.StoredProcedure("dbo.GetByIdAnswer")
                     .Parameter("IdQuestion", IdQuestion)
-                    .QueryMany<Entity.Answer>();
+                    .QueryMany<Answer>();
             }
         }
-        public static void UpdateAnswer(List<Entity.Answer> obj)
+        public static void UpdateAnswer(List<Answer> obj)
         {
             using (var context = MasterDBContext())
             {
@@ -159,14 +149,14 @@ namespace TAMS.DAL
                 }
             }
         }
-        public static void UpdateQuestion(Entity.Question obj)
+        public static void UpdateQuestion(EQuestion obj)
         {
             using (var context = MasterDBContext())
             {
                 context.StoredProcedure("dbo.UpdateQuestion")
                .Parameter("Id", obj.Id)
                .Parameter("Text", obj.Text)
-               .Parameter("CategoryName", obj.CategoryName)
+               .Parameter("CategoryName", obj.CategoryAnswer)
                .Parameter("ModifyDate",obj.ModifyDate)
 
                .Execute();
@@ -211,9 +201,9 @@ namespace TAMS.DAL
         {
             using (var context = MasterDBContext())
             {
-                List<Question> questions=context.StoredProcedure("dbo.Question_Search")
+                List<EQuestion> questions=context.StoredProcedure("dbo.Question_Search")
                   .Parameter("TextQuestion", text)
-                  .QueryMany<Question>();
+                  .QueryMany<EQuestion>();
                 if (questions.Count > 0) return true;
                 return false;
             }
