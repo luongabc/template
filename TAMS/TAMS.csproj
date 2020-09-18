@@ -193,6 +193,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\App_Strart\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\App_Strart\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoriesQuestionController.cs" />
     <Compile Include="Areas\Admin\Controllers\Common.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\TestController.cs" />

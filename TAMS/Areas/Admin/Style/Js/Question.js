@@ -1,5 +1,5 @@
 ﻿
-
+var max = 5;
 function loadCategory() {
     $.ajax({
         url: "/Admin/Admin/GetDataCategory",
@@ -14,6 +14,7 @@ function loadCategory() {
             });
             $("#CategoryQuestion option[value='']").prop('selected', 'selected');
             $('#CategoryQuestion').html(html);
+            
         },
         error: function (errormessage) {
             alert(errormessage.responseText);
@@ -74,12 +75,12 @@ function to_slug(str) {
     return str;
 }
 
-function displayAnswer(total) {
+function displayAnswer() {
     var st = to_slug($("#CategoryAnswer").val());
     if (st == "radio") {
         console.log("Radio");
         var html = "";
-        for (var i = 1; i <= total; i++) {
+        for (var i = 1; i <= 2; i++) {
             html += '<div class="form-group">';
             html += '<div id="BlockAnswer-'+i+'"';
             html += '<label for="formGroupExampleInput2">Câu trả lời số ' + i +':</label>';
@@ -113,7 +114,7 @@ function displayAnswer(total) {
     }
     if (st == "checkbox") {
         var html = "";
-        for (var i = 1; i <= total; i++) {
+        for (var i = 1; i <= 2; i++) {
             html += '<div class="form-group">';
             html += '<div id="BlockAnswer-' + i + '"';
             html += '<label for="formGroupExampleInput2">Câu trả lời số ' + i + ':</label>';
@@ -135,10 +136,10 @@ function displayAnswer(total) {
         $("#ResultAnswer-2").prop('checked', true);
     }
 }
-function displayAnswer1(total) {
+function displayAnswer1() {
     if (to_slug($("#CategoryAnswer").val()) == "radio") {
         var html = "";
-        for (var i = 1; i <= total; i++) {
+        for (var i = 1; i <= 2; i++) {
             html += '<div class="form-group">';
             html += '<div id="BlockAnswer-' + i + '"';
             html += '<label for="formGroupExampleInput2">Câu trả lời số ' + i + ':</label>';
@@ -151,27 +152,21 @@ function displayAnswer1(total) {
             html += '<span class="checkmark"></span>';
             html += '</label>';
             html += '<button type="button" onclick="deleteDisplayAnswer();" class="close">×</button></div></div></div></div>';
-
         }
         html += ' <div id="more"></div>';
         html += '<button type="button" class="btn btn-primary" onclick="addDisplayAnswer(); ">Thêm câu trả lời</button><br>';
         $('#answer').html(html);
-        
     }
     if (to_slug($("#CategoryAnswer").val()) == "text") {
         var html = "";
-
         html += '<div class="form-group">';
         html += '<label for="formGroupExampleInput2">Nhập câu trả lời:</label>';
-
         html += '<input type="text" class="form-control answerText" id="Answer-1" placeholder="Nhập câu trả lời"></div>';
-
-
         $('#answer').html(html);
     }
     if (to_slug($("#CategoryAnswer").val()) == "checkbox") {
         var html = "";
-        for (var i = 1; i <= total; i++) {
+        for (var i = 1; i <= 2; i++) {
             html += '<div class="form-group">';
             html += '<div id="BlockAnswer-' + i + '"';
             html += '<label for="formGroupExampleInput2">Câu trả lời số ' + i + ':</label>';
@@ -184,7 +179,6 @@ function displayAnswer1(total) {
             html += '<span class="checkmark1"></span>';
             html += '</label>';
             html += '<button type="button" onclick="deleteDisplayAnswer();" class="close" data-dismiss="modal">×</button></div></div></div></div>';
-
         }
         html += ' <div id="more"></div>';
         html += '<button type="button" class="btn btn-primary" onclick="addDisplayAnswer(); ">Thêm câu trả lời</button>';
@@ -193,55 +187,51 @@ function displayAnswer1(total) {
     }
 }
 function deleteDisplayAnswer() {
-    if (total > 2) {
-        $('#BlockAnswer-' + total + '').remove();
-        total--;
+    if ($(".answerText").length > 2) {
+        $('#BlockAnswer-' + $(".answerText").length + '').remove();
     }
     else {
         alert("Cần ít nhất 2 câu trả lời?")
     }
 }
 function addDisplayAnswer() {
-    if (to_slug($("#CategoryAnswer").val()) == "radio") {
-        var html = "";
-
-        html += '<div class="form-group">';
-        html += '<div id="BlockAnswer-' + (total + 1) + '"';
-        html += '<label for="formGroupExampleInput2">Câu trả lời số ' + (total + 1) + ':</label>';
-        html += '<div class="row">';
-        html += '<div class="col-md-11">';
-        html += '<input type="text" class="form-control" id="Answer-' + (total + 1) + '" placeholder="Câu trả lời số ' + (total + 1) + '"></div>';
-        html += '<div class="col-md-1">';
-        html += '<label class="SelectResult">';
-        html += '<input type="radio" id="ResultAnswer-' + (total + 1) + '" name="radio">';
-        html += '<span class="checkmark"></span>';
-        html += '</label>';
-        html += '<button type="button" onclick="deleteDisplayAnswer();" class="close" data-dismiss="modal">×</button></div></div></div></div>';
-
-
-        $('#more').append(html);
-        total++;
+    if ($(".answerText").length != max) {
+        if (to_slug($("#CategoryAnswer").val()) == "radio") {
+            var html = "";
+            html += '<div class="form-group">';
+            html += '<div id="BlockAnswer-' + ($(".answerText").length + 1) + '"';
+            html += '<label for="formGroupExampleInput2">Câu trả lời số ' + ($(".answerText").length + 1) + ':</label>';
+            html += '<div class="row">';
+            html += '<div class="col-md-11">';
+            html += '<input type="text" class="form-control answerText" id="Answer-' + ($(".answerText").length + 1) + '" placeholder="Câu trả lời số ' + ($(".answerText").length + 1) + '"></div>';
+            html += '<div class="col-md-1">';
+            html += '<label class="SelectResult">';
+            html += '<input type="radio" id="ResultAnswer-' + ($(".answerText").length + 1) + '" name="radio">';
+            html += '<span class="checkmark"></span>';
+            html += '</label>';
+            html += '<button type="button" onclick="deleteDisplayAnswer();" class="close" data-dismiss="modal">×</button></div></div></div></div>';
+            $('#more').append(html);
+            total++;
+        }
+        if (to_slug($("#CategoryAnswer").val()) == "checkbox") {
+            var html = "";
+            html += '<div class="form-group">';
+            html += '<div id="BlockAnswer-' + ($(".answerText").length + 1) + '"';
+            html += '<label for="formGroupExampleInput2">Câu trả lời số ' + ($(".answerText").length + 1) + ':</label>';
+            html += '<div class="row">';
+            html += '<div class="col-md-11">';
+            html += '<input type="text" class="form-control answerText" id="Answer-' + ($(".answerText").length + 1) + '" placeholder="Câu trả lời số ' + ($(".answerText").length + 1) + '"></div>';
+            html += '<div class="col-md-1">';
+            html += '<label class="SelectResult1">';
+            html += '<input type="checkbox" id="ResultAnswer-' + ($(".answerText").length + 1) + '" name="radio">';
+            html += '<span class="checkmark1"></span>';
+            html += '</label>';
+            html += '<button type="button" onclick="deleteDisplayAnswer();" class="close" data-dismiss="modal">×</button></div></div></div></div>';
+            $('#more').append(html);
+            total++;
+        }
     }
-    if (to_slug($("#CategoryAnswer").val()) == "checkbox ") {
-        var html = "";
-
-        html += '<div class="form-group">';
-        html += '<div id="BlockAnswer-' + (total + 1) + '"';
-        html += '<label for="formGroupExampleInput2">Câu trả lời số ' + (total + 1) + ':</label>';
-        html += '<div class="row">';
-        html += '<div class="col-md-11">';
-        html += '<input type="text" class="form-control" id="Answer-' + (total + 1) + '" placeholder="Câu trả lời số ' + (total + 1) + '"></div>';
-        html += '<div class="col-md-1">';
-        html += '<label class="SelectResult1">';
-        html += '<input type="checkbox" id="ResultAnswer-' + (total + 1) + '" name="radio">';
-        html += '<span class="checkmark1"></span>';
-        html += '</label>';
-        html += '<button type="button" onclick="deleteDisplayAnswer();" class="close" data-dismiss="modal">×</button></div></div></div></div>';
-
-
-        $('#more').append(html);
-        total++;
-    }
+    
 }
 function Add() {
     var res = validate1();
@@ -251,7 +241,6 @@ function Add() {
     else {
         var empObj = {
             Name: $('#Name').val(),
-
             CreateDate: new Date().toISOString(),
             ModifyDate: new Date().toISOString()
         };
@@ -264,6 +253,7 @@ function Add() {
 
                 $('#myModal').modal('hide');
                 alert("you are done");
+                loadCategory();
             },
             error: function (response) {
                 alert("Failed");
@@ -299,7 +289,7 @@ function Delele(ID) {
                 loadPagination();
             },
             error: function (errormessage) {
-                alert(errormessage.responseText);
+                alert("Check your tests");
             }
         });
     }
@@ -355,49 +345,8 @@ function AddQuestion() {
         }
     });
 }
-function GetByIdQuestion(Id) {
-    $.ajax({
-        url: "/Admin/Admin/GetByIdQuestion/" + Id,
-        type: "GET",
-        contentType: "application/json;charset=UTF-8",
-        dataType: "json",
-        success: function (result) {
-            $('#Id').val(Id);
-            $('#Text').val(result.Text);
-            $('#CategoryQuestion').val(result.Name);
-            $('#myModal').modal('show');
-            displayAnswer1(total);
-            GetByIdAnswer(Id);
-        },
-        error: function (errormessage) {
-            alert(errormessage.responseText);
-        }
-    });
-}
-function GetByIdAnswer(Id) {
-    $.ajax({
-        url: "/Admin/Admin/GetByIdAnswer?IdQuestion=" + Id,
-        type: "GET",
-        contentType: "application/json;charset=UTF-8",
-        dataType: "json",
-        success: function (res) {
-            if (res.length > 1) {
-                $.each(res, function (key, item) {
-                    $("#Answer-" + (key + 1) + "").val(item.TextAnswer);
-                    if (item.result == true) {
-                        $("#ResultAnswer-" + (key + 1) + "").prop("checked", "true");
-                    }
-                });
-            }
-            else if (res.length == 1){
-                $("#TextAnswer").val(res[0].TextAnswer);
-            }
-        },
-        error: function (errormessage) {
-            alert(errormessage.responseText);
-        }
-    });
-}                    
+
+           
             
 function UpdateQuestion() {
     var res = validate();
@@ -473,21 +422,7 @@ function UpdateAnswer() {
 
     }
 }
-function CountAnswer(Id) {
-    $.ajax({
-        url: "/Admin/Admin/CountAnswer?IdQuestion="+Id,
-        type: "GET",
-        contentType: "application/json;charset=UTF-8",
-        dataType: "json",
-        success: function (result) {
-            total = result;
-            GetByIdQuestion(Id);
-        },
-        error: function (errormessage) {
-            alert(errormessage.responseText);
-        }
-    });
-}
+
 
 function page(a) {
     currentPage = a;

@@ -153,11 +153,12 @@ namespace TAMS.DAL
         {
             using (var context = MasterDBContext())
             {
-                context.StoredProcedure("dbo.UpdateQuestion")
+                context.StoredProcedure("dbo.Question_Update")
                .Parameter("Id", obj.Id)
                .Parameter("Text", obj.Text)
                .Parameter("CategoryName", obj.CategoryAnswer)
                .Parameter("ModifyDate",obj.ModifyDate)
+               .Parameter("CategoryAnswer", obj.ModifyDate)
 
                .Execute();
             }

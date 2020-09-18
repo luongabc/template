@@ -71,7 +71,6 @@ namespace TAMS.Areas.Admin.Controllers
                     data.Item2[i].isTrue = listAnserIsTrue[i].result;
                 }
             }
-            
             ViewData["ContentTest"] = Tuple.Create(eQuestions, userResults);
             ViewData["Test"] = test;
             return View();

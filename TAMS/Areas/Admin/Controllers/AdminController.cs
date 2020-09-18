@@ -14,40 +14,38 @@ namespace TAMS.Areas.Admin.Controllers
 {
     public class AdminController : Controller
     {
-        //    // GET: Admin/Admin
-        //    public ActionResult Index()
-        //    {
-        //        return View();
-        //    }
-
-
-        //    public ActionResult CategoryQuestion()
-        //    {
-        //        return View();
-        //    }
-        //    public void AddCategoryQuestion(CategoryQuestion obj)
-        //    {
-        //        AdminContext.AddCategoryQuestion(obj);
-        //    }
-        //    public void UpdateCategory(CategoryQuestion obj)
-        //    {
-        //        AdminContext.UpdateCategory(obj);
-        //    }
+        // GET: Admin/Admin
+        public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult CategoryQuestion()
+        {
+            return View();
+        }
+        public void AddCategoryQuestion(CategoryQuestion obj)
+        {
+            AdminContext.AddCategoryQuestion(obj);
+        }
+        public void UpdateCategory(CategoryQuestion obj)
+        {
+            AdminContext.UpdateCategory(obj);
+        }
 
         public IEnumerable GetDataCategory()
         {
             return JsonConvert.SerializeObject(AdminContext.GetDataCategory());
         }
-        //    public IEnumerable GetByIdCategory(int Id)
-        //    {
+        public IEnumerable GetByIdCategory(int Id)
+        {
 
-        //        return JsonConvert.SerializeObject(AdminContext.GetByIdCategory(Id));
-        //    }
-        //    public void DeleteCategory(int Id)
-        //    {
+            return JsonConvert.SerializeObject(AdminContext.GetByIdCategory(Id));
+        }
+        public void DeleteCategory(int Id)
+        {
 
-        //        AdminContext.DeleteCategory(Id);
-        //    }
+            AdminContext.DeleteCategory(Id);
+        }
         public ActionResult Question()
         {
             return View();
@@ -91,16 +89,16 @@ namespace TAMS.Areas.Admin.Controllers
             AdminContext.UpdateQuestion(obj);
             return JsonConvert.SerializeObject(obj);
         }
-        //    public IEnumerable UpdateAnswer(List<Answer> obj)
-        //    {
-        //        AdminContext.UpdateAnswer(obj);
-        //        return JsonConvert.SerializeObject(obj);
-        //    }
-        //    public IEnumerable CountAnswer(int IdQuestion)
-        //    {
-        //        return JsonConvert.SerializeObject(AdminContext.CountAnswer(IdQuestion));
-         //   }
-            public IEnumerable CountQuestion()
+        public IEnumerable UpdateAnswer(List<Answer> obj)
+        {
+            AdminContext.UpdateAnswer(obj);
+            return JsonConvert.SerializeObject(obj);
+        }
+        public IEnumerable CountAnswer(int IdQuestion)
+        {
+            return JsonConvert.SerializeObject(AdminContext.CountAnswer(IdQuestion));
+        }
+        public IEnumerable CountQuestion()
             {
                 return JsonConvert.SerializeObject(AdminContext.CountQuestion());
             }
