@@ -24,7 +24,9 @@ namespace TAMS.Entity.Models
 
         public bool result { get; set; }
 
+        public bool isTrue { get; set; }
         public virtual Question Question { get; set; }
+        
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserResult> UserResults { get; set; }

@@ -25,53 +25,44 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            @using (Html.BeginForm("Index", "UserManager", FormMethod.Get))
+            @using (Html.BeginForm("Search", "UserManager", FormMethod.Get))
             {
                 <div class="row justify-content-between">
-                    <div class="dataTables_length row ml-4" id="example1_length" >
-                        <label>
-                            Show
-                        </label>
-                            <select name="example1_length" aria-controls="example1" class="custom-select custom-select-sm form-control form-control-sm">
-                                <option value="10">10</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select> 
+                    <div class="dataTables_length row ml-4">
+                        <div class="">
+                            <a class="btn btn-primary" href="/Admin/UserManager/Create"> <i class="fas fa-plus-square mr-2"></i>Thêm Users</a>
+                        </div>
                     </div>
-                    <div class="input-group input-group-sm w-25 row" >
-                        <input  class="form-control form-control-navbar m-1" type="search" placeholder="Search" aria-label="Search">
+                    <div class="input-group input-group-sm w-25 row">
+                        <input id="search" name="search" class="form-control form-control-navbar m-1" type="search" placeholder="Search" aria-label="Search">
                         <div class="input-group-append">
                             <div>
-                                <button class="btn btn-navbar" type="submit">
+                                <button class="btn btn-navbar" type="submit" id="btn-search" >
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                }
-           
-                <div class=" row">
-                    <div class="col-12">
-                        <div class="card-body">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" style=" margin: -50px 0 -14px -30px;"> <a href="/Admin/UserManager/Create" style="font-size: 20px"> <i class="fas fa-plus-square"></i>Thêm Users</a></button>
-                            </div>
-                            <table id="example2" class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">Avatar</th>
-                                        <th class="text-center">Name</th>
-                                        <th class="text-center">Email</th>
-                                        <th class="text-center">Birthday</th>
-                                        <th class="text-center">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tbody">
-                                    @for (var i=0 ; i < listUsers.Item1.Count;i++)
-                                    {
-                                    <tr>
+            }
+
+            <div class=" row">
+                <div class="col-12">
+                    <div class="card-body">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Avatar</th>
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Birthday</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+                                @for (var i = 0; i < listUsers.Item1.Count; i++)
+                                {
+                                    <tr class="select-row">
                                         <td class="text-center"><img src="~/Content/Image/@listUsers.Item1[i].Avatar" height="50"></td>
                                         <td class="text-center">@listUsers.Item1[i].Name</td>
                                         <td class="text-center">@listUsers.Item1[i].Email</td>
@@ -85,32 +76,28 @@
                                             </a>
                                         </td>
                                     </tr>
-                                    }
-                                </tbody>
-                            </table>
-                            <div style="display: table; margin: auto;">
-                                <ul class="pagination">
-                                    @for (int i = 1; i <= listUsers.Item2; i++)
-                                    {
-                                        if (i == 1)
-                                        {
-                                            <li class="page-item"><a style=" margin-top: 20px;" class="page-link bg-primary text-white" id="@i" value="@i">@i</a></li>
-                                        }
-                                        else
-                                        {
-                                            <li class="page-item"><a style=" margin-top: 20px;" class="page-link " id="@i" value="@i">@i</a></li>
-                                        }
-                                    }
-                                </ul>
-                            </div>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="table mt-3">
+                            <ul class="pagination">
+                                @for (int i = 1; i <= listUsers.Item2; i++)
+                                {
+                                    if (i == 1)
+                                    { <li class="page-item" id="@i"><a class="page-link bg-primary" value="@i">@i</a></li>}
+                                    else
+                                    {<li class="page-item" id="@i"><a class="page-link"  value="@i">@i</a></li>}
+                                }
+                            </ul>
                         </div>
-                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
-                    <!-- /.col -->
+                    <!-- /.card-body -->
                 </div>
-                <!-- /.row -->
+                <!-- /.card -->
+                <!-- /.col -->
             </div>
+            <!-- /.row -->
+        </div>
         <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
@@ -119,5 +106,14 @@
 <!-- Control Sidebar -->
 
 
-
+@section scripts {
+    <script src="~/Areas/Admin/Style/Js/Question.js" type="text/javascript"  >
+        
+    </script>
+    <script type="text/javascript">
+        $(document).ready(() => {
+            $(".page-item").on("click", UserManagerPage);
+        })
+    </script>
+}
 

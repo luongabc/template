@@ -1,8 +1,8 @@
 ﻿
 @{
-    var user= ViewData["user"] as TAMS.Entity.User;
-    var test=ViewData["Test"] as TAMS.Entity.Test;
-    var listData =ViewData["ListData"] as Tuple<List<TAMS.Entity.Question>,List<TAMS.Entity.UserResult>>;
+    var user= ViewData["user"] as TAMS.Entity.Models.User;
+    var test=ViewData["Test"] as TAMS.Entity.ETest;
+    var listData =ViewData["ListData"] as Tuple<List<TAMS.Entity.EQuestion>,List<TAMS.Entity.Models.UserResult>>;
     Layout = null;
 }
 
@@ -43,7 +43,7 @@
             <div class="p-3 h5 bg-white border rounded border-secondary col-md-9"  id="testContent">
                
             </div>
-            <div class="   col-md-3 position-fixed  "  style="right:20px">
+            <div class="   col-md-3 position-fixed "  style="right:20px">
                 <div class="row text-center m-4 justify-content-center " id="count-down">
                     <div>
                         <label class="bg-primary text-white h3 time-warn  " id="hours2" style="width:30px; border-radius:4px;margin:2px">0 </label>
@@ -61,13 +61,7 @@
                     </div>
 
                 </div>
-                <div class="row   m-4 body-content justify-content-center">
-                        <button class=" btn btn-primary text-bold" id="btn-sendResult">Lưu bài</button>
-                </div>
-                
-                    <div class="row " id="list-Question"  >
-
-                    </div>
+                <div class="row " id="list-Question"  ></div>
                 
                 <div class="row justify-content-center">
                     <button class=" m-auto btn btn-danger m-3" id="btn-finishTest">Kết thúc</button>

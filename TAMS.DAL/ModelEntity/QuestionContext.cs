@@ -13,7 +13,7 @@ namespace TAMS.DAL.ModelEntity
         {
             using (var context = MasterDBContext())
             {
-                return context.StoredProcedure("GetListQuestion_StartTest")
+                return context.StoredProcedure("QuestionOfTest_GetByTest")
                     .Parameter("IdTest", idTest)
                     .QueryMany<EQuestion>();
             }

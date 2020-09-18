@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "ViewTest";
     Layout = "~/Areas/Admin/Views/Shared/Layout1.cshtml";
-    var listData = ViewData["ContentTest"] as Tuple<List<TAMS.Entity.Question>, List<TAMS.Entity.UserResult>>;
+    var listData = ViewData["ContentTest"] as Tuple<List<TAMS.Entity.EQuestion>, List<TAMS.Entity.Models.UserResult>>;
 }
         <!-- Content Header (Page header) -->
         <div class="content-header">
@@ -27,33 +27,64 @@
         </div>
         <section class="content">
             <div class="container-fluid row">
-                <div class="p-3 h5 bg-white border-secondary  col-md-10" style="border-radius: 5px;border:1px solid #000">
+                <div class="p-3 h5 bg-white border-secondary  col-md-9" style="border-radius: 5px;border:1px solid #000">
                    @if (listData != null)
-                    {
-                        for (var i = 1; i <= listData.Item1.Count; i++)
+                   {
+                       var numAs = 0;
+                       for (var i = 1; i <= listData.Item1.Count; i++)
+                       {
+                    <div class="" style="">
+                        <label class="  text-primary">Câu @i: @listData.Item1[i - 1].Text</label><br />
+                        @for (; numAs < listData.Item2.Count; numAs++)
                         {
-                    <div class="row">
-                        <div class="m-4" style="width:30px">
-                            <input type="checkbox" class="form-check form-control">
-                        </div>
-                        <div class="" style="">
-                            <label class="  text-primary">Câu @i: @listData.Item1[i - 1].Text</label><br />
-                            @foreach (var answer in listData.Item2)
+                            if (listData.Item2[numAs].IdQuestion != listData.Item1[i - 1].Id)
                             {
-                                if (answer.IdQuestion == listData.Item1[i - 1].Id)
+                                break;
+                            }
+                            else
+                            {
+                                if (listData.Item1[i - 1].CategoryAnswer.ToUpper() == "text".ToUpper())
                                 {
-                                    <div class="">
-                                        Trả lời :  @answer.TextAnswer
-                                    </div>
-                                    break;
+                                    if (listData.Item2[numAs].isTrue)
+                                    {
+                                        <label class="text-green">T</label>
+                                    }
+                                    else
+                                    {
+                                        <label class="text-red">F</label>
+                                    }
+                                    <input type="text" value="@listData.Item2[numAs].TextAnswer" readonly />
+                                }
+                                else
+                                {
+                                    if (listData.Item2[numAs].isTrue)
+                                    {
+                                        <label class="text-green">T</label>
+                                    }
+                                    else
+                                    {
+                                        <label class="text-red">F</label>
+                                    }
+                                    if (listData.Item2[numAs].result == true)
+                                    {
+                                        <input type="checkbox" checked readonly/>
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" readonly />
+                                    }
+
+                                    <label>@listData.Item2[numAs].TextAnswer</label>
+                                    <br/>
                                 }
                             }
-                        </div>
+                        }
+                        <br/>
                     </div>
                         }
                     }
                 </div>
-                <div class="col-md-2 row justify-content-center">
+                <div class="col-md-3 row justify-content-center">
                     <div>
                         <button class="btn btn-primary ">Done</button>
                     </div>

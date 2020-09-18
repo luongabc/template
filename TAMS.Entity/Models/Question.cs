@@ -13,6 +13,8 @@ namespace TAMS.Entity.Models
         public Question()
         {
             Answers = new HashSet<Answer>();
+            QuestionOfTests = new HashSet<QuestionOfTest>();
+            UserResults = new HashSet<UserResult>();
         }
 
         public int Id { get; set; }
@@ -34,5 +36,11 @@ namespace TAMS.Entity.Models
         public virtual ICollection<Answer> Answers { get; set; }
 
         public virtual CategoryQuestion CategoryQuestion { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<QuestionOfTest> QuestionOfTests { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserResult> UserResults { get; set; }
     }
 }

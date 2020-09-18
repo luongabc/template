@@ -21,8 +21,9 @@ using Google.Apis.Auth.OAuth2.Mvc;
 using Google.Apis.Drive.v2;
 using Google.Apis.Gmail.v1;
 using Google.Apis.AnalyticsReporting.v4;
-
+using TAMS.Entity.Models;
 using Google.Apis.Util.Store;
+using TAMS.DAL.ModelEntity;
 
 namespace TAMS.Areas.Admin.Controllers
 {
@@ -227,12 +228,10 @@ namespace TAMS.Areas.Admin.Controllers
             Session.Remove(Common.USER_SESSION);
             if (ModelState.IsValid)
             {
-                var users = new TAMS.DAL.UserContext();
-                var result = users.Login(model.UserName, model.Password);
-                if (result)
+                User result = UserContext.Search(model.UserName, model.Password);
+                if (result!=null)
                 {
-                    User user = users.GetByUserName(model.UserName);
-                    Session.Add(CommonConstants.USER_SESSION, user);
+                    Session.Add(CommonConstants.USER_SESSION, result);
                     return RedirectToAction("index", "Test");
                 }
                 else

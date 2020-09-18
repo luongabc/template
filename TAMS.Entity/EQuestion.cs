@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TAMS.DAL
+namespace TAMS.Entity
 {
     public class EQuestion : Entity.Models.Question
     {

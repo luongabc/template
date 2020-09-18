@@ -27,7 +27,6 @@ namespace TAMS.Entity.Models
 
         public DateTime? TimeStart { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         public virtual Test Test { get; set; }

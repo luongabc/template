@@ -12,10 +12,10 @@ namespace TAMS.Entity.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FormTest()
         {
+            CategoryQuestionOfTests = new HashSet<CategoryQuestionOfTest>();
             Tests = new HashSet<Test>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [Required]
@@ -34,6 +34,9 @@ namespace TAMS.Entity.Models
         public DateTime CreateDate { get; set; }
 
         public DateTime ModifyDate { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CategoryQuestionOfTest> CategoryQuestionOfTests { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Test> Tests { get; set; }

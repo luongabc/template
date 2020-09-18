@@ -59,8 +59,8 @@
     <Compile Include="Md5.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\CategoryQuestion.cs" />
+    <Compile Include="Models\CategoryQuestionOfTest.cs" />
     <Compile Include="Models\FormTest.cs" />
-    <Compile Include="Models\Model1.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\QuestionOfTest.cs" />
     <Compile Include="Models\Test.cs" />

@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using TAMS.DAL;
 using TAMS.Entity.Models;
-
+using TAMS.Entity;
 namespace TAMS.Areas.Admin.Controllers
 {
     public class AdminController : Controller

@@ -50,8 +50,11 @@
     <Compile Include="AdminContext.cs" />
     <Compile Include="BaseContext.cs" />
     <Compile Include="BL\BLTest.cs" />
+    <Compile Include="ModelEntity\AnswerContext.cs" />
+    <Compile Include="ModelEntity\QuestionContext.cs" />
     <Compile Include="ModelEntity\TestContext.cs" />
     <Compile Include="ModelEntity\UserContext.cs" />
+    <Compile Include="ModelEntity\UserResultContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿using TAMS.Entity;
+﻿using TAMS.Entity.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -26,18 +26,18 @@ namespace TAMS.Areas.Admin.Models
         public string ConfirmPassword { get; set; }
     }
 
-    public class LoginModel: User
+    public class LoginModel
     {
         [Required (ErrorMessage ="Mời nhập tên đăng nhập")]
         [Display(Name = "User name")]
-        public new string UserName { get; set; }
+        public  string UserName { get; set; }
 
         [Required(ErrorMessage = "Mời nhập tên mật khẩu")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         /*[RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}")]
 */
-        public new string Password { get; set; }
+        public  string Password { get; set; }
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }

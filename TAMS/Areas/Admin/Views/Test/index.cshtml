@@ -1,8 +1,7 @@
 ﻿
 @{
     Layout = "~/Areas/Admin//Views/Shared/Layout1.cshtml";
-    var listTests = ViewData["listTest"] as List<TAMS.Entity.Test>;
-    var page = (int)ViewData["page"];
+    var listTests = ViewData["listTest"] as List<TAMS.Entity.Models.FormTest>;
     var totalPage = (int)ViewData["totalPage"];
 }
 
@@ -38,17 +37,19 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <div class="row">
-                    <a class="btn btn-primary m-2" href="/Admin/Test/Create">Create</a>
-                    <a class="btn btn-danger m-2" href="/Admin/Test/FormTest?IdForm=-1">Old test</a>
-                </div>
+                <div class="row justify-content-between">
+                    <a class="btn btn-primary m-3"  href="/Admin/Test/Create">Create</a>
+                    <div class="row p-3">
+                        <input type="text"  class="rounded "id="search-input"/>
+                        <i class="fas fa-search m-2 " id="search-btn"></i>
+                    </div>
                 <table id="example2" class="table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>NumQuestion</th>
-                            <th>Category</th>
+                            <th>Number Question</th>
                             <th>Time</th>
+                            <th>Create Date</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -57,11 +58,11 @@
                         {
                             <tr id="Test_@item.Id">
                                 <td>@item.Name</td>
-                                <td>@item.NumQuestion</td>
-                                <th>@item.CategoryTestName</th>
+                                <td>@item.TotalQuestion</td>
                                 <th>@item.Time</th>
+                                <th>@item.CreateDate</th>
                                 <th>
-                                    <a href="/Admin/Test/FormTest?IdForm=@item.Id">Detail |</a>
+                                    <a href="/Admin/Test/FormTest?search=&&IdForm=@item.Id&&Page=1">Detail |</a>
                                     <a href="/Admin/Test/Delete?IdTest=@item.Id">Delete</a>
                                 </th>
                             </tr>
@@ -72,27 +73,23 @@
                             <div class="">
                                 <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
                                     <ul class="pagination">
-                                        @{ var Previous = page - 1;
-                                           var Next = page + 1;
-                                           if (Previous > 0)
-                                           {
-                                               <li class="paginate_button page-item previous " id="example2_previous"><a href="/Admin/Test/Page?page=@Previous" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-                                           } 
-                                           }
-
-                                        @for (int i = 1; i <= totalPage; i++)
+                                        @for (int i = 1; i <= 3; i++)
                                         {
-                                            if (i == page)
+                                            if (i > totalPage) { break; }
+                                            if (i == 1)
                                             {
-                                    <li class="paginate_button page-item active"><a href="/Admin/Test/Page?page=@i" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">@i</a></li> }
-                                                    else
-                                                    {
-                                    <li class="paginate_button page-item"><a href="/Admin/Test/Page?page=@i" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">@i</a></li>}
-                                                }
-                                        @if (Next <= totalPage)
-                                        {
-                                            <li class="paginate_button page-item next " id="example2_next"><a href="/Admin/Test/Page?page=@Next" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">Next</a></li>
+                                                <li class="paginate_button page-item active"><a href="/Admin/Test/Page?page=@i" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">@i</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li class="paginate_button page-item"><a href="/Admin/Test/Page?page=@i" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">@i</a></li>
+                                            }
                                         }
+                                        @if (2 < totalPage)
+                                        {
+                                            <li class="paginate_button page-item"><a href="/Admin/Test/Page?page=2" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">Next</a></li>
+                                        }
+                                        <li class="paginate_button page-item"><a href="/Admin/Test/Page?page=2" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">End</a></li>
 
                                     </ul>
                                 </div>
@@ -106,3 +103,8 @@
     </div>
 </section>
 <!-- /.content -->
+@section scripts {
+    <script type="text/javascript">
+        $("#search-btn").on("click", () => { window.location.href = "/Admin/Test/Search?search=" + $("#search-input").val() })
+    </script>
+    }

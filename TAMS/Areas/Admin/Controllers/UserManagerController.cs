@@ -19,30 +19,21 @@ namespace TAMS.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            Tuple<List<User>, int> getDatas = UserContext.GetUserByPage(1, this.pageSize);
-            int PageSize = getDatas.Item2 / pageSize;
-            int div = getDatas.Item2 % pageSize;
-            if (div > 0) PageSize++;
-            Tuple<List<User>, int> result= Tuple.Create(getDatas.Item1, PageSize);
-            ViewData["ListUser"] = result;
+            Tuple<List<User>, int> getDatas = UserContext.GetUserByPage("",1, this.pageSize);
+            ViewData["ListUser"] = getDatas;
             return View();
         }
-        public ActionResult Index(int pageIndex)
+        public ActionResult Search(string search)
         {
             User user = new User();
-            Tuple<List<User>, int> getDatas = UserContext.GetUserByPage(pageIndex, this.pageSize);
-            int PageSize = getDatas.Item2 / pageSize;
-            int div = getDatas.Item2 % pageSize;
-            if (div > 0) PageSize++;
-            /* string search = usercontext.Search(user);
-             ViewBag.Search = search;*/
-            ViewData["ListUser"] = Tuple.Create(getDatas.Item1, PageSize);
-            return View();
+            Tuple<List<User>, int> getDatas = UserContext.GetUserByPage(search, 1, this.pageSize);
+            ViewData["ListUser"] = getDatas;
+            return View("Index");
         }
         [HttpGet]
-        public IEnumerable GetUserByPage(int page)
+        public IEnumerable GetUserByPage(string search,int page)
         {
-            return JsonConvert.SerializeObject(UserContext.GetUserByPage(page, this.pageSize));
+            return JsonConvert.SerializeObject(UserContext.GetUserByPage(search,page, this.pageSize));
         }
         public ActionResult Create()
         {
@@ -139,7 +130,6 @@ namespace TAMS.Areas.Admin.Controllers
                 return View("Index");
             }
             return View();
-            
         }
         //[HttpGet]
         //public ActionResult Delete(int id)

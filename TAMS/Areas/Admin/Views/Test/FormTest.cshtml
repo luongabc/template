@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "~/Areas/Admin//Views/Shared/Layout1.cshtml";
-    var listTests = ViewData["listTest"] as List<TAMS.Entity.Test>;
-    var formTest= ViewData["FormTest"]  as TAMS.Entity.Test;
+    var listTests = ViewData["listTest"] as Tuple<List<TAMS.Entity.ETest>,int>;
+    var formTest= ViewData["FormTest"]  as TAMS.Entity.Models.FormTest;
 }
 
 <!-- Content Header (Page header) -->
@@ -36,10 +36,6 @@
                 <table id="example2" class="table table-bordered table-hover" >
                     <thead>
                         <tr>
-                            @if (formTest == null)
-                            {
-                                <th>Test</th>
-                            }
                             <th>Name User</th>
                             <th>Score</th>
                             <th>Action</th>
@@ -47,28 +43,24 @@
                     </thead>
                     <tbody>
 
-                        @foreach (var item in listTests)
+                        @foreach (var item in listTests.Item1)
                         {
                         <tr id="Test_@item.Id">
-                            @if (formTest == null)
-                            {
-                            <td>@item.Name</td>
-                            }
 
                             <th>@item.UserName</th>
                             <th>
-                                @if (item.Score == null &&
-                                    item.Status != (int)(TAMS.Entity.baseEmun.StaticTest.NotStart))
+                                @if (item.Score == 0 &&
+                                    item.Status != TAMS.Entity.baseEmun.StaticTest.NotStart.ToString())
                                 {
                                     <a href="/Admin/Test/ViewTest?IdTest=@item.Id">Chấm</a>
                                 }
-                                else if (item.Status == (int)(TAMS.Entity.baseEmun.StaticTest.Finish))
+                                else if (item.Status == TAMS.Entity.baseEmun.StaticTest.Finish.ToString())
                                 {
                                     <a href="#">@item.Score</a>
                                 }
                             </th>
                             <th>
-                                <a href="/Admin/Test/Detail?IdTest=@item.Id">Detail |</a>
+                                <a href="/Admin/Test/ViewTest?IdTest=@item.Id">Detail |</a>
                                 <a href="/Admin/Test/Delete?IdTest=@item.Id">Delete</a>
                             </th>
                         </tr>
@@ -87,7 +79,6 @@
                 <div class="widget-user-header bg-info">
                     <!-- /.widget-user-image -->
                     <h3 class="text-center">@formTest.Name</h3>
-                    <h5 class="text-center">@formTest.CategoryTestName</h5>
                 </div>
                 <div class="card-footer p-0">
                     <ul class="nav flex-column">
@@ -98,7 +89,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                Questions <p class="float-right  ">@formTest.NumQuestion</p>
+                                Questions <p class="float-right  ">@formTest.TotalQuestion</p>
                             </a>
                         </li>
                         <li class="nav-item">

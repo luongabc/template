@@ -87,48 +87,59 @@ async function loadQuestion(id) {
     }
 }
 function showTest() {
-    function showNavQuestion() {
-        for (var i = 0; i < this.listQuestion.length; i++) {
-            if (this.listQuestion[i].check === true) {
-                $("#list-Question").append(`
-                    <a  class=" linkScroll border rounded-circle btn btn-primary text-white p-2 m-2 width-50px" id="barQs-` + this.listQuestion[i].Id + `" >` + (i + 1) + `</a>
-                `)
-            }
-            else {
-                $("#list-Question").append(`
-                    <a  class="linkScroll border rounded-circle p-2 btn m-2 width-50px" id="barQs-` + this.listQuestion[i].Id + `" >` + (i + 1) + `</a>
-                `)
-            }
-        }
-        $(".linkScroll").on("click", scrollLink)
-        function scrollLink() {
-            $([document.documentElement, document.body]).animate({
-                scrollTop: $("#Text-" + this.id.slice(6)).offset().top-80
-            }, 1000);
-        }
-    }
-    for (var i = 0; i < this.listQuestion.length; i++) {
+    var Stt = 0;
+    var tempList = JSON.parse( JSON.stringify(this.listQuestion));
+    while (tempList.length > 0) {
+        var i = Math.floor(Math.random() * (tempList.length-1))
+        Stt++;
         {
-            $("#testContent").append(` <div class="pt-4" id="Text-` + this.listQuestion[i].Id +`">
-                    <label class="text-primary" >Câu `+ (i + 1) + `: ` + this.listQuestion[i].Text + `</label><br />`);
-            if (this.listQuestion[i].IdCategory == 5) {
-                if (this.listQuestion[i].answers[0].TextAnswer == null) this.listQuestion[i].answers[0].TextAnswer = "";
-                $("#testContent").append(`<input type="text" class="answerText w-100 p-1 m-2 itemSelect" id="` + this.listQuestion[i].answers[0].IdAnswer+`" name="Q_` + this.listQuestion[i].Id + `" value="` + this.listQuestion[i].answers[0].TextAnswer + `" />`)
+            $("#testContent").append(` <div class="pt-4" id="Text-` + tempList[i].Id +`">
+                    <label class="text-primary" >Câu `+ Stt + `: ` + tempList[i].Text + `</label><br />`);
+            if (tempList[i].CategoryAnswer == "Text") {
+                if (tempList[i].answers[0].TextAnswer == null) tempList[i].answers[0].TextAnswer = "";
+                $("#testContent").append(`<input type="text" class="answerText w-100 p-1 m-2 itemSelect rounded" id="` + tempList[i].answers[0].IdAnswer + `" name="Q_` + tempList[i].Id + `" value="` + tempList[i].answers[0].TextAnswer + `" />`)
             }
-            else
-                this.listQuestion[i].answers.map((item) => {
+            else if (tempList[i].CategoryAnswer == "Checkbox") 
+                tempList[i].answers.map((item) => {
                     if (item.result == true)
                         $("#testContent").append(`
-                                <input class="answerCheck m-2 itemSelect" type="checkbox" id="`+ item.IdAnswer + `" name="Q_` + this.listQuestion[i].Id + `" checked="checked" value="` + item.TextAnswer + `" />
+                                <input class="answerCheck m-2 itemSelect" type="checkbox" id="`+ item.IdAnswer + `" name="Q_` + tempList[i].Id + `" checked="checked" value="` + item.TextAnswer + `" />
                                 <label>`+ item.TextAnswer + `</label><br />`);
                     else $("#testContent").append(`
-                                <input class="answerCheck m-2 itemSelect" type="checkbox" id="`+ item.IdAnswer + `" name="Q_` + this.listQuestion[i].Id + `" value="` + item.TextAnswer + `" />
+                                <input class="answerCheck m-2 itemSelect" type="checkbox" id="`+ item.IdAnswer + `" name="Q_` + tempList[i].Id + `" value="` + item.TextAnswer + `" />
+                                <label>`+ item.TextAnswer + `</label><br />`);
+                })
+            else if (tempList[i].CategoryAnswer == "Radio") 
+                tempList[i].answers.map((item) => {
+                    if (item.result == true)
+                        $("#testContent").append(`
+                                <input class="answerCheck m-2 itemSelect" type="radio" id="`+ item.IdAnswer + `" name="Q_` + tempList[i].Id + `" checked="checked" value="` + item.TextAnswer + `" />
+                                <label>`+ item.TextAnswer + `</label><br />`);
+                    else $("#testContent").append(`
+                                <input class="answerCheck m-2 itemSelect" type="radio" id="`+ item.IdAnswer + `" name="Q_` + tempList[i].Id + `" value="` + item.TextAnswer + `" />
                                 <label>`+ item.TextAnswer + `</label><br />`);
                 })
             $("#testContent").append(` </div>`);
         }
+        if (tempList[i].check === true) {
+            $("#list-Question").append(`
+                    <a  class=" linkScroll border rounded-circle btn btn-primary text-white p-2 m-2 width-50px" id="barQs-` + tempList[i].Id + `" >` + Stt + `</a>`)
+        }
+        else {
+            $("#list-Question").append(`
+                    <a  class="linkScroll border rounded-circle p-2 btn m-2 width-50px" id="barQs-` + tempList[i].Id + `" >` + Stt + `</a>
+                `)
+        }
+        tempList.splice(i, 1);
     }
-    showNavQuestion();
+    $(".linkScroll").on("click", scrollLink)
+    function scrollLink() {
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("#Text-" + this.id.slice(6)).offset().top - 80
+        }, 1000);
+    }
+    $(".answerCheck").on("change", testSendResult);
+    $(".answerText").on("change", testSendResult);
 }
 async function testSendResult() {
     var res = [];
@@ -163,10 +174,12 @@ async function testSendResult() {
     })
     console.log("ok");
 }
- function testFinishTest() {
-     testSendResult();
-    console.log("asdfasdfs");
-    window.location.href = "/InfoUser/FinishTest?IdTest=" + $("#idTest").text();
+function testFinishTest() {
+    var comf = confirm("Bạn muốn kêt thúc bài thi");
+    if (comf) {
+        testSendResult();
+        window.location.href = "/InfoUser/FinishTest?IdTest=" + $("#idTest").text();
+    }
 }
 function testTime() {
     var time = $("#h").text().split(':');

@@ -1,4 +1,4 @@
-﻿using TAMS.Entity;
+﻿using TAMS.Entity.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

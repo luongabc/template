@@ -1,6 +1,6 @@
 ﻿@{
-    var user = ViewData["user"] as TAMS.Entity.User;
-    var listTest = ViewData["ListTest"] as List<TAMS.Entity.Test>;
+    var user = ViewData["user"] as TAMS.Entity.Models.User;
+    var listTest = ViewData["ListTest"] as List<TAMS.Entity.ETest>;
     Layout = null;
 }
 <!DOCTYPE html>
@@ -41,11 +41,7 @@
                         <label class="h3 text-bold" >@user.UserName</label><br />
                         <div id="BornDate">
                             <img class="icon" src="~/Style/open-iconic-master/png/calendar-2x.png" />
-                            <label class="h6 " >@user.BornDate</label>
-                        </div>
-                        <div id="Sex">
-                            <img class="icon" src="~/Style/open-iconic-master/png/badge-2x.png" />
-                            <label class="h6" >@user.sex</label>
+                            <label class="h6 " >@user.Birthday</label>
                         </div>
                         <div id="Email">
                             <img class="icon" src="~/Style/open-iconic-master/png/envelope-closed-2x.png" />
@@ -69,11 +65,11 @@
                                 <label class="h5 text-primary" id="place">@item.Name</label>
                                 <div id="">
                                     <img class="icon" src="~/Style/open-iconic-master/png/aperture-2x.png" />
-                                    <label class="h6 ">Cấu trúc : </label><label class="h6 text-body" id="">  @item.CategoryTestName</label>
+                                    <label class="h6 ">Cấu trúc : </label><label class="h6 text-body" id="">  @item.Description</label>
                                 </div>
                                 <div id="">
                                     <img class="icon" src="~/Style/open-iconic-master/png/list-2x.png" />
-                                    <label class="h6">Số câu hỏi : </label><label class="h6 text-body" id="">  @item.NumQuestion</label>
+                                    <label class="h6">Số câu hỏi : </label><label class="h6 text-body" id="">  @item.TotalQuestion</label>
                                 </div>
                                 <div id="">
                                     <img class="icon" src="~/Style/open-iconic-master/png/clock-2x.png" />
@@ -82,30 +78,30 @@
                                 <div id="">
                                     <img class="icon" src="~/Style/open-iconic-master/png/flag-2x.png" />
                                     <label class="h6">Trạng thái : </label>
-                                    @if ((int)TAMS.Entity.baseEmun.StaticTest.NotStart == item.Status)
+                                    @if (TAMS.Entity.baseEmun.StaticTest.NotStart.ToString().ToUpper() == item.Status.ToUpper())
                                     {
                                 <label class="h6 font-weight text-primary" id="">Chưa bắt đầu</label>
                                     }
-                                    else if ((int)TAMS.Entity.baseEmun.StaticTest.Doing == item.Status)
+                                    else if (TAMS.Entity.baseEmun.StaticTest.Doing.ToString().ToUpper() == item.Status.ToUpper())
                                     {
                                 <label class="h6 font-weight text-yellow" id="">Đang làm dở</label>
                                     }
-                                    else if ((int)TAMS.Entity.baseEmun.StaticTest.Finish == item.Status)
+                                    else if (TAMS.Entity.baseEmun.StaticTest.Finish.ToString().ToUpper() == item.Status.ToUpper())
                                     {
                                 <label class="h6 font-weight text-danger " id="">Đã làm xong</label>
                                     }
                                 </div>
                             </div>
                             <div>
-                                @if (item.Status == (int)TAMS.Entity.baseEmun.StaticTest.NotStart)
+                                @if (item.Status == TAMS.Entity.baseEmun.StaticTest.NotStart.ToString())
                                 {
-                                    <a href="/InfoUser/Test?IdUser=@user.Id&&IdTest=@item.Id" class="m-4 btn btn-primary" style="width:150px;">Tham gia</a>
+                                    <a href="/InfoUser/Test?IdTest=@item.IdTest" class="m-4 btn btn-primary" style="width:150px;">Tham gia</a>
                                 }
-                                else if (item.Status == (int)TAMS.Entity.baseEmun.StaticTest.Doing)
+                                else if (item.Status == TAMS.Entity.baseEmun.StaticTest.Doing.ToString())
                                 {
-                                    <a href="/InfoUser/Test?IdUser=@user.Id&&IdTest=@item.Id" class="m-4 btn btn-primary" style="width:150px;">Tiếp tục</a>
+                                    <a href="/InfoUser/Test?IdTest=@item.IdTest" class="m-4 btn btn-primary" style="width:150px;">Tiếp tục</a>
                                 }
-                                else {<a class="m-4 btn btn-info text-white" style="width:150px;">Số câu đúng: @item.Score</a>}
+                                else {<a class="m-4 btn btn-info text-white" style="width:150px;">Điểm: @item.Score</a>}
                             </div>
                         </div>
                         }

@@ -5,16 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using TAMS.Entity.Models;
 
-namespace TAMS.DAL.ModelEntity
+namespace TAMS.DAL.Model.Entity
 {
     public class AnswerContext : BaseContext
     {
-        public static List<Answer> GetByTest(int @IdTest)
+        //public static List<Answer> GetByTest(int @IdTest)
+        //{
+        //    using(var context= MasterDBContext())
+        //    {
+        //        return context.StoredProcedure("Answer_GetByTest")
+        //            .Parameter("IdTest", @IdTest)
+        //            .QueryMany<Answer>();
+        //    }
+        //}
+        public static List<Answer> GetByTest(int idTest)
         {
-            using(var context= MasterDBContext())
+            using (var context = MasterDBContext())
             {
                 return context.StoredProcedure("Answer_GetByTest")
-                    .Parameter("IdTest", @IdTest)
+                    .Parameter("IdTest", idTest)
                     .QueryMany<Answer>();
             }
         }

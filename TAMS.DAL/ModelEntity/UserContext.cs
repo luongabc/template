@@ -168,7 +168,7 @@ namespace TAMS.DAL.ModelEntity
                     .QuerySingle<User>();
             }
         }
-        public static Tuple<List<User>, int> GetUserByPage(int pageIndex, int pageSize)
+        public static Tuple<List<User>, int> GetUserByPage(String search,int pageIndex, int pageSize)
         {
             int toTalRecord = 0;
             List<User> listUser = new List<User>();
@@ -177,6 +177,7 @@ namespace TAMS.DAL.ModelEntity
                 var cmd = context.StoredProcedure("User_GetByPagging")
                     .Parameter("pageIndex", pageIndex)
                     .Parameter("pageSize", pageSize)
+                    .Parameter("search", search)
                     .ParameterOut("TotalRecord", FluentData.DataTypes.Int32);
                 listUser = cmd.QueryMany<User>();
                 toTalRecord = cmd.ParameterValue<int>("TotalRecord");

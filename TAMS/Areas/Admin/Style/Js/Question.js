@@ -1,5 +1,5 @@
 ﻿
-$("#Id").hide();
+
 function loadCategory() {
     $.ajax({
         url: "/Admin/Admin/GetDataCategory",
@@ -73,7 +73,7 @@ function to_slug(str) {
     // return
     return str;
 }
-var total = 4;
+
 function displayAnswer(total) {
     var st = to_slug($("#CategoryAnswer").val());
     if (st == "radio") {
@@ -488,7 +488,7 @@ function CountAnswer(Id) {
         }
     });
 }
-var currentPage = 1;
+
 function page(a) {
     currentPage = a;
     loadPagination();
@@ -598,4 +598,37 @@ function validateAnswer() {
         }
     }
     return isValid;
+}
+function UserManagerPage() {
+    var pageIndex = this.id;
+    var url = new URL(location.href);
+    var search = url.searchParams.get("search");
+    if (search == null) search = "";
+    search = search.trim();
+    $.ajax({
+        type:"get",
+        url: "/Admin/UserManager/GetUserByPage?search=" + search + "&&page=" + pageIndex,
+        contentType: "application/json;charset=UTF-8",
+        dataType: "json",
+    }).done((res) => {
+        $("#tbody").empty();
+        res.Item1.map((item) => {
+            var listUsetHtml  = `<tr>
+                                    <td class="text-center"><img src="/Content/Image/`+item.Avatar+`" height="50"></td>
+                                    <td class="text-center">`+item.Name+`</td>
+                                    <td class="text-center">`+item.Email+`</td>
+                                    <td>`+item.Birthday+`</td>
+                                    <td>
+                                        <a class="btn-edit" href="/Admin/UserManager/Edit?id=`+item.Id+`" value="`+item.Id+`"><i class="fas fa-edit"></i>Edit</a>
+                                        |
+                                        <a class="btn-delete" href="/Admin/UserManager/Delete?id=`+item.Id+`" value="`+item.Id+`">
+                                            <i class="fas fa-trash-alt"></i>
+                                            Delete
+                                        </a>
+                                    </td>
+                                </tr>`
+            $("#tbody").append(listUsetHtml);
+        })
+    }).fail((res) => {
+    })
 }
