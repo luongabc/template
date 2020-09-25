@@ -13,7 +13,7 @@ namespace TAMS.Entity.Models
         {
             TestOfUsers = new HashSet<TestOfUser>();
         }
-
+        public string Skill { get; set; }
         public int Id { get; set; }
 
         [Required]

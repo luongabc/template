@@ -2120,6 +2120,9 @@
     <Content Include="Areas\Admin\Views\UserManager\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\UserManager\Index.cshtml" />
     <Content Include="Areas\Admin\Content\File\Book1.xlsx" />
+    <Content Include="Areas\Admin\Views\Test\ContentFormTest.cshtml" />
+    <Content Include="Areas\Admin\Views\Test\AddUserForTest.cshtml" />
+    <Content Include="Areas\Admin\Views\Test\EditContentFormTest.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Areas\Admin\Style\Js\Category.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />

@@ -9,6 +9,17 @@ namespace TAMS.Entity.Models
     [Table("CategoryQuestionOfTest")]
     public partial class CategoryQuestionOfTest
     {
+        public CategoryQuestionOfTest()
+        {
+
+        }
+        public CategoryQuestionOfTest(int IdCategoryQuestion,int IdTest,int ScoreQuestion,int Numquestion)
+        {
+            this.IdCategoryQuestion = IdCategoryQuestion;
+            this.IdTest = IdTest;
+            this.ScoreQuestion = ScoreQuestion;
+            this.Numquestion = Numquestion;
+        }
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -21,23 +32,12 @@ namespace TAMS.Entity.Models
 
         [Key]
         [Column(Order = 2)]
-        public DateTime CreateDate { get; set; }
+        public int ScoreQuestion { get; set; }
 
         [Key]
         [Column(Order = 3)]
-        public DateTime ModifyDate { get; set; }
-
-        [Key]
-        [Column(Order = 4)]
-        public double ScoreQuestion { get; set; }
-
-        [Key]
-        [Column(Order = 5)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Numquestion { get; set; }
 
-        public virtual CategoryQuestion CategoryQuestion { get; set; }
-
-        public virtual FormTest FormTest { get; set; }
     }
 }

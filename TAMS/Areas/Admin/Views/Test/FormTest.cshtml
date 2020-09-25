@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "~/Areas/Admin//Views/Shared/Layout1.cshtml";
-    var listTests = ViewData["listTest"] as Tuple<List<TAMS.Entity.ETest>,int>;
-    var formTest= ViewData["FormTest"]  as TAMS.Entity.Models.FormTest;
+    var listTests = ViewData["listTest"] as Tuple<List<TAMS.Entity.ETest>, int>;
+    var formTest = ViewData["FormTest"] as TAMS.Entity.Models.FormTest;
 }
 
 <!-- Content Header (Page header) -->
@@ -26,6 +26,11 @@
 
 </div>
 <section class="content">
+
+    <div class="container-fluid row col-7 mb-2">
+        <a class="btn btn-info ml-4" href="/Admin/Test/EditContentFormTest?IdFormTest=@formTest.Id"> Edit categories question</a>
+        <a class="btn btn-info ml-4" href="Admin">Add user</a>
+    </div>
     <div class="container-fluid row justify-content-around">
         <div class="card col-7">
             <div class="card-header">
@@ -33,7 +38,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="example2" class="table table-bordered table-hover" >
+                <table id="example2" class="table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>Name User</th>
@@ -45,32 +50,31 @@
 
                         @foreach (var item in listTests.Item1)
                         {
-                        <tr id="Test_@item.Id">
+                            <tr id="Test_@item.Id">
 
-                            <th>@item.UserName</th>
-                            <th>
-                                @if (item.Score == 0 &&
-                                    item.Status != TAMS.Entity.baseEmun.StaticTest.NotStart.ToString())
-                                {
-                                    <a href="/Admin/Test/ViewTest?IdTest=@item.Id">Chấm</a>
-                                }
-                                else if (item.Status == TAMS.Entity.baseEmun.StaticTest.Finish.ToString())
-                                {
-                                    <a href="#">@item.Score</a>
-                                }
-                            </th>
-                            <th>
-                                <a href="/Admin/Test/ViewTest?IdTest=@item.Id">Detail |</a>
-                                <a href="/Admin/Test/Delete?IdTest=@item.Id">Delete</a>
-                            </th>
-                        </tr>
+                                <th>@item.UserName</th>
+                                <th>
+                                    @if (item.Score == 0 &&
+                                        item.Status != TAMS.Entity.baseEmun.StaticTest.NotStart.ToString())
+                                    {
+                                        <a href="/Admin/Test/ViewTest?IdTest=@item.Id">Chấm</a>
+                                    }
+                                    else if (item.Status == TAMS.Entity.baseEmun.StaticTest.Finish.ToString())
+                                    {
+                                        <a href="#">@item.Score</a>
+                                    }
+                                </th>
+                                <th>
+                                    <a href="/Admin/Test/ViewTest?IdTest=@item.Id">Detail |</a>
+                                    <a href="/Admin/Test/Delete?IdTest=@item.Id">Delete</a>
+                                </th>
+                            </tr>
                         }
                     </tbody>
                 </table>
             </div>
             <!-- /.card-body -->
             <!-- /.row -->
-
         </div>
         @if (@formTest != null)
         {
@@ -103,11 +107,9 @@
 
         }
         <!--/. container-fluid -->
+
     </div>
 </section>
+@section scripts{
+    }
 <!-- /.content -->
-
-
-
-
-

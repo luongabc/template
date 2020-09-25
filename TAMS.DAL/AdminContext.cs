@@ -156,9 +156,9 @@ namespace TAMS.DAL
                 context.StoredProcedure("dbo.Question_Update")
                .Parameter("Id", obj.Id)
                .Parameter("Text", obj.Text)
-               .Parameter("CategoryName", obj.CategoryAnswer)
+               .Parameter("CategoryName", obj.CategoryName)
                .Parameter("ModifyDate",obj.ModifyDate)
-               .Parameter("CategoryAnswer", obj.ModifyDate)
+               .Parameter("CategoryAnswer", obj.CategoryAnswer)
 
                .Execute();
             }

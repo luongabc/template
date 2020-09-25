@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FastMember, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\TAMS\packages\FastMember.1.5.0\lib\net461\FastMember.dll</HintPath>
+    </Reference>
     <Reference Include="FluentData">
       <HintPath>..\DLL\FluentData.dll</HintPath>
     </Reference>
@@ -51,7 +54,9 @@
     <Compile Include="BaseContext.cs" />
     <Compile Include="BL\BLTest.cs" />
     <Compile Include="ModelEntity\AnswerContext.cs" />
+    <Compile Include="ModelEntity\DALCategoryQuestionOfTest.cs" />
     <Compile Include="ModelEntity\QuestionContext.cs" />
+    <Compile Include="ModelEntity\QuestionOfTestContext.cs" />
     <Compile Include="ModelEntity\TestContext.cs" />
     <Compile Include="ModelEntity\UserContext.cs" />
     <Compile Include="ModelEntity\UserResultContext.cs" />
@@ -62,6 +67,9 @@
       <Project>{6d794080-45ca-4062-8697-40d3e3693656}</Project>
       <Name>TAMS.Entity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

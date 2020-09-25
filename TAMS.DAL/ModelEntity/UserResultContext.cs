@@ -10,13 +10,13 @@ namespace TAMS.DAL.ModelEntity
     public class UserResultContext: BaseContext
     {
 
-        public static List<UserResult> GetByTest(int idTest)
+        public static List<EUserResult> GetByTest(int idTest)
         {
             using (var context = MasterDBContext())
             {
                 return context.StoredProcedure("UserResult_GetByIdTest")
                         .Parameter("IdTest", idTest)
-                        .QueryMany<UserResult>();
+                        .QueryMany<EUserResult>();
             }
         }
         //public static int DeleteByTest(int IdTest)

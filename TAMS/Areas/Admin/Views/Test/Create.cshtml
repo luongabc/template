@@ -1,80 +1,69 @@
-﻿@model TAMS.Entity.Test
-
+﻿
 @{
-    var listCategoryTest = ViewData["listCategoryTest"] as List<TAMS.Entity.CategoryTest>;
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/Layout1.cshtml";
 }
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Manage test </h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Test</li>
-                    </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Create test </h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Test</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
 <div class="container">
     <div class="container">
-    <div class="card">
-        <div class="card-header">
-            <h2>Create temple test</h2>
-        </div>
-        <div class="card-body">
-            <form class="pl-2" action="/Admin/Test/Create" method="post" id="form-Create-Test">
-                <div class="row justify-content-between">
-                    <div class="form-group col-6 p-2">
-                        <label class="">Name: </label>
-                        <input type="text" name="Name" class="form-control col-10" autocomplete="off" required="true" />
-                    </div>
-                    <div class="form-group col-6 p-2 ">
-                        <label class="row">Time: </label>
-                        <div class="row   ">
-                            <div class="row">
-                                <label class="m-2">Hours:</label>
-                                <input  class="form-control w-50 pl-3" type="number" name="Hours" min="0" required="true" />
-                            </div>
-                            <div class="row">
-                                <label class="m-2">Minutes:</label>
-                                <input class="form-control w-50 pl-3" type="number" name="Minutes" min="0" required="true" />
+        <div class="card">
+            <div class="card-header">
+                <h2>Create temple test</h2>
+            </div>
+            <div class="card-body">
+                <form class="pl-2" action="/Admin/Test/Create" method="post" id="form-Create-Test">
+                    <div class="row justify-content-between">
+                        <div class="form-group col-6 p-2">
+                            <label class="">Name: </label>
+                            <input type="text" name="Name" class="form-control col-10" autocomplete="off" required="true" />
+                        </div>
+                        <div class="form-group col-6 p-2 ">
+                            <label class="row">Time: </label>
+                            <div class="row   ">
+                                <div class="row">
+                                    <label class="m-2">Hours:</label>
+                                    <input class="form-control w-50 pl-3" type="number" name="Hours" min="0" required/>
+                                </div>
+                                <div class="row">
+                                    <label class="m-2">Minutes:</label>
+                                    <input class="form-control w-50 pl-3" type="number" name="Minutes" min="0" required/>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label class="">Category test: </label>
-                        <select name="IdCategory" form="form-Create-Test" class="form-control col-10" id="Create-categoryTest" autocomplete="off">
-                            <option >Select</option>
-                            @foreach (var categoryTest in listCategoryTest)
-                            {
-                                <option value="@categoryTest.Id" name="IdCategory">@categoryTest.Name</option>
-                            }
-                        </select>
+                    <div  id="group_Category row">
+                        <div class="form-group col-4">
+                            <label class="">Total question: </label>
+                            <input type="number" min="0" name="TotalQuestion" required class="form-control">
+                        </div>
+                        
                     </div>
-                    <div class="form-group col-6 input-numQuestion d-none">
-                        <label class="">Number question:</label>
-                        <input id="NumQuestion" type="number" name="NumQuestion" class="form-control col-10" autocomplete="off" min="0" max="" required="true" />
+                    <div class="row">
+                        <div class="form-group col-12">
+                            <label class="">Description test: </label>
+                            <input type="text" name="Description" class="form-control col-11" autocomplete="off" required/>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-12">
-                        <label class="">Description test: </label>
-                        <input type="text" name="Description" class="form-control col-11" autocomplete="off" required="true" />
-                    </div>
-                </div>
-                <button type="submit" class="m-3 btn btn-primary">Create</button>
-            </form>
+                    <button type="submit" class="m-3 btn btn-primary">Create</button>
+                </form>
+            </div>
         </div>
-    </div>
-        
-        
+
+
         <div>
             @Html.ActionLink("Back to List", "Index")
         </div>
@@ -82,4 +71,9 @@
 </div>
 @section scripts {
     <script src="~/Areas/Admin/Style/Js/CategoryTest.js"></script>
+    <script type="text/javascript">
+        $(document).ready(() => {
+
+        });
+    </script>
 }

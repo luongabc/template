@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TAMS.Controllers;
+using TAMS.DAL;
 using TAMS.DAL.BL;
 using TAMS.DAL.Model.Entity;
 using TAMS.DAL.ModelEntity;
@@ -39,13 +40,15 @@ namespace TAMS.Areas.Admin.Controllers
             ViewData["totalPage"] = totalPage;
             return View("Index");
         }
-        public IEnumerable FormTestsPage(string search,int page)
+        public ActionResult FormTestsPage(string search,int page)
         {
             Tuple<List<FormTest>, int> data = TestContext.Get_FormTests(search,numItem, page);
             List<FormTest> test = data.Item1;
             int totalPage = data.Item2 / numItem;
             if (data.Item2 % numItem > 0) totalPage++;
-            return JsonConvert.SerializeObject(Tuple.Create(test, totalPage));
+            ViewData["listTest"] = test;
+            ViewData["totalPage"] = totalPage;
+            return View("index");   
         }
         public ActionResult FormTest(string search,int IdForm,int Page)
         {
@@ -60,10 +63,10 @@ namespace TAMS.Areas.Admin.Controllers
         public ActionResult ViewTest(int IdTest)
         {
             ETest test = TestContext.GetTestOfUser(IdTest);
-            Tuple<List<EQuestion>, List<UserResult>> data = BLTest.GetContentOfTest(test);
+            Tuple<List<EQuestion>, List<EUserResult>> data = BLTest.GetContentOfTest(test);
             List<Answer> listAnserIsTrue = AnswerContext.GetByTest(IdTest);
             List<EQuestion> eQuestions = data.Item1.OrderBy(i => i.Id).ToList();
-            List<UserResult> userResults = data.Item2.OrderBy(i => i.IdQuestion).ToList();
+            List<EUserResult> userResults = data.Item2.OrderBy(i => i.IdQuestion).ToList();
             for (int i=0;i< data.Item2.Count;i++)
             {
                 if (data.Item2[i].IdAnswer == listAnserIsTrue[i].Id)
@@ -75,22 +78,25 @@ namespace TAMS.Areas.Admin.Controllers
             ViewData["Test"] = test;
             return View();
         }
-        //[HttpGet]
-        //public ActionResult Create()
-        //{
-        //    ViewData["listCategoryTest"] = CategoriesTestContext.Get(0,-1,0).Item1;
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public ActionResult Create(Test test,int Hours,int Minutes)
-        //{
-        //    TimeSpan time = new TimeSpan(Hours,Minutes,0);
-        //    test.Time = time;
-        //    test.IdUser = 0;
-        //    if (TestContext.Create(test) == 0) return View();
-        //    return RedirectToAction("Index");
-        //}
+        [HttpGet]
+        public ActionResult Create()
+        {
+            BLTest.CreateFormTest(null);
+            return View();
+        }
+        public IEnumerable GetCategoryQuestion()
+        {
+            List<CategoryQuestion> categoryQuestions= AdminContext.GetDataCategory();
+            return JsonConvert.SerializeObject(categoryQuestions);
+        }
+        [HttpPost]
+        public ActionResult Create(FormTest test, int Hours, int Minutes)
+        {
+            TimeSpan time = new TimeSpan(Hours, Minutes, 0);
+            test.Time = time;
+            if (TestContext.Create(test) == 0) return View();
+            return RedirectToAction("ContentFormTest", new { IdFormTest =test.Id });
+        }
         //public ActionResult Detail(int IdTest)
         //{
         //    Test test = TestContext.Get_Test(IdTest);
@@ -106,9 +112,34 @@ namespace TAMS.Areas.Admin.Controllers
         //    TestContext.Delete(IdTest);
         //    return RedirectToAction("Index");
         //}
-        //public int CountQuestionByCategoryTest(int Id)
-        //{
-        //    return QuestionContext.GetByCategoryTest(Id).Count;
-        //}
+        public int CountQuestionByCategoryQuestion(string Category)
+        {
+            return AdminContext.GetDataQuestion("", Category,"",1,1).Item2;
+        }
+        public ActionResult ContentFormTest(int IdFormTest)
+        {
+            return View();
+        }
+        [HttpPost]
+        public int ContentFormTest(List<CategoryQuestionOfTest>categoryQuestionOfTests)
+        {
+            int count =DALCategoryQuestionOfTest.addCategoriesQuetionForTest(categoryQuestionOfTests);
+            return count;
+        }
+        public ActionResult AddUserForTest()
+        {
+            
+            return View();
+        }
+        public ActionResult EditContentFormTest(int IdFormTest)
+        {
+            return View();
+        }
+        public IEnumerable GetCategoryQuestionOfTest(int IdFormTest)
+        {
+            List<CategoryQuestionOfTest> res = QuestionOfTestContext.GetCategoryQuestionOfTest(IdFormTest);
+            if (res.Count == 0) return null;
+            return JsonConvert.SerializeObject(res);
+        }
     }
 }

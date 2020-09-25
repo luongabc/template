@@ -27,14 +27,5 @@ namespace TAMS.DAL.ModelEntity
                     .QueryMany<EQuestion>();
             }
         }
-        public static List<EQuestion> GetByCategoryTest(int CategoryTest)
-        {
-            using (var context = MasterDBContext())
-            {
-                return context.StoredProcedure("[CategoryTest_GetQuestion]")
-                    .Parameter("IdCategoryTest", CategoryTest)
-                    .QueryMany<EQuestion>();
-            }
-        }
     }
 }

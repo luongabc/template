@@ -23,12 +23,11 @@ namespace TAMS.Entity.Models
         public int IdTest { get; set; }
 
         public bool? result { get; set; }
-        public bool isTrue { get; set; }
+
         public virtual Answer Answer { get; set; }
 
         public virtual Question Question { get; set; }
 
         public virtual TestOfUser TestOfUser { get; set; }
-
     }
 }

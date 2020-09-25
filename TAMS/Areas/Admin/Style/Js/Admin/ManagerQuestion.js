@@ -48,7 +48,7 @@ function loaddataQuestion(Page, Size, Search, FilterQuestion, FilterAnswer) {
                 html += '<td>' + item.Text + '</td>';
                 html += '<td>' + item.CategoryName + '</td>';
                 html += '<td>' + item.CategoryAnswer + '</td>';
-                html += '<td><a href="" onclick=" CountAnswer(' + item.Id + ');">Edit</a> | <a href="#" class="state_hover" onclick="DeleteQuestionAndAnswer(' + item.Id + ',' + item.Id + ');">Delete</a></td>';
+                html += '<td><a href="#" onclick=" CountAnswer(' + item.Id + ');">Edit</a> | <a href="#" class="state_hover" onclick="DeleteQuestionAndAnswer(' + item.Id + ',' + item.Id + ');">Delete</a></td>';
                 html += '</tr>';
             });
             $('.tbody').html(html);
@@ -83,8 +83,8 @@ function loadCategory() {
             $.each(result, function (key, item) {
                 html += "<option id='Catagory-" + item.Id + "'  value='" + item.Name + "'>" + item.Name + '</option>';
             });
-            $("#CategoryId option[value='']").prop('selected', 'selected');
-            $('#CategoryId').html(html);
+            $("#CategoryQuestion option[value='']").prop('selected', 'selected');
+            $('#CategoryQuestion').html(html);
         },
         error: function (errormessage) {
             alert(errormessage.responseText);
@@ -141,7 +141,7 @@ function GetByIdQuestion(Id) {
         success: function (result) {
             $('#Id').val(Id);
             $('#Text').val(result.Text);
-            $('#CategoryId').val(result.CategoryName);
+            $('#CategoryQuestion').val(result.CategoryName);
             $('#CategoryAnswer').val(result.CategoryAnswer);
             $('#myModal').modal('show');
             displayAnswer1(total);
@@ -209,6 +209,8 @@ function UpdateAnswer() {
             }
             ,
             error: function (response) {
+                console.log(response)
+
             }
         });
     }
@@ -337,12 +339,12 @@ function validate() {
     else {
         $('#Text').css('border-color', 'lightgrey');
     }
-    if ($('#CategoryId').val().trim() == "") {
-        $('#CategoryId').css('border-color', 'Red');
+    if ($('#CategoryQuestion').val().trim() == "") {
+        $('#CategoryQuestion').css('border-color', 'Red');
         isValid = false;
     }
     else {
-        $('#CategoryId').css('border-color', 'lightgrey');
+        $('#CategoryQuestion').css('border-color', 'lightgrey');
     }
     return isValid;
 }

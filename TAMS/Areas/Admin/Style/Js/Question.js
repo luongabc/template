@@ -45,7 +45,6 @@ function loaddataQuestion( Page,  Size,  Search,  FilterQuestion,  FilterAnswer)
             }
         });
     }
-
 function to_slug(str) {
     // Chuyển hết sang chữ thường
     str = str.toLowerCase();
@@ -74,7 +73,6 @@ function to_slug(str) {
     // return
     return str;
 }
-
 function displayAnswer() {
     var st = to_slug($("#CategoryAnswer").val());
     if (st == "radio") {
@@ -274,7 +272,6 @@ function clearTextBox() {
     $('#btnAdd').show();
 
 }
-
 function Delele(ID) {
     var ans = confirm("Bạn có chắc xóa không?");
     if (ans) {
@@ -344,10 +341,7 @@ function AddQuestion() {
             alert("Failed");
         }
     });
-}
-
-           
-            
+}         
 function UpdateQuestion() {
     var res = validate();
     if (res == false) {
@@ -382,7 +376,6 @@ function UpdateQuestion() {
     }
 
 }
-
 function UpdateAnswer() {
     var res = validate2();
     if (res == false) {
@@ -422,8 +415,6 @@ function UpdateAnswer() {
 
     }
 }
-
-
 function page(a) {
     currentPage = a;
     loadPagination();

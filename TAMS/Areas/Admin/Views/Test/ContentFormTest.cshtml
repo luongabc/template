@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "ContentFormTest";
+    Layout = "~/Areas/Admin/Views/Shared/Layout1.cshtml";
+}
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Create test </h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Test</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<div class="container">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h3>Add question for test</h3>
+            </div>
+            <div class="card-body">
+                <div class="pl-2" action="/Admin/Test/Create" method="post" id="form-Create-Test">
+                    <div class="row ">
+                        <label class="form-group col-6">Select Category question</label>
+                        <label class="form-group col-3">Choose total question</label>
+                        <label class="form-group col-2">Choose score</label>
+                    </div>
+                    <div class="group-category" id="group_Category">
+                    </div>
+                    <button type="button" class="m-3 btn btn-primary" id="btn-moreCategory">More Category</button>
+                    <button type="submit" class="m-3 btn btn-primary" id="btn-Add">Add</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script src="~/Areas/Admin/Style/Js/CategoryTest.js"></script>
+    <script type="text/javascript">
+        $(document).ready(() => {
+            getCategoryQuestion();
+            addnewCategory();
+            $("#btn-moreCategory").on("click", addnewCategory);
+            $("#btn-Add").on("click", sendCategoryAdd);
+            $("#group_Category").on("click", ".removeCategory", this.removeCategory);
+            $("#group_Category").on("focus", ".Create-categoryTest", this.selectCategory);
+        });
+    </script>
+}
+

@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Data;
 using TAMS.DAL;
 using TAMS.Entity;
 using TAMS.Entity.Models;
@@ -142,24 +143,18 @@ namespace TAMS.DAL.ModelEntity
                     .Execute();
             }
         }
-        //public static int Create(Test test)
-        //{
-        //    using(var context = MasterDBContext())
-        //    {
-        //        string time = test.Time.ToString();
-        //        int count = QuestionContext.GetByCategoryTest(test.IdCategory).Count;
-        //        if (count < test.NumQuestion) return 0;
-        //        return context.StoredProcedure("Test_Create")
-        //            .Parameter("Name", test.Name)
-        //            .Parameter("Time", time)
-        //            .Parameter("Description", test.Description)
-        //            .Parameter("IdCategory", test.IdCategory)
-        //            .Parameter("NumQuestion", test.NumQuestion)
-        //            .Parameter("IdFormTest", test.Id)
-        //            .Parameter("IdUser", test.IdUser)
-        //            .Execute();
-        //    }
-        //}
+        public static int Create(FormTest test)
+        {
+            using (var context = MasterDBContext())
+            {
+                string time = test.Time.ToString();
+                return context.StoredProcedure("FormTest_Create")
+                    .Parameter("Name", test.Name)
+                    .Parameter("Time", time)
+                    .Parameter("Description", test.Description)
+                    .Execute();
+            }
+        }
         public static List<ETest> GetByUser(int IdUser)
         {
             using (var context = MasterDBContext())
@@ -190,5 +185,8 @@ namespace TAMS.DAL.ModelEntity
         //            .Execute();
         //    }
         //}
+
+        //Category of test
+        
     }
 }
