@@ -1,5 +1,4 @@
-﻿
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -95,6 +94,7 @@ namespace TAMS.Areas.Admin.Controllers
             TimeSpan time = new TimeSpan(Hours, Minutes, 0);
             test.Time = time;
             if (TestContext.Create(test) == 0) return View();
+            test=TestContext.GetByName(test.Name);
             return RedirectToAction("ContentFormTest", new { IdFormTest =test.Id });
         }
         //public ActionResult Detail(int IdTest)
@@ -126,11 +126,7 @@ namespace TAMS.Areas.Admin.Controllers
             int count =DALCategoryQuestionOfTest.addCategoriesQuetionForTest(categoryQuestionOfTests);
             return count;
         }
-        public ActionResult AddUserForTest()
-        {
-            
-            return View();
-        }
+        
         public ActionResult EditContentFormTest(int IdFormTest)
         {
             return View();

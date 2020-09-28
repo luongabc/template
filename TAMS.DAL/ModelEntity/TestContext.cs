@@ -134,15 +134,6 @@ namespace TAMS.DAL.ModelEntity
             }
             return count;
         }
-        public static int ChangeStatusTest(int IdTest)
-        {
-            using (var context = MasterDBContext())
-            {
-                return context.StoredProcedure("Test_UpdateStatus")
-                    .Parameter("Id", IdTest)
-                    .Execute();
-            }
-        }
         public static int Create(FormTest test)
         {
             using (var context = MasterDBContext())
@@ -166,16 +157,28 @@ namespace TAMS.DAL.ModelEntity
                 return tests;
             }
         }
+        public static FormTest GetByName(String Name)
+        {
+            using (var context = MasterDBContext())
+            {
+                //Get test of user
+                var cmd = context.StoredProcedure("FormTest_GetByName")
+                    .Parameter("Name", Name);
+                FormTest tests = cmd.QuerySingle<FormTest>();
+                return tests;
+            }
+        }
         public static int UpdateStatus(int IdTest)
         {
             using (var context = MasterDBContext())
             {
-                int count = context.StoredProcedure("Test_UpdateStatus")
+                int count = context.StoredProcedure("TestOfUser_UpdateStatus")
                     .Parameter("Id", IdTest)
                     .Execute();
                 return count;
             }
         }
+
         //public static int Delete(int IdTest)
         //{
         //    using(var context = MasterDBContext())

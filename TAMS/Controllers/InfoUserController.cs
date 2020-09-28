@@ -72,7 +72,7 @@ namespace TAMS.Controllers
         }
         public ActionResult FinishTest(int IdTest)
         {
-            TestContext.ChangeStatusTest(IdTest);
+            TestContext.UpdateStatus(IdTest);
             BLTest.CheckIsFinish(IdTest);
             return RedirectToAction("Index");
         }

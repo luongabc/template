@@ -33,7 +33,7 @@ namespace TAMS.DAL.BL
             if (test == null) return null;
             if ((test.TimeStart + test.Time) < DateTime.Now)
             {
-                TestContext.ChangeStatusTest(test.Id);
+                TestContext.UpdateStatus(test.Id);
             }
             if(test.Status.ToUpper()==TAMS.Entity.baseEmun.StaticTest.Finish.ToString().ToUpper())TestContext.UpdateScore(test.Id);
             return TestContext.GetTestOfUser(test.Id);
